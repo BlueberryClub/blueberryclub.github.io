@@ -1,4 +1,88 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
+#
+baseURL = 'https://blueberryclub.github.io/'
+# 主题
 theme = 'hugo-theme-void'
+
+# 语言
+defaultContentLanguage = "zh-cn"
+languagesCode = "zh-cn"
+
+
+# Social media links
+[params]
+    [params.social]
+        github = "https://github.com/blueberryclub"
+        email = "1568413588@163.com"
+    [params.avatar]
+        url = "https://raw.githubusercontent.com/BlueberryClub/blueberryclub.github.io/refs/heads/main/favicon/apple-touch-icon.png"
+
+
+[languages]
+    [languages.zh-cn]
+        weight = 1
+        title = "blueberryclub"
+        languageCode = "zh-cn"
+        languageName = "中文"
+        hasCJKLanguage = true
+    # menu - Home
+    [[languages.zh-cn.menu.main]]
+        identifier = "home"
+        parent = ""
+        pre = "<i class='fas fa-home'></i>"
+        post = ""
+        name = "主页"
+        url = "/"
+        title = ""
+        weight = 1
+    # menu - posts
+    [[languages.zh-cn.menu.main]]
+        identifier = "post"
+        parent = ""
+        pre = "<i class='fas fa-file-alt'></i>"
+        post = ""
+        name = "博客"
+        url = "/post"
+        title = ""
+        weight = 2
+    # menu - categories
+    [[languages.zh-cn.menu.main]]
+        identifier = "categories"
+        parent = ""
+        pre = "<i class='fas fa-folder'></i>"
+        post = ""
+        name = "分类"
+        url = "/categories"
+        title = ""
+        weight = 3
+    # menu - tags
+    [[languages.zh-cn.menu.main]]
+        identifier = "tags"
+        parent = ""
+        pre = "<i class='fas fa-tags'></i>"
+        post = ""
+        name = "标签"
+        url = "/tags"
+        title = ""
+        weight = 4
+    # menu - about
+    [[languages.zh-cn.menu.main]]
+        identifier = "about"
+        parent = ""
+        pre = "<i class='fas fa-about'></i>"
+        post = ""
+        name = "关于"
+        url = "/about"
+        title = ""
+        weight = 5
+
+# Table of Contents (recommended)
+[markup]
+    [markup.tableOfContents]
+        startLevel = 1
+        endLevel = 6
+        ordered = false
+
+# Allow raw HTML within Markdown (for KaTeX, etc.)
+[markup.goldmark]
+    [markup.goldmark.renderer]
+        unsafe = true
