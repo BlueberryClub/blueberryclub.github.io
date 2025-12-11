@@ -26,7 +26,7 @@ languagesCode = "zh-cn"
         hasCJKLanguage = true
     # menu - Home
     [[languages.zh-cn.menu.main]]
-        identifier = "home"
+        identifier = "主页"
         parent = ""
         pre = "<i class='fas fa-home'></i>"
         post = ""
@@ -36,7 +36,7 @@ languagesCode = "zh-cn"
         weight = 1
     # menu - posts
     [[languages.zh-cn.menu.main]]
-        identifier = "post"
+        identifier = "博客"
         parent = ""
         pre = "<i class='fas fa-file-alt'></i>"
         post = ""
@@ -46,7 +46,7 @@ languagesCode = "zh-cn"
         weight = 2
     # menu - categories
     [[languages.zh-cn.menu.main]]
-        identifier = "categories"
+        identifier = "分类"
         parent = ""
         pre = "<i class='fas fa-folder'></i>"
         post = ""
@@ -56,7 +56,7 @@ languagesCode = "zh-cn"
         weight = 3
     # menu - tags
     [[languages.zh-cn.menu.main]]
-        identifier = "tags"
+        identifier = "标签"
         parent = ""
         pre = "<i class='fas fa-tags'></i>"
         post = ""
@@ -66,7 +66,7 @@ languagesCode = "zh-cn"
         weight = 4
     # menu - about
     [[languages.zh-cn.menu.main]]
-        identifier = "about"
+        identifier = "关于"
         parent = ""
         pre = "<i class='fas fa-about'></i>"
         post = ""
@@ -86,3 +86,8 @@ languagesCode = "zh-cn"
 [markup.goldmark]
     [markup.goldmark.renderer]
         unsafe = true
+
+[taxonomies]
+    tag = "tags"
+    series = "series"
+    category = "categories"
