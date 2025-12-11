@@ -6,6 +6,28 @@
     <description>Recent content in Categories on blueberryclub</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
+    <lastBuildDate>Thu, 11 Dec 2025 08:31:52 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kafka</title>
+      <link>http://localhost:1313/categories/kafka/</link>
+      <pubDate>Thu, 11 Dec 2025 08:31:52 +0800</pubDate>
+      <guid>http://localhost:1313/categories/kafka/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Zookeeper</title>
+      <link>http://localhost:1313/categories/zookeeper/</link>
+      <pubDate>Thu, 11 Dec 2025 08:31:52 +0800</pubDate>
+      <guid>http://localhost:1313/categories/zookeeper/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Java</title>
+      <link>http://localhost:1313/categories/java/</link>
+      <pubDate>Wed, 10 Dec 2025 10:31:52 +0800</pubDate>
+      <guid>http://localhost:1313/categories/java/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>
