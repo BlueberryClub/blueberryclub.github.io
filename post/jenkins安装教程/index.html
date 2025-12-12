@@ -3,7 +3,7 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>opengauss安装教程 | blueberryclub</title>
+<title>jenkins安装教程 | blueberryclub</title>
 
 
 <meta name="color-scheme" content="light dark">
@@ -534,20 +534,20 @@
       
       <div class="mb-3 flex">
         
-        <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93" class="text-xs inline-flex items-center px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors">
-          数据库
+        <a href="/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2" class="text-xs inline-flex items-center px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors">
+          自动部署
         </a>
         
       </div>
       
       
-      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 relative">opengauss安装教程</h1>
+      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 relative">jenkins安装教程</h1>
       
       <div class="flex flex-wrap items-center text-sm text-gray-500 gap-4 relative">
         
         
         
-        <time datetime="2025-12-12T16:31:52&#43;08:00" class="flex items-center">
+        <time datetime="2025-12-12T16:33:52&#43;08:00" class="flex items-center">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
@@ -559,7 +559,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          9 分钟阅读
+          2 分钟阅读
         </span>
 
         
@@ -600,28 +600,29 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#软件下载">软件下载</a>
-          <ul>
-            <li><a href="#官网-httpsopengaussorgzhdownload">官网 https://opengauss.org/zh/download/</a></li>
-            <li><a href="#兼容">兼容</a></li>
-            <li><a href="#选型">选型</a></li>
-            <li><a href="#提前准备">提前准备</a></li>
-          </ul>
-        </li>
+        <li><a href="#软件下载">软件下载</a></li>
         <li><a href="#软件安装">软件安装</a>
           <ul>
-            <li><a href="#首先登录机器使用sftp将python上传上去">首先登录机器，使用SFTP将python上传上去。</a></li>
-            <li><a href="#安装">安装</a></li>
-            <li><a href="#安装-opengauss">安装 opengauss</a></li>
+            <li>
+              <ul>
+                <li><a href="#安装jenkins">安装jenkins</a></li>
+                <li><a href="#自动安装jenkins完成之后jenkins安装后的目录有">自动安装Jenkins完成之后，Jenkins安装后的目录有</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
-        <li><a href="#问题汇总">问题汇总</a>
+        <li><a href="#软件配置">软件配置</a>
           <ul>
-            <li><a href="#python软链接">python软链接</a></li>
-            <li><a href="#赋权">赋权</a></li>
-            <li><a href="#内存">内存</a></li>
+            <li>
+              <ul>
+                <li><a href="#在jenkins配置文件中配置jdk环境变量">在jenkins配置文件中配置jdk环境变量</a></li>
+                <li><a href="#配置jenkins的端口">配置Jenkins的端口</a></li>
+                <li><a href="#修改jenkins默认的操作用户">修改jenkins默认的操作用户</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
+        <li><a href="#软件启动">软件启动</a></li>
       </ul>
     </li>
   </ul>
@@ -640,290 +641,148 @@
     </svg>
   </a>
 </h2>
+<p>Red Hat/Fedora/Alma/Rocky/CentOS 软件下载    <a href="https://mirrors.jenkins.io/redhat-stable/">https://mirrors.jenkins.io/redhat-stable/</a></p>
+<p>下载LTS版本，按照不同的java版本安装不同版本的jenkins</p>
+<p><img src="/images/jenkins%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B1.png" alt="Image Alt Text"></p>
 
-<h3 id="官网-httpsopengaussorgzhdownload">官网 <a href="https://opengauss.org/zh/download/">https://opengauss.org/zh/download/</a>
-  <a class="heading-anchor" href="#%e5%ae%98%e7%bd%91-httpsopengaussorgzhdownload" aria-label="Copy link to this section">
-    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
-    </svg>
-  </a>
-</h3>
-<p>官网版本分为 LTS (长期支持) 版本和PreView(预览版)版本 。</p>
-<p>暂时采用企业版本(<font style="color:rgb(0, 0, 0);">Enterprise-Edition</font>)进行使用，后续如果出现问题(规则性问题)，再使用个人版本(<font style="color:rgb(0, 0, 0);">Simplified</font>)。</p>
-
-<h3 id="兼容"><font style="color:rgb(77, 77, 77);">兼容</font>
-  <a class="heading-anchor" href="#%e5%85%bc%e5%ae%b9" aria-label="Copy link to this section">
-    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
-    </svg>
-  </a>
-</h3>
-<p>数据库兼容性比较差，只能支持几款操作系统  在centos 8系统无法进行安装。</p>
-<p>centos 7.6</p>
-<p>openEuler-20.03-LTS  aarch64</p>
-<p>openEuler-20.03-LTS  x86</p>
-<p>kylin- V10  aarch64</p>
-
-<h3 id="选型"><font style="color:rgb(77, 77, 77);">选型</font>
-  <a class="heading-anchor" href="#%e9%80%89%e5%9e%8b" aria-label="Copy link to this section">
-    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
-    </svg>
-  </a>
-</h3>
-<p>针对使用的系统架构和操作系统，进行选型。</p>
-<p><img src="/images/opengauss%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B1.png" alt="Image Alt Text"></p>
-<p><font style="background-color:#F9EFCD;">首先区分的是操作系统架构因为麒麟系统是arm所以使用了 AArch64  但是安装时却抛出架构是x86架构。所以最终使用 x86架构的。</font></p>
-<p>其次是<font style="color:rgb(0, 0, 0);">操作系统，因为操作系统是麒麟所以选用了 openEuler 20.03 LTS版本。</font></p>
-
-<h3 id="提前准备"><font style="color:rgb(77, 77, 77);">提前准备</font>
-  <a class="heading-anchor" href="#%e6%8f%90%e5%89%8d%e5%87%86%e5%a4%87" aria-label="Copy link to this section">
-    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
-    </svg>
-  </a>
-</h3>
-<p>注意 需要提前安装python 3.6+</p>
-<p><font style="background-color:#F9EFCD;">这里注意，因为操作说明说是 3.6+ 就可以，但是不同操作系统需要使用不一样的 python。</font></p>
-<p><img src="/images/opengauss%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B2.png" alt="Image Alt Text"></p>
-
-<h2 id="软件安装"><font style="color:rgb(77, 77, 77);">软件安装</font>
+<h2 id="软件安装">软件安装
   <a class="heading-anchor" href="#%e8%bd%af%e4%bb%b6%e5%ae%89%e8%a3%85" aria-label="Copy link to this section">
     <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
       <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
     </svg>
   </a>
 </h2>
-<p><font style="color:rgb(77, 77, 77);">按照上问的选型，选择不同的python，下文是python的下载路径，自行选型。</font></p>
-<p><a href="https://www.python.org/ftp/python/3.8.1/">https://www.python.org/ftp/python/</a></p>
 
-<h3 id="首先登录机器使用sftp将python上传上去"><font style="color:rgb(77, 77, 77);">首先登录机器，使用SFTP将python上传上去。</font>
-  <a class="heading-anchor" href="#%e9%a6%96%e5%85%88%e7%99%bb%e5%bd%95%e6%9c%ba%e5%99%a8%e4%bd%bf%e7%94%a8sftp%e5%b0%86python%e4%b8%8a%e4%bc%a0%e4%b8%8a%e5%8e%bb" aria-label="Copy link to this section">
+<h4 id="安装jenkins"><font style="color:rgb(77, 77, 77);">安装jenkins</font>
+  <a class="heading-anchor" href="#%e5%ae%89%e8%a3%85jenkins" aria-label="Copy link to this section">
     <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
       <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
     </svg>
   </a>
-</h3>
-
-<h3 id="安装"><font style="color:rgb(77, 77, 77);">安装</font>
-  <a class="heading-anchor" href="#%e5%ae%89%e8%a3%85" aria-label="Copy link to this section">
+</h4>
+<pre tabindex="0"><code class="language-shell">rpm -ivh jenkins-2.361.1-1.1.noarch.rpm</code></pre>
+<h4 id="自动安装jenkins完成之后jenkins安装后的目录有"><font style="color:rgb(77, 77, 77);">自动安装Jenkins完成之后，Jenkins安装后的目录有</font>
+  <a class="heading-anchor" href="#%e8%87%aa%e5%8a%a8%e5%ae%89%e8%a3%85jenkins%e5%ae%8c%e6%88%90%e4%b9%8b%e5%90%8ejenkins%e5%ae%89%e8%a3%85%e5%90%8e%e7%9a%84%e7%9b%ae%e5%bd%95%e6%9c%89" aria-label="Copy link to this section">
     <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
       <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
     </svg>
   </a>
-</h3>
-<pre tabindex="0"><code class="language-shell"># 创建目录
-mkdir /usr/local/python3
-# 移动文件到创建的目录下
-mv Python-3.7.4.tar.xz /usr/local/python3/
-# 跳转到目录下
-cd /usr/local/python3/
-# 解压文件
-tar -xvf Python-3.7.4.tar.xz
-# 跳转到目录下
-cd Python-3.7.4/
-# 设置安装路径
-./configure --prefix=/usr/local/python3/Python-3.7.4/ --enable-shared 
-# 安装
-make &amp;&amp; make install
-# 建立软连接
-ln -s /usr/local/python3/Python-3.7.4/bin/python3.7 /usr/bin/python3
-ln -s /usr/local/python3/Python-3.7.4/bin/pip3.7 /usr/bin/pip3
-# 配置python3.7的lib到ldconfig
-vi /etc/ld.so.conf.d/python3.conf
-# 添加内容
-/usr/local/python3/Python-3.7.4/lib
-# 让配置生效
-ldconfig
-# 验证配置是否生效
-python3 -V
-# 配置环境变量
-vi ~/.bash_profile
-# 添加内容
-export PYTHON_HOME=/usr/local/python3/Python-3.7.4
-export PATH=$PYTHON_HOME/bin:$PATH
-# 让配置生效
-source ~/.bash_profile
-# 验证配置是否生效
-echo $PYTHON_HOME</code></pre>
-<h3 id="安装-opengauss"><font style="color:rgb(77, 77, 77);"> 安装 opengauss </font>
-  <a class="heading-anchor" href="#%e5%ae%89%e8%a3%85-opengauss" aria-label="Copy link to this section">
-    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
-    </svg>
-  </a>
-</h3>
-<pre tabindex="0"><code class="language-shell"># 创建目录
-mkdir -p /usr/local/teleware/openGauss/
-# 移动文件到创建的目录下
-mv openGauss-5.0.1-openEuler-64bit-all.tar.gz /usr/local/teleware/openGauss/
-# 跳转到目录下
-cd /usr/local/telewave/openGauss/
-# 关闭防火墙
-vim /etc/selinux/config
-SELINUX=disabled
-reboot
-systemctl status firewalld
-systemctl disable firewalld.service
-systemctl stop firewalld.service
-systemctl status firewalld
-# 设置字符集参数
-vim /etc/profile
-export LANG=&#34;zh_CN.UTF-8&#34;
-# 创建用户和组
-groupadd dbgrp
-useradd -g dbgrp omm
-passwd omm
-# 为安装路径及文件授权
-chown 755 -R /usr/local/telewave/
-# 为omm用户授权安装路径权限
-chown -R omm:dbgrp /usr/local/telewave/openGauss/
-# 首先配置xml
-vi cluster_config.xml
-# 添加内容
-------- 看下文  cluster_config.xml  需要确认 hostname 是否一致 本文hostname为 host-172-19-135-6
-可以使用 hostname 命令查询
-# 解压文件 首先要解压，下载的文件，然后里面有两个新文件
-tar -xvf openGauss-5.0.1-openEuler-64bit-all.tar.gz
-tar -xvf openGauss-5.0.1-openEuler-64bit-om.tar.gz
-# 跳转到目录下
-cd script/
-# 执行前置脚本gs_preinstall
-./gs_preinstall -U omm -G dbgrp -X /usr/local/telewave/openGauss/cluster_config.xml 
-# 再给用户赋一遍权   
-# 为安装路径及文件授权
-chown 755 -R /usr/local/telewave/
-# 为omm用户授权安装路径权限
-chown -R omm:dbgrp /usr/local/telewave/openGauss/
-# 切换用户
-su - omm
-# 安装openGauss
-gs_install -X /usr/local/telewave/openGauss/cluster_config.xml
-# 最后安装完成</code></pre><pre tabindex="0"><code class="language-shell">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
-&lt;ROOT&gt;
-    &lt;!-- openGauss整体信息 --&gt;
-    &lt;CLUSTER&gt;
-        &lt;!-- 数据库名称 --&gt;
-        &lt;PARAM name=&#34;clusterName&#34; value=&#34;dbCluster&#34; /&gt;
-        &lt;!-- 数据库节点名称(hostname) --&gt;
-        &lt;PARAM name=&#34;nodeNames&#34; value=&#34;host-172-19-135-6&#34; /&gt;
-        &lt;!-- 数据库安装目录--&gt;
-        &lt;PARAM name=&#34;gaussdbAppPath&#34; value=&#34;/home/omm/app&#34; /&gt;
-        &lt;!-- 日志目录--&gt;
-        &lt;PARAM name=&#34;gaussdbLogPath&#34; value=&#34;/home/omm/log&#34; /&gt;
-        &lt;!-- 临时文件目录--&gt;
-        &lt;PARAM name=&#34;tmpMppdbPath&#34; value=&#34;/home/omm/tmp&#34; /&gt;
-        &lt;!-- 数据库工具目录--&gt;
-        &lt;PARAM name=&#34;gaussdbToolPath&#34; value=&#34;/home/omm/tools&#34; /&gt;
-        &lt;!-- 数据库core文件目录--&gt;
-        &lt;PARAM name=&#34;corePath&#34; value=&#34;/home/omm/corefile&#34; /&gt;
-        &lt;!-- 节点IP，与数据库节点名称列表一一对应 --&gt;
-        &lt;PARAM name=&#34;backIp1s&#34; value=&#34;172.19.135.6&#34;/&gt;
-    &lt;/CLUSTER&gt;
-    &lt;!-- 每台服务器上的节点部署信息 --&gt;
-    &lt;DEVICELIST&gt;
-        &lt;!-- 节点1上的部署信息 --&gt;
-        &lt;DEVICE sn=&#34;node1_hostname&#34;&gt;
-            &lt;!-- 节点1的主机名称 --&gt;
-            &lt;PARAM name=&#34;name&#34; value=&#34;host-172-19-135-6&#34;/&gt;
-            &lt;!-- 节点1所在的AZ及AZ优先级 --&gt;
-            &lt;PARAM name=&#34;azName&#34; value=&#34;AZ1&#34;/&gt;
-            &lt;PARAM name=&#34;azPriority&#34; value=&#34;1&#34;/&gt;
-            &lt;!-- 节点1的IP，如果服务器只有一个网卡可用，将backIP1和sshIP1配置成同一个IP --&gt;
-            &lt;PARAM name=&#34;backIp1&#34; value=&#34;172.19.135.6&#34;/&gt;
-            &lt;PARAM name=&#34;sshIp1&#34; value=&#34;172.19.135.6&#34;/&gt;
+</h4>
+<pre tabindex="0"><code class="language-shell">find / -iname jenkins    </code></pre><p><img src="/images/jenkins%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B2.png" alt="Image Alt Text"></p>
 
-            &lt;!--dbnode--&gt;
-            &lt;PARAM name=&#34;dataNum&#34; value=&#34;1&#34;/&gt;
-            &lt;PARAM name=&#34;dataPortBase&#34; value=&#34;15400&#34;/&gt;
-            &lt;PARAM name=&#34;dataNode1&#34; value=&#34;/home/omm/install/data&#34;/&gt;
-            &lt;PARAM name=&#34;dataNode1_syncNum&#34; value=&#34;0&#34;/&gt;
-        &lt;/DEVICE&gt;
-    &lt;/DEVICELIST&gt;
-&lt;/ROOT&gt;</code></pre><p><font style="color:rgb(92, 99, 112);"> </font></p>
-
-<h2 id="问题汇总"><font style="color:rgb(77, 77, 77);">问题汇总</font>
-  <a class="heading-anchor" href="#%e9%97%ae%e9%a2%98%e6%b1%87%e6%80%bb" aria-label="Copy link to this section">
+<h2 id="软件配置"><font style="color:rgb(79, 79, 79);">软件配置</font>
+  <a class="heading-anchor" href="#%e8%bd%af%e4%bb%b6%e9%85%8d%e7%bd%ae" aria-label="Copy link to this section">
     <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
       <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
     </svg>
   </a>
 </h2>
 
-<h3 id="python软链接"><font style="color:rgb(77, 77, 77);">python软链接</font>
-  <a class="heading-anchor" href="#python%e8%bd%af%e9%93%be%e6%8e%a5" aria-label="Copy link to this section">
+<h4 id="在jenkins配置文件中配置jdk环境变量"><font style="color:rgb(79, 79, 79);">在jenkins配置文件中配置jdk环境变量</font>
+  <a class="heading-anchor" href="#%e5%9c%a8jenkins%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6%e4%b8%ad%e9%85%8d%e7%bd%aejdk%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f" aria-label="Copy link to this section">
     <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
       <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
     </svg>
   </a>
-</h3>
-<p>如果系统有python 2.* 是不可以直接使用的，需要进行版本替换，替换为3.7 (本文)，如果已经存在相应软连接，可以直接删除对应的软连接。</p>
+</h4>
+<pre tabindex="0"><code class="language-shell">vim /etc/init.d/jenkins
+echo $JAVA_HOME      # 结果  /soft/java/jdk-17.0.4.1/bin/java</code></pre><p><img src="/images/jenkins%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B3.png" alt="Image Alt Text"></p>
 
-<h3 id="赋权"><font style="color:rgb(77, 77, 77);">赋权</font>
-  <a class="heading-anchor" href="#%e8%b5%8b%e6%9d%83" aria-label="Copy link to this section">
+<h4 id="配置jenkins的端口"><font style="color:rgb(79, 79, 79);">配置Jenkins的端口</font>
+  <a class="heading-anchor" href="#%e9%85%8d%e7%bd%aejenkins%e7%9a%84%e7%ab%af%e5%8f%a3" aria-label="Copy link to this section">
     <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
       <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
     </svg>
   </a>
-</h3>
-<p>如果在 omm 用户下执行 gs_install -X /usr/local/telewave/openGauss/cluster_config.xml 抛出用户权限不够，不能够使用python的问题，千万不要把所有 /usr/bin的权限给 omm，系统会崩溃。我是崩溃了重新安装的，第二次就没问题了。</p>
+</h4>
+<pre tabindex="0"><code class="language-shell">vim /etc/sysconfig/jenkins   					# 端口: 9468
+vim /usr/lib/systemd/system/jenkins.service			# 端口: 9468</code></pre><p><img src="/images/jenkins%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B4.png" alt="Image Alt Text"></p>
 
-<h3 id="内存"><font style="color:rgb(77, 77, 77);">内存</font>
-  <a class="heading-anchor" href="#%e5%86%85%e5%ad%98" aria-label="Copy link to this section">
+<h4 id="修改jenkins默认的操作用户"><font style="color:rgb(79, 79, 79);">修改jenkins默认的操作用户</font>
+  <a class="heading-anchor" href="#%e4%bf%ae%e6%94%b9jenkins%e9%bb%98%e8%ae%a4%e7%9a%84%e6%93%8d%e4%bd%9c%e7%94%a8%e6%88%b7" aria-label="Copy link to this section">
     <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
       <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
     </svg>
   </a>
-</h3>
-<p>如果 omm 用户安装 opengauss 的时候抛出内存不够问题，</p>
-<p>cat /opt/huawei/install/data/dn/postgresql.conf  | grep shared_buffers</p>
-<p>然后调整相关配置</p>
-<p><font style="color:rgb(92, 99, 112);"></font></p>
-<p><font style="color:rgb(92, 99, 112);"></font></p>
-<p><font style="color:rgb(92, 99, 112);">omm用户密码为: Telewave@1234   群组:dbgrp</font></p>
-<p>数据库密码  Telewave@1234</p>
-<p><font style="color:rgb(0, 0, 0);background-color:rgb(250, 250, 250);">数据库密码权限设置： </font></p>
-<p><font style="color:rgb(0, 0, 0);background-color:rgb(250, 250, 250);"> gs_guc reload </font><font style="color:rgb(166, 127, 89);">-</font><font style="color:rgb(0, 0, 0);background-color:rgb(250, 250, 250);">N </font><font style="color:rgb(0, 119, 170);">all</font><font style="color:rgb(166, 127, 89);">-</font><font style="color:rgb(0, 0, 0);background-color:rgb(250, 250, 250);">I </font><font style="color:rgb(0, 119, 170);">all</font><font style="color:rgb(166, 127, 89);">-</font><font style="color:rgb(0, 0, 0);background-color:rgb(250, 250, 250);">c </font><font style="color:rgb(80, 161, 79);">&ldquo;password_policy=1&rdquo;     密码要求高</font></p>
-<p><font style="color:rgb(0, 0, 0);background-color:rgb(250, 250, 250);"> gs_guc reload </font><font style="color:rgb(166, 127, 89);">-</font><font style="color:rgb(0, 0, 0);background-color:rgb(250, 250, 250);">N </font><font style="color:rgb(0, 119, 170);">all</font><font style="color:rgb(166, 127, 89);">-</font><font style="color:rgb(0, 0, 0);background-color:rgb(250, 250, 250);">I </font><font style="color:rgb(0, 119, 170);">all</font><font style="color:rgb(166, 127, 89);">-</font><font style="color:rgb(0, 0, 0);background-color:rgb(250, 250, 250);">c </font><font style="color:rgb(80, 161, 79);">&ldquo;password_policy=0&rdquo;     密码要求低</font></p>
-<p><font style="color:rgb(77, 77, 77);"></font></p>
-<p><font style="color:rgb(77, 77, 77);"></font></p>
-<p><font style="color:rgb(77, 77, 77);">实际使用中的过程记录 </font></p>
-<p><font style="color:rgb(77, 77, 77);">给数据库用户赋权</font></p>
-<p>:::info
-<font style="color:rgb(77, 77, 77);">当导出数据存在权限问题的时候：permission denied for relation pg_user </font></p>
-<p><font style="color:rgb(77, 77, 77);">可以使用下面这个命令进行赋权让导出功能成功。</font></p>
-<p><font style="color:rgb(77, 77, 77);">grant select ON pg_user TO kffxdt;</font></p>
-<p><font style="color:rgb(77, 77, 77);">grant 权限 来自 某个用户 给 某个用户;</font></p>
-<p>:::</p>
-<p><font style="color:rgb(77, 77, 77);">登录数据库需要切换权限</font></p>
-<p>:::info
-从root用户切换到omm用户（也就是数据库用户）</p>
-<p>su - omm</p>
-<p>:::</p>
-<p>连接数据库</p>
-<p>:::info
-当到达数据库用户下，执行下面命令就可以进入到数据中</p>
-<p>gsql -d postgres -p 15400</p>
-<p>当需要退出用户的时候，不是exit哦</p>
-<p>\q</p>
-<p>才是退出命令</p>
-<p>:::</p>
-<p>数据库的状态和重启命令</p>
-<p>:::info
-当数据库需要重启或者查看运行状态的时候</p>
-<p><font style="color:rgb(51, 51, 51);">进行数据库重启的命令    gs_om -t restart</font></p>
-<p><font style="color:rgb(51, 51, 51);">进行数据库启动的命令    gs_om -t start  </font></p>
-<p><font style="color:rgb(51, 51, 51);">进行数据库状态查询的命令  gs_om -t status &ndash;detail</font></p>
-<p>:::</p>
-<p><font style="color:rgb(77, 77, 77);"></font></p>
-<p><font style="color:rgb(77, 77, 77);">参考资料</font></p>
-<p><a href="https://blog.csdn.net/weixin_43312382/article/details/127664709"><font style="color:rgb(77, 77, 77);">https://blog.csdn.net/weixin_43312382/article/details/127664709</font></a></p>
-<p><a href="https://docs-opengauss.osinfra.cn/zh/docs/5.0.0/docs/InstallationGuide/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83.html"><font style="color:rgb(77, 77, 77);">https://docs-opengauss.osinfra.cn/zh/docs/5.0.0/docs/InstallationGuide/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83.html</font></a></p>
-<p><a href="https://blog.csdn.net/weixin_53267215/article/details/135825275"><font style="color:rgb(77, 77, 77);">https://blog.csdn.net/weixin_53267215/article/details/135825275</font></a></p>
-<p><a href="https://blog.51cto.com/bjdong/2527670"><font style="color:rgb(77, 77, 77);">https://blog.51cto.com/bjdong/2527670</font></a></p>
-<p><a href="https://www.cnblogs.com/mcxw/p/openGauss_opt.html">https://www.cnblogs.com/mcxw/p/openGauss_opt.html</a>   （操作类的教程）</p>
-<p><font style="color:rgb(77, 77, 77);"></font></p>
+</h4>
+<pre tabindex="0"><code class="language-shell">vim /etc/sysconfig/jenkins   				
+vim /usr/lib/systemd/system/jenkins.service		</code></pre><p><img src="/images/jenkins%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B5.png" alt="Image Alt Text"></p>
+<pre tabindex="0"><code class="language-shell">chown -R root /var/log/jenkins
+chgrp -R root /var/log/jenkins
+chown -R root /var/lib/jenkins
+chgrp -R root /var/lib/jenkins
+chown -R root /var/cache/jenkins
+chgrp -R root /var/cache/jenkins</code></pre><pre tabindex="0"><code class="language-shell">vim /usr/lib/systemd/system/jenkins.service
+修改java_home的路径</code></pre>
+<h2 id="软件启动"><font style="color:rgb(79, 79, 79);">软件启动</font>
+  <a class="heading-anchor" href="#%e8%bd%af%e4%bb%b6%e5%90%af%e5%8a%a8" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+<pre tabindex="0"><code class="language-shell">service jenkins start</code></pre><pre tabindex="0"><code class="language-shell">cat /var/lib/jenkins/secrets/initialAdminPassword</code></pre><p>service jenkins states</p>
+<p>ef36f989220c44da8a55f94053a846b8</p>
+<p><font style="color:rgb(0, 0, 0);background-color:rgb(238, 238, 238);">firewall-cmd &ndash;permanent &ndash;zone=public &ndash;add-port=9468/tcp</font></p>
+<p><font style="color:rgb(0, 0, 0);background-color:rgb(238, 238, 238);">17:25:52</font></p>
+<p><font style="color:rgb(0, 0, 0);background-color:rgb(238, 238, 238);">/usr/share/java/jenkins.war</font></p>
+<p><img src="/images/jenkins%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B6.png" alt="Image Alt Text"></p>
+<pre tabindex="0"><code class="language-shell">sudo docker pull jenkins</code></pre><pre tabindex="0"><code class="language-shell">docker images</code></pre><pre tabindex="0"><code class="language-shell">docker run -itd -u root \
+-p 12347:8080 \
+-p 50000:50000 \
+--name=&#34;jenkins&#34; \
+--restart always \
+--privileged=true \
+-v /soft/jenkins:/var/jenkins_home \
+-v /soft/java/jdk-17.0.4.1/bin/java:/app/java/jdk-17.0.4.1/bin/java \
+-v /soft/java/jdk-17.0.4.1:/app/java/jdk-17.0.4.1 \
+-v /soft/maven/apache-maven-3.9.9:/app/maven/apache-maven-3.9.9 \
+-v /soft/jenkins/repo:/soft/jenkins/repo 091ba5742e7e
 
+
+
+apt install -y telnet  
+apt install vim
+如果出现github网络问题
+git config --global --unset http.proxy 
+git config --global --unset https.proxy
+然后重启jenkins的docker
+
+
+om.oracle.database.jdbc:ojdbc11:jar 异常
+
+mvn install:install-file \
+-DgroupId=com.oracle.database.jdbc \
+-DartifactId=ojdbc11 \
+-Dversion=12.2.0.3 \
+-Dpackaging=jar 
+-Dfile=/app/maven/apache-maven-3.9.9/lib/ojdbc11-12.2.0.3.jar \
+-DgeneratePom=true</code></pre><pre tabindex="0"><code class="language-bash"># 代理设置
+mkdir ~/clash
+
+cd ~/clash 
+
+wget &#34;https://github.com/DustinWin/proxy-tools/releases/download/Clash-Premium/clashpremium-release-linux-amd64.tar.gz&#34;
+
+wget -O config.yaml &#34;些你自己的地址哈&#34;
+# 需要下载db上传上去
+chmod &#43;x clash
+./clash -d .
+
+# clash运行目录
+/root/.config
+
+
+sudo vi /etc/profile.d/proxy.sh
+
+
+# Socks5 代理配置
+export ALL_PROXY=socks5://127.0.0.1:7891
+export http_proxy=$ALL_PROXY
+export https_proxy=$ALL_PROXY
+
+sudo chmod &#43;x /etc/profile.d/proxy.sh
+source /etc/profile.d/proxy.sh</code></pre>
     </div>
 
     
@@ -943,12 +802,12 @@ gs_install -X /usr/local/telewave/openGauss/cluster_config.xml
   <div class="tags-container">
     <div class="text-gray-700 dark:text-gray-300 font-medium mb-2">Tags:</div>
     <div class="flex flex-wrap gap-2">
-        <a href="/tags/opengauss/" class="tag-chip inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
+        <a href="/tags/jenkins/" class="tag-chip inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-labelledby="tagIconTitle" role="img">
             <title id="tagIconTitle"></title>
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
           </svg>
-          Opengauss
+          Jenkins
         </a>
         <a href="/tags/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" class="tag-chip inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-labelledby="tagIconTitle" role="img">
@@ -967,27 +826,17 @@ gs_install -X /usr/local/telewave/openGauss/cluster_config.xml
       
       <nav class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
         
-        <a href="/post/redis%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" class="group block p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50/30 transition-colors">
+        <a href="/post/opengauss%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" class="group block p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50/30 transition-colors">
           <div class="text-xs text-gray-500 mb-1 flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
             Previous
           </div>
-          <div class="text-sm font-medium text-gray-900 group-hover:text-blue-700 line-clamp-2">Redis安装教程</div>
+          <div class="text-sm font-medium text-gray-900 group-hover:text-blue-700 line-clamp-2">opengauss安装教程</div>
         </a>
         
 
-        
-        <a href="/post/jenkins%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" class="group block p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50/30 transition-colors sm:text-right sm:col-start-2">
-          <div class="text-xs text-gray-500 mb-1 flex items-center sm:justify-end">
-            <span class="sm:order-1 mr-0 sm:ml-1">Next</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1.5 text-gray-400 sm:order-2 sm:ml-1 sm:mr-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
-          </div>
-          <div class="text-sm font-medium text-gray-900 group-hover:text-blue-700 line-clamp-2">jenkins安装教程</div>
-        </a>
         
       </nav>
       
