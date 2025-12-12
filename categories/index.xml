@@ -6,8 +6,15 @@
     <description>Recent content in Categories on blueberryclub</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 11 Dec 2025 10:31:52 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 12 Dec 2025 08:31:52 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Redis</title>
+      <link>http://localhost:1313/categories/redis/</link>
+      <pubDate>Fri, 12 Dec 2025 08:31:52 +0800</pubDate>
+      <guid>http://localhost:1313/categories/redis/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Mq</title>
       <link>http://localhost:1313/categories/mq/</link>
