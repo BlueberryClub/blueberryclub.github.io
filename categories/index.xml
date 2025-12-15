@@ -6,8 +6,36 @@
     <description>Recent content in Categories on blueberryclub</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 15 Dec 2025 10:48:52 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 15 Dec 2025 10:57:52 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docker</title>
+      <link>http://localhost:1313/categories/docker/</link>
+      <pubDate>Mon, 15 Dec 2025 10:57:52 +0800</pubDate>
+      <guid>http://localhost:1313/categories/docker/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>自动部署</title>
+      <link>http://localhost:1313/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/</link>
+      <pubDate>Mon, 15 Dec 2025 10:57:52 +0800</pubDate>
+      <guid>http://localhost:1313/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Mysql</title>
+      <link>http://localhost:1313/categories/mysql/</link>
+      <pubDate>Mon, 15 Dec 2025 10:54:52 +0800</pubDate>
+      <guid>http://localhost:1313/categories/mysql/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>数据库</title>
+      <link>http://localhost:1313/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <pubDate>Mon, 15 Dec 2025 10:54:52 +0800</pubDate>
+      <guid>http://localhost:1313/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Nginx</title>
       <link>http://localhost:1313/categories/nginx/</link>
@@ -16,24 +44,10 @@
       <description></description>
     </item>
     <item>
-      <title>自动部署</title>
-      <link>http://localhost:1313/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/</link>
-      <pubDate>Mon, 15 Dec 2025 10:48:52 +0800</pubDate>
-      <guid>http://localhost:1313/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Clickhouse</title>
       <link>http://localhost:1313/categories/clickhouse/</link>
       <pubDate>Mon, 15 Dec 2025 10:45:52 +0800</pubDate>
       <guid>http://localhost:1313/categories/clickhouse/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>数据库</title>
-      <link>http://localhost:1313/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
-      <pubDate>Mon, 15 Dec 2025 10:45:52 +0800</pubDate>
-      <guid>http://localhost:1313/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
       <description></description>
     </item>
     <item>
