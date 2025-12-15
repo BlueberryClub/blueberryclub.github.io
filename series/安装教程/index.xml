@@ -6,8 +6,22 @@
     <description>Recent content in 安装教程 on blueberryclub</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 12 Dec 2025 16:33:52 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 15 Dec 2025 10:48:52 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/series/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>nginx安装教程</title>
+      <link>http://localhost:1313/post/nginx%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</link>
+      <pubDate>Mon, 15 Dec 2025 10:48:52 +0800</pubDate>
+      <guid>http://localhost:1313/post/nginx%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</guid>
+      <description>&lt;h2 id=&#34;软件下载&#34;&gt;软件下载&#xA;  &lt;a class=&#34;heading-anchor&#34; href=&#34;#%e8%bd%af%e4%bb%b6%e4%b8%8b%e8%bd%bd&#34; aria-label=&#34;Copy link to this section&#34;&gt;&#xA;    &lt;svg viewBox=&#34;0 0 1024 1024&#34; width=&#34;18&#34; height=&#34;18&#34; fill=&#34;currentColor&#34; aria-hidden=&#34;true&#34;&gt;&#xA;      &lt;path d=&#34;M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z&#34;/&gt;&#xA;    &lt;/svg&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;下载地址&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://nginx.org/en/download.html&#34;&gt;https://nginx.org/en/download.html&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>clickhouse安装教程</title>
+      <link>http://localhost:1313/post/clickhouse%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</link>
+      <pubDate>Mon, 15 Dec 2025 10:45:52 +0800</pubDate>
+      <guid>http://localhost:1313/post/clickhouse%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</guid>
+      <description>&lt;h2 id=&#34;软件下载&#34;&gt;软件下载&#xA;  &lt;a class=&#34;heading-anchor&#34; href=&#34;#%e8%bd%af%e4%bb%b6%e4%b8%8b%e8%bd%bd&#34; aria-label=&#34;Copy link to this section&#34;&gt;&#xA;    &lt;svg viewBox=&#34;0 0 1024 1024&#34; width=&#34;18&#34; height=&#34;18&#34; fill=&#34;currentColor&#34; aria-hidden=&#34;true&#34;&gt;&#xA;      &lt;path d=&#34;M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z&#34;/&gt;&#xA;    &lt;/svg&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;软件下载地址 &lt;a href=&#34;https://packages.clickhouse.com/rpm/stable/&#34;&gt;https://packages.clickhouse.com/rpm/stable/&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>jenkins安装教程</title>
       <link>http://localhost:1313/post/jenkins%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</link>

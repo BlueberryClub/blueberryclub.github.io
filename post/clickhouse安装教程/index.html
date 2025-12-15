@@ -3,7 +3,7 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>Tags | blueberryclub</title>
+<title>clickhouse安装教程 | blueberryclub</title>
 
 
 <meta name="color-scheme" content="light dark">
@@ -526,139 +526,282 @@
   <div class="flex-1 flex flex-col min-h-screen pt-24">
     <main class="flex-1 w-full max-w-4xl mx-auto px-6 overflow-x-auto sm:overflow-visible">
       
-<div class="max-w-4xl mx-auto px-4 py-8">
-  <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Tags</h1>
-  
-  
-  <div class="mb-8 text-center text-gray-600 text-sm">
-    <p>点击任意标签查看相关文章</p>
-  </div>
-  
-  
-  <div class="bg-white dark:bg-slate-900 shadow-sm rounded-lg p-6">
-    <div class="flex flex-wrap gap-3 justify-center">
+  <article class="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+    <header class="p-8 border-b border-gray-100 relative overflow-hidden">
       
-        <a href="/tags/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" class="group">
-          <div class="tag-chip flex items-center px-4 py-2 rounded-full bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
-            <span class="font-medium">安装教程</span>
-            <span class="ml-2 count-badge bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-300 px-2 py-0.5 text-xs rounded-full">
-              11
-            </span>
-          </div>
+      
+      
+      
+      <div class="mb-3 flex">
+        
+        <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93" class="text-xs inline-flex items-center px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors">
+          数据库
         </a>
+        
+      </div>
       
-        <a href="/tags/clickhouse/" class="group">
-          <div class="tag-chip flex items-center px-4 py-2 rounded-full bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
-            <span class="font-medium">Clickhouse</span>
-            <span class="ml-2 count-badge bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-300 px-2 py-0.5 text-xs rounded-full">
-              1
-            </span>
-          </div>
+      
+      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 relative">clickhouse安装教程</h1>
+      
+      <div class="flex flex-wrap items-center text-sm text-gray-500 gap-4 relative">
+        
+        
+        
+        <time datetime="2025-12-15T10:45:52&#43;08:00" class="flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          2025-12-15
+        </time>
+        
+        
+        <span class="flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          1 分钟阅读
+        </span>
+
+        
+        <span id="busuanzi_container_page_pv" class="inline-flex items-center whitespace-nowrap">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400 inline-block flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+          </svg><span class="whitespace-nowrap">阅读量 <span id="busuanzi_value_page_pv"></span></span>
+        </span>
+      </div>
+    </header>
+
+    
+    
+    
+    
+    
+    
+    
+    <div class="px-8 pt-6" x-data="{ open: false }">
+      <button
+        class="w-full flex items-center justify-between text-sm text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-200 dark:border-slate-700 rounded-md px-4 py-2 transition-colors"
+        @click="open = !open"
+        aria-controls="toc-content"
+        :aria-expanded="open.toString()"
+      >
+        <span>Table of Contents</span>
+        <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+        </svg>
+        <svg x-show="open" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M5 9a1 1 0 000 2h10a1 1 0 100-2H5z" clip-rule="evenodd" />
+        </svg>
+      </button>
+      <div id="toc-content" x-cloak x-show="open" x-transition class="mt-3 border border-gray-100 rounded-md bg-white p-4 text-sm leading-relaxed">
+        <div class="prose prose-sm max-w-none">
+          <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#软件下载">软件下载</a></li>
+        <li><a href="#软件安装">软件安装</a>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#安装clickhouse">安装clickhouse</a></li>
+                <li><a href="#image-alt-text"><img src="/images/clickhouse%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B2.png" alt="Image Alt Text"></a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#软件启动">软件启动</a></li>
+      </ul>
+    </li>
+    <li><a href="#切换到clickhouse用户">切换到clickhouse用户</a></li>
+    <li><a href="#如果报错this-account-is-currently-not-available需要先激活clickhouse用户">如果报错：This account is currently not available，需要先激活clickhouse用户</a></li>
+    <li><a href="#手动指定一个配置文件并启动clickhouse服务">手动指定一个配置文件并启动clickhouse服务</a></li>
+  </ul>
+</nav>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="p-8 prose prose-sm sm:prose lg:prose-lg max-w-none">
+      
+<h2 id="软件下载">软件下载
+  <a class="heading-anchor" href="#%e8%bd%af%e4%bb%b6%e4%b8%8b%e8%bd%bd" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+<p>软件下载地址 <a href="https://packages.clickhouse.com/rpm/stable/">https://packages.clickhouse.com/rpm/stable/</a></p>
+<p>按照不同的cpu内核</p>
+<p>:::info
+cat /proc/cpuinfo</p>
+<p>:::</p>
+<p><img src="/images/clickhouse%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B1.png" alt="Image Alt Text"></p>
+<p>下载对应的 rpm包</p>
+<p>:::info
+<font style="color:rgb(51, 51, 51);">clickhouse-client-19.17.10.1-1.el7.x86_64.rpm </font></p>
+<p><font style="color:rgb(51, 51, 51);">clickhouse-common-static-19.17.10.1-1.el7.x86_64.rpm </font></p>
+<p><font style="color:rgb(51, 51, 51);">clickhouse-server-19.17.10.1-1.el7.x86_64.rpm </font></p>
+<p>:::</p>
+
+<h2 id="软件安装">软件安装
+  <a class="heading-anchor" href="#%e8%bd%af%e4%bb%b6%e5%ae%89%e8%a3%85" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+
+<h4 id="安装clickhouse"><font style="color:rgb(77, 77, 77);">安装clickhouse</font>
+  <a class="heading-anchor" href="#%e5%ae%89%e8%a3%85clickhouse" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h4>
+<pre tabindex="0"><code class="language-shell">rpm -ivh clickhouse-common-static-19.17.10.1-1.el7.x86_64.rpm
+rpm -ivh clickhouse-server-19.17.10.1-1.el7.x86_64.rpm
+rpm -ivh clickhouse-client-19.17.10.1-1.el7.x86_64.rpm</code></pre>
+<h4 id="image-alt-text"><img src="/images/clickhouse%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B2.png" alt="Image Alt Text">
+  <a class="heading-anchor" href="#image-alt-text" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h4>
+
+<h2 id="软件启动">软件启动
+  <a class="heading-anchor" href="#%e8%bd%af%e4%bb%b6%e5%90%af%e5%8a%a8" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+<p>:::info
+service clickhouse-server start</p>
+<p>:::</p>
+<ul>
+<li><font style="color:rgb(51, 51, 51);">基于默认配置启动，默认读取/etc/clickhouse-server/config.xml配置文件</font></li>
+<li><font style="color:rgb(51, 51, 51);">基于指定配置启动，需要手动切换到clickhouse用户启动</font></li>
+</ul>
+<p>:::info</p>
+
+<h1 id="切换到clickhouse用户">切换到clickhouse用户
+  <a class="heading-anchor" href="#%e5%88%87%e6%8d%a2%e5%88%b0clickhouse%e7%94%a8%e6%88%b7" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h1>
+<p>su clickhouse</p>
+
+<h1 id="如果报错this-account-is-currently-not-available需要先激活clickhouse用户">如果报错：This account is currently not available，需要先激活clickhouse用户
+  <a class="heading-anchor" href="#%e5%a6%82%e6%9e%9c%e6%8a%a5%e9%94%99this-account-is-currently-not-available%e9%9c%80%e8%a6%81%e5%85%88%e6%bf%80%e6%b4%bbclickhouse%e7%94%a8%e6%88%b7" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h1>
+<p>usermod -s /bin/bash clickhouse</p>
+
+<h1 id="手动指定一个配置文件并启动clickhouse服务">手动指定一个配置文件并启动clickhouse服务
+  <a class="heading-anchor" href="#%e6%89%8b%e5%8a%a8%e6%8c%87%e5%ae%9a%e4%b8%80%e4%b8%aa%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6%e5%b9%b6%e5%90%af%e5%8a%a8clickhouse%e6%9c%8d%e5%8a%a1" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h1>
+<p>clickhouse-server &ndash;config-file=/etc/clickhouse-server/config-ch5.xml</p>
+<p>:::</p>
+<p><font style="color:rgb(51, 51, 51);"></font></p>
+
+    </div>
+
+    
+    
+    
+    
+    <div class="px-8 pb-2 text-sm text-gray-500 flex items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+      </svg>
+      最后更新于 2025-12-15
+    </div>
+    
+
+    <footer class="px-8 py-6 bg-gray-50 border-t border-gray-100">
+      
+  <div class="tags-container">
+    <div class="text-gray-700 dark:text-gray-300 font-medium mb-2">Tags:</div>
+    <div class="flex flex-wrap gap-2">
+        <a href="/tags/clickhouse/" class="tag-chip inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-labelledby="tagIconTitle" role="img">
+            <title id="tagIconTitle"></title>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+          </svg>
+          Clickhouse
         </a>
-      
-        <a href="/tags/java/" class="group">
-          <div class="tag-chip flex items-center px-4 py-2 rounded-full bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
-            <span class="font-medium">Java</span>
-            <span class="ml-2 count-badge bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-300 px-2 py-0.5 text-xs rounded-full">
-              1
-            </span>
-          </div>
+        <a href="/tags/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" class="tag-chip inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-labelledby="tagIconTitle" role="img">
+            <title id="tagIconTitle"></title>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+          </svg>
+          安装教程
         </a>
-      
-        <a href="/tags/jenkins/" class="group">
-          <div class="tag-chip flex items-center px-4 py-2 rounded-full bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
-            <span class="font-medium">Jenkins</span>
-            <span class="ml-2 count-badge bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-300 px-2 py-0.5 text-xs rounded-full">
-              1
-            </span>
-          </div>
-        </a>
-      
-        <a href="/tags/kafka/" class="group">
-          <div class="tag-chip flex items-center px-4 py-2 rounded-full bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
-            <span class="font-medium">Kafka</span>
-            <span class="ml-2 count-badge bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-300 px-2 py-0.5 text-xs rounded-full">
-              1
-            </span>
-          </div>
-        </a>
-      
-        <a href="/tags/libreoffice/" class="group">
-          <div class="tag-chip flex items-center px-4 py-2 rounded-full bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
-            <span class="font-medium">LibreOffice</span>
-            <span class="ml-2 count-badge bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-300 px-2 py-0.5 text-xs rounded-full">
-              1
-            </span>
-          </div>
-        </a>
-      
-        <a href="/tags/mq/" class="group">
-          <div class="tag-chip flex items-center px-4 py-2 rounded-full bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
-            <span class="font-medium">Mq</span>
-            <span class="ml-2 count-badge bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-300 px-2 py-0.5 text-xs rounded-full">
-              1
-            </span>
-          </div>
-        </a>
-      
-        <a href="/tags/nginx/" class="group">
-          <div class="tag-chip flex items-center px-4 py-2 rounded-full bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
-            <span class="font-medium">Nginx</span>
-            <span class="ml-2 count-badge bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-300 px-2 py-0.5 text-xs rounded-full">
-              1
-            </span>
-          </div>
-        </a>
-      
-        <a href="/tags/opengauss/" class="group">
-          <div class="tag-chip flex items-center px-4 py-2 rounded-full bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
-            <span class="font-medium">Opengauss</span>
-            <span class="ml-2 count-badge bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-300 px-2 py-0.5 text-xs rounded-full">
-              1
-            </span>
-          </div>
-        </a>
-      
-        <a href="/tags/oracle/" class="group">
-          <div class="tag-chip flex items-center px-4 py-2 rounded-full bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
-            <span class="font-medium">Oracle</span>
-            <span class="ml-2 count-badge bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-300 px-2 py-0.5 text-xs rounded-full">
-              1
-            </span>
-          </div>
-        </a>
-      
-        <a href="/tags/redis/" class="group">
-          <div class="tag-chip flex items-center px-4 py-2 rounded-full bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
-            <span class="font-medium">Redis</span>
-            <span class="ml-2 count-badge bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-300 px-2 py-0.5 text-xs rounded-full">
-              1
-            </span>
-          </div>
-        </a>
-      
-        <a href="/tags/zookeeper/" class="group">
-          <div class="tag-chip flex items-center px-4 py-2 rounded-full bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
-            <span class="font-medium">Zookeeper</span>
-            <span class="ml-2 count-badge bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-300 px-2 py-0.5 text-xs rounded-full">
-              1
-            </span>
-          </div>
-        </a>
-      
     </div>
   </div>
+
+      
+      
+      
+      
+      
+      <nav class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        
+        <a href="/post/jenkins%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" class="group block p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50/30 transition-colors">
+          <div class="text-xs text-gray-500 mb-1 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            Previous
+          </div>
+          <div class="text-sm font-medium text-gray-900 group-hover:text-blue-700 line-clamp-2">jenkins安装教程</div>
+        </a>
+        
+
+        
+        <a href="/post/nginx%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" class="group block p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50/30 transition-colors sm:text-right sm:col-start-2">
+          <div class="text-xs text-gray-500 mb-1 flex items-center sm:justify-end">
+            <span class="sm:order-1 mr-0 sm:ml-1">Next</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1.5 text-gray-400 sm:order-2 sm:ml-1 sm:mr-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+          <div class="text-sm font-medium text-gray-900 group-hover:text-blue-700 line-clamp-2">nginx安装教程</div>
+        </a>
+        
+      </nav>
+      
+      
+      
+      <div class="mt-6 flex justify-center">
+        <a href="/" class="inline-flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          返回首页
+        </a>
+      </div>
+    </footer>
+  </article>
+
   
-  
-  <div class="mt-10 text-center">
-    <a href="/" class="inline-flex items-center text-gray-600 hover:text-blue-600 transition-colors">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-      </svg>
-      返回首页
-    </a>
+  <div class="max-w-4xl mx-auto mt-8 bg-white rounded-lg shadow-md overflow-hidden theme-card" style="--tw-prose-body: #374151; --tw-prose-headings: #111827; --tw-prose-links: #2563eb; --tw-prose-links-hover: #1d4ed8; --tw-prose-code-bg: #f3f4f6; color: #374151;">
+    
+ 
   </div>
-</div>
 
     </main>
   </div>
