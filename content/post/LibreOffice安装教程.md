@@ -2,11 +2,13 @@
 date = '2025-12-11T10:30:52+08:00'
 draft = true
 title = 'LibreOffice安装教程'
-tags = ["教程","libreOffice"]
-series = ["教程"]
-categories = ["libreOffice"]
+tags = ["libreOffice", "安装教程"]
+series = ["安装教程"]
+categories = ["组件", "libreOffice"] 
 +++
-2. 使用文件上传工具将libreOffice 上传至服务器
+
+
+1. 使用文件上传工具将libreOffice 上传至服务器
 
 ![Image Alt Text](/images/LibreOffice安装教程1.png)
 

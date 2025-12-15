@@ -2,10 +2,13 @@
 date = '2025-12-11T08:31:52+08:00'
 draft = true
 title = 'Kafka安装教程'
-tags = ["教程","Kafka"]
-series = ["教程"]
-categories = ["Kafka"]
+tags = ["Kafka","安装教程"]
+series = ["安装教程"]
+categories = ["中间件", "Kafka"] 
 +++
+
+
+
 ## 软件下载
 因为需要做数据接入功能的开发，所以使用到了kafka的工具。不过测试不好测试，所以就在远程服务器安装一个kafka，来进行测试，故记录此次安装过程为以后做积累。
 

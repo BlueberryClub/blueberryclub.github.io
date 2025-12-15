@@ -2,10 +2,12 @@
 date = '2025-12-11T10:30:52+08:00'
 draft = true
 title = 'oracle19c安装教程'
-tags = ["教程","数据库"]
-series = ["教程"]
-categories = ["oracle"]
+tags = ["oracle", "安装教程"]
+series = ["安装教程"]
+categories = ["数据库","oracle"] 
 +++
+
+
 # <font style="color:#000000;">在腾讯云centos8环境下安装oracle19c的问题</font>
 ## <font style="color:#000000;">软件下载</font>
 ### <font style="color:#000000;">将yum进行更新、安装解压工具</font>

@@ -2,10 +2,12 @@
 date = '2025-12-10T12:31:52+08:00'
 draft = true
 title = 'Zookeeper安装教程'
-tags = ["教程","Zookeeper"]
-series = ["教程"]
-categories = ["Zookeeper"]
+tags = ["Zookeeper", "安装教程"]
+series = ["安装教程"]
+categories = ["中间件","Zookeeper"]
 +++
+
+
 # Zookeeper安装教程
 ## 软件下载
 因为公司需要使用 KafKa 来进行接数据，所以需要安装，但是前置条件是需要安装这个 ZooKeeper

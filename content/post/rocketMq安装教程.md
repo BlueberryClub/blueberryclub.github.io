@@ -2,10 +2,13 @@
 date = '2025-12-11T10:31:52+08:00'
 draft = true
 title = 'rocketMq安装教程'
-tags = ["教程","中间件"]
-series = ["教程"]
-categories = ["mq"]
+tags = ["mq", "安装教程"]
+series = ["安装教程"]
+categories = ["rocketMq","中间件"] 
 +++
+
+
+
 # rocketMq安装和使用
 ##  软件下载
 ### 下载与上传

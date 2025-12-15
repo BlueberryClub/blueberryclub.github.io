@@ -2,10 +2,12 @@
 date = '2025-12-10T10:31:52+08:00'
 draft = true
 title = 'jdk安装教程'
-tags = ["教程","java"]
-series = ["教程"]
-categories = ["java"]
+tags = ["java","安装教程"]
+series = ["安装教程"]
+categories = ["开发语言", "java"] 
 +++
+
+
 # 基于Cen8的jdk安装教程
 ## 软件下载
 ### 下载
