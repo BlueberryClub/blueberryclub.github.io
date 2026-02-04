@@ -6,27 +6,34 @@
     <description>Recent content in Categories on blueberryclub</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 15 Dec 2025 11:06:52 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 04 Feb 2026 08:06:52 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Consul</title>
-      <link>http://localhost:1313/categories/consul/</link>
-      <pubDate>Mon, 15 Dec 2025 11:06:52 +0800</pubDate>
-      <guid>http://localhost:1313/categories/consul/</guid>
+      <title>Docker</title>
+      <link>http://localhost:1313/categories/docker/</link>
+      <pubDate>Wed, 04 Feb 2026 08:06:52 +0800</pubDate>
+      <guid>http://localhost:1313/categories/docker/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>函数式编程</title>
+      <link>http://localhost:1313/categories/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Wed, 04 Feb 2026 08:06:52 +0800</pubDate>
+      <guid>http://localhost:1313/categories/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/</guid>
       <description></description>
     </item>
     <item>
       <title>自动部署</title>
       <link>http://localhost:1313/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/</link>
-      <pubDate>Mon, 15 Dec 2025 11:06:52 +0800</pubDate>
+      <pubDate>Wed, 04 Feb 2026 08:06:52 +0800</pubDate>
       <guid>http://localhost:1313/categories/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/</guid>
       <description></description>
     </item>
     <item>
-      <title>Docker</title>
-      <link>http://localhost:1313/categories/docker/</link>
-      <pubDate>Mon, 15 Dec 2025 10:57:52 +0800</pubDate>
-      <guid>http://localhost:1313/categories/docker/</guid>
+      <title>Consul</title>
+      <link>http://localhost:1313/categories/consul/</link>
+      <pubDate>Mon, 15 Dec 2025 11:06:52 +0800</pubDate>
+      <guid>http://localhost:1313/categories/consul/</guid>
       <description></description>
     </item>
     <item>

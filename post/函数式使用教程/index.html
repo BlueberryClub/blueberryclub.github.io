@@ -3,7 +3,7 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>docker使用教程 | blueberryclub</title>
+<title>函数式编程 | blueberryclub</title>
 
 
 <meta name="color-scheme" content="light dark">
@@ -541,7 +541,7 @@
       </div>
       
       
-      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 relative">docker使用教程</h1>
+      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 relative">函数式编程</h1>
       
       <div class="flex flex-wrap items-center text-sm text-gray-500 gap-4 relative">
         
@@ -559,7 +559,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          13 分钟阅读
+          18 分钟阅读
         </span>
 
         
@@ -598,45 +598,78 @@
         <div class="prose prose-sm max-w-none">
           <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#函数式编程">函数式编程</a>
       <ul>
-        <li><a href="#学习计划">学习计划</a></li>
-        <li><a href="#概述">概述</a>
+        <li><a href="#1-概述学习自三更">1. 概述（学习自三更）</a>
           <ul>
-            <li><a href="#docker为什么出现">docker为什么出现</a></li>
-          </ul>
-        </li>
-        <li><a href="#docker的安装">docker的安装</a></li>
-        <li><a href="#docker的常用命令">docker的常用命令</a>
-          <ul>
-            <li><a href="#docker命令">docker命令</a></li>
-            <li><a href="#镜像命令">镜像命令</a></li>
-            <li><a href="#容器命令">容器命令</a></li>
-            <li><a href="#常用其他命令">常用其他命令</a>
+            <li><a href="#11-学习原因">1.1 学习原因</a></li>
+            <li><a href="#12函数编程思想">1.2函数编程思想</a>
               <ul>
-                <li><a href="#查看容器内部的进程信息">查看容器内部的进程信息</a></li>
+                <li><a href="#121-概念">1.2.1 概念</a></li>
+                <li><a href="#122-优点">1.2.2 优点</a></li>
               </ul>
             </li>
           </ul>
         </li>
-        <li><a href="#作业练习">作业练习</a></li>
-        <li><a href="#容器数据卷">容器数据卷</a>
+        <li><a href="#2-lambad-表达式">2. lambad 表达式</a>
           <ul>
-            <li><a href="#什么是数据卷">什么是数据卷</a></li>
-            <li><a href="#实战-安装mysql">实战: 安装mysql</a></li>
-            <li><a href="#匿名具名挂载">匿名/具名挂载</a></li>
+            <li><a href="#21-概述">2.1 概述</a></li>
+            <li><a href="#22-核心原则">2.2 核心原则</a></li>
+            <li><a href="#23-基本格式">2.3 基本格式</a></li>
+            <li><a href="#24-省略规则">2.4 省略规则</a></li>
           </ul>
         </li>
-        <li><a href="#dockerfile">DockerFile</a></li>
-        <li><a href="#docker网络">Docker网络</a></li>
-      </ul>
-    </li>
-    <li><a href="#外部访问容器">外部访问容器</a>
-      <ul>
-        <li><a href="#映射所有接口地址">映射所有接口地址</a></li>
-        <li><a href="#映射到指定地址的指定端口">映射到指定地址的指定端口</a></li>
-        <li><a href="#映射到指定地址的任意端口">映射到指定地址的任意端口</a></li>
-        <li><a href="#查看映射端口配置">查看映射端口配置</a></li>
+        <li><a href="#3-stream流">3. Stream流</a>
+          <ul>
+            <li><a href="#31-概述">3.1 概述</a></li>
+            <li><a href="#32-常用操作">3.2 常用操作</a>
+              <ul>
+                <li><a href="#321-创建流">3.2.1 创建流</a></li>
+                <li><a href="#322-中间操作">3.2.2 中间操作</a></li>
+                <li><a href="#323-终结操作">3.2.3 终结操作</a></li>
+              </ul>
+            </li>
+            <li><a href="#33-注意事项">3.3 注意事项</a></li>
+          </ul>
+        </li>
+        <li><a href="#4-optional">4. OPtional</a>
+          <ul>
+            <li><a href="#41-概述">4.1 概述</a></li>
+            <li><a href="#42-使用">4.2 使用</a>
+              <ul>
+                <li><a href="#421-创建对象">4.2.1 创建对象</a></li>
+                <li><a href="#422-安全消费值">4.2.2 安全消费值</a></li>
+                <li><a href="#423-获取值">4.2.3 获取值</a></li>
+                <li><a href="#424-安全获取值">4.2.4 安全获取值</a></li>
+                <li><a href="#425-过滤">4.2.5 过滤</a></li>
+                <li><a href="#426-判断">4.2.6 判断</a></li>
+                <li><a href="#427-数据转换">4.2.7 数据转换</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#5-函数式接口">5. 函数式接口</a>
+          <ul>
+            <li><a href="#51-概述">5.1 概述</a></li>
+            <li><a href="#52-常见函数式接口">5.2 常见函数式接口</a></li>
+            <li><a href="#53-常用的默认方法">5.3 常用的默认方法</a></li>
+          </ul>
+        </li>
+        <li><a href="#6-方法引用">6 方法引用</a>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#使用前提">使用前提</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#7-高级用法">7. 高级用法</a>
+          <ul>
+            <li><a href="#基本数据类型优化">基本数据类型优化</a></li>
+            <li><a href="#并行流">并行流</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -648,389 +681,622 @@
 
     <div class="p-8 prose prose-sm sm:prose lg:prose-lg max-w-none">
       
-<h2 id="学习计划">学习计划
-  <a class="heading-anchor" href="#%e5%ad%a6%e4%b9%a0%e8%ae%a1%e5%88%92" aria-label="Copy link to this section">
-    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
-    </svg>
-  </a>
-</h2>
-<p>使用三更的教学进行初步学习docker的使用  -  <font style="color:rgb(24, 25, 28);">Docker实战教程</font></p>
-<p><a href="https://www.bilibili.com/video/BV1FC4y157gK/?spm_id_from=333.1387.favlist.content.click&amp;vd_source=0101ecad56b5fc14c743923002bbc428">Docker实战教程-从零到实战-Docker容器化-DockerFile&amp;DockerCompose-挑战尚硅谷&amp;黑马_哔哩哔哩_bilibili</a></p>
-<p>因为边工作边学习，所以很多知识都不是很深刻，所以继续使用- <font style="color:rgb(24, 25, 28);">Docker最新超详细版教程通俗易懂</font></p>
-<p>教程进行二次学习，了解使用过程中的相关细节。</p>
-<p><a href="https://www.bilibili.com/video/BV1og4y1q7M4/?spm_id_from=333.337.search-card.all.click&amp;vd_source=0101ecad56b5fc14c743923002bbc428">【狂神说Java】Docker最新超详细版教程通俗易懂_哔哩哔哩_bilibili</a></p>
-<p>来自好大哥们的资料。</p>
-<p><a href="https://yeasy.gitbook.io/docker_practice/network/linking">https://yeasy.gitbook.io/docker_practice/network/linking</a></p>
-
-<h2 id="概述">概述
-  <a class="heading-anchor" href="#%e6%a6%82%e8%bf%b0" aria-label="Copy link to this section">
-    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
-    </svg>
-  </a>
-</h2>
-
-<h3 id="docker为什么出现">docker为什么出现
-  <a class="heading-anchor" href="#docker%e4%b8%ba%e4%bb%80%e4%b9%88%e5%87%ba%e7%8e%b0" aria-label="Copy link to this section">
-    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
-    </svg>
-  </a>
-</h3>
-<p>一套系统两个多个环境</p>
-<p>可能会出现，本地可以运行但是生产运行存在问题。   (思考，那如果部署多套环境，是不是数据库，redis，服务器型号等都要有一套一模一样的)</p>
-<p>解析 环境一致，docker安装的时候环境一致，docker的目的。</p>
-<p>传统的部署: 开发出jar包，运维人员进行部署。</p>
-<p>现在的部署: 开发打包部署上线，一套流程做完。</p>
-<p>隔离: docker核心思想，打包装箱，每个程序互相隔离。</p>
-
-<h2 id="docker的安装">docker的安装
-  <a class="heading-anchor" href="#docker%e7%9a%84%e5%ae%89%e8%a3%85" aria-label="Copy link to this section">
-    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
-    </svg>
-  </a>
-</h2>
-<pre tabindex="0"><code class="language-shell">cat /etc/os-release</code></pre><pre tabindex="0"><code class="language-shell">yum remove docker \
-  docker-client \
-  docker-client-latest \
-  docker-common \
-  docker-latest \
-  docker-latest-logrotate \
-  docker-logrotate \
-  docker-engine</code></pre><pre tabindex="0"><code class="language-shell">sudo yum install -y yum-utils</code></pre><pre tabindex="0"><code class="language-shell">sudo yum-config-manager\
-  --add-repo \
-  http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</code></pre><pre tabindex="0"><code class="language-shell">yum makecache fast</code></pre><pre tabindex="0"><code class="language-shell">yum install docker-ce docker-ce-cli containerd.io</code></pre><!-- 这是一张图片，ocr 内容为： -->
-<p><img src="/images/docker%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B1.png" alt=""></p>
-<pre tabindex="0"><code class="language-shell">systemctl start docker</code></pre><!-- 这是一张图片，ocr 内容为： -->
-<p><img src="/images/docker%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B2.png" alt=""></p>
-<pre tabindex="0"><code class="language-shell">docker run hello-world</code></pre><!-- 这是一张图片，ocr 内容为： -->
-<p><img src="/images/docker%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B3.png" alt=""></p>
-<pre tabindex="0"><code class="language-shell">docker images</code></pre><!-- 这是一张图片，ocr 内容为： -->
-<p><img src="/images/docker%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B4.png" alt=""></p>
-<pre tabindex="0"><code class="language-shell">sudo yum remove docker-ce docker-ce-cli containerd.io
-
-sudo rm -rf /var/lib/docker</code></pre>
-<h2 id="docker的常用命令">docker的常用命令
-  <a class="heading-anchor" href="#docker%e7%9a%84%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4" aria-label="Copy link to this section">
-    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
-    </svg>
-  </a>
-</h2>
-<pre tabindex="0"><code class="language-shell">docker version   
-docker info
-docker --help</code></pre>
-<h3 id="docker命令">docker命令
-  <a class="heading-anchor" href="#docker%e5%91%bd%e4%bb%a4" aria-label="Copy link to this section">
-    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
-    </svg>
-  </a>
-</h3>
-
-<h3 id="镜像命令">镜像命令
-  <a class="heading-anchor" href="#%e9%95%9c%e5%83%8f%e5%91%bd%e4%bb%a4" aria-label="Copy link to this section">
-    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
-    </svg>
-  </a>
-</h3>
-<pre tabindex="0"><code class="language-shell">[root@VM-12-9-centos ~]# docker images
-REPOSITORY    TAG       IMAGE ID       CREATED        SIZE
-hello-world   latest    74cc54e27dc4   6 months ago   10.1kB
-
-#注释
-REPOSITORY  镜像的仓库源
-TAG  				标签
-IMAGE ID  	镜像id
-CREATED			镜像创建时间
-SIZE				镜像的大小
-
-# 
-  -a 	 --all		列出所有的镜像
-  -q 	 --quiet	只显示进行的id</code></pre><pre tabindex="0"><code class="language-shell">由于不可描述之原因，docker 官方已经禁止大陆访问其服务器，
-因此，搜索镜像时应当采用 ${镜像源域名}/${搜索关键字} 的模式，
-这里假设您的 registry-mirrors 配置了 docker.1ms.run ：
-
-
-docker search docker.1ms.run/&lt;Keyword&gt;</code></pre><pre tabindex="0"><code class="language-shell">docker pull mysql
-
-docker pull mysql:xxx
-
-[root@VM-12-9-centos ~]# docker pull mysql
-Using default tag: latest					# 如果不写  tag，默认就是  latest
-latest: Pulling from library/mysql
-10aec8a104c7: Pull complete 			# 分层下载，docker image的核心 联合文件系统
-c81e70a25040: Pull complete 
-b9916866e45f: Pull complete 
-cac9e6e2c9d6: Pull complete 
-5d2f76605aa7: Pull complete 
-31f7d8dc4024: Pull complete 
-f15cc21449ca: Pull complete 
-a22f87a7c498: Pull complete 
-e55b6f427ac7: Pull complete 
-fcb1221d0ce3: Pull complete 
-Digest: sha256:a776e89aad2d425c248ccfb840115aaa52883499ff36512db4d503b11aae455a
-Status: Downloaded newer image for mysql:latest
-docker.io/library/mysql:latest		# 真实地址</code></pre><pre tabindex="0"><code class="language-shell">docker rmi -f  容器id   # 按照id删除
-docker rmi -f  ${docker image -aq}   # 全部删除</code></pre>
-<h3 id="容器命令">容器命令
-  <a class="heading-anchor" href="#%e5%ae%b9%e5%99%a8%e5%91%bd%e4%bb%a4" aria-label="Copy link to this section">
-    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
-    </svg>
-  </a>
-</h3>
-<pre tabindex="0"><code class="language-shell">docker pull centos</code></pre><pre tabindex="0"><code class="language-shell">docker run [可选参数] image 
-
-参数说明
---name=&#34;Name&#34;			容器名字   
--d								后台方式运行
--it								使用交互方式运行
--p 								指定容器的端口  -p  8080:8080	
-  -p 主机端口:容器端口
-  -p 容器端口
-  容器端口
--P								随机指定端口</code></pre><pre tabindex="0"><code class="language-shell">docker run -it centos /bin/bash</code></pre><pre tabindex="0"><code class="language-shell">exit
-Ctrl &#43; P &#43; Q </code></pre><pre tabindex="0"><code class="language-shell">docker ps -a			# 全部
-docker ps					# 当前运行的
-docker ps -aq			# 全部 只显示编号</code></pre><pre tabindex="0"><code class="language-shell">exit # 直接容器停止并退出
-Ctrl &#43; P &#43; Q # 容器不停止退出</code></pre><pre tabindex="0"><code class="language-shell">docker rm 容器id										# 删除指定容器
-docker rm -rf ${docker ps -aq}		# 删除全部容器
-docker ps -a -q|xargs docker rm		# 删除所有容器</code></pre><pre tabindex="0"><code class="language-shell">docker start 容器id 		# 启动容器
-docker restart 容器id	# 重启容器
-docker stop 容器id			# 停止当前运行的容器
-docker kill 容器id		 	# 强制停止当前容器</code></pre>
-<h3 id="常用其他命令">常用其他命令
-  <a class="heading-anchor" href="#%e5%b8%b8%e7%94%a8%e5%85%b6%e4%bb%96%e5%91%bd%e4%bb%a4" aria-label="Copy link to this section">
-    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
-    </svg>
-  </a>
-</h3>
-<pre tabindex="0"><code class="language-shell">docker run -d 容器名		# 启动完后，发现容器停止
-
-# docker 容器使用后台运行，就必须要有一个前台进程，容器发现没有应用，就会自动停止。
-# nginx，容器启动后，发现自己没有提供服务，就会立刻停止，就是没有程序了</code></pre><pre tabindex="0"><code class="language-shell">docker logs -f -t --tail 容器id
-
-# 自己编写一段shell脚本
-&#34;while true;do echo kuangshen;sleep 1;done&#34;
-
-docker logs -tf --tail 10 容器名称/容器id
-
-# 追加命令
-docker update --restart always mysql </code></pre>
-<h4 id="查看容器内部的进程信息">查看容器内部的进程信息
-  <a class="heading-anchor" href="#%e6%9f%a5%e7%9c%8b%e5%ae%b9%e5%99%a8%e5%86%85%e9%83%a8%e7%9a%84%e8%bf%9b%e7%a8%8b%e4%bf%a1%e6%81%af" aria-label="Copy link to this section">
-    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
-    </svg>
-  </a>
-</h4>
-<pre tabindex="0"><code class="language-shell">docker top 容器名称/容器id</code></pre><pre tabindex="0"><code class="language-shell">docker inspect --help
-
-docker inspect id</code></pre><p>进入当前正在运行的容器</p>
-<pre tabindex="0"><code class="language-shell">docker ps
-# 方式一
-docker exec -it 容器id/容器名 /bin/bash
-ps -ef 
-# 方式二
-docker attach  容器id/容器名</code></pre><!-- 这是一张图片，ocr 内容为： -->
-<p><img src="/images/docker%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B5.png" alt=""></p>
-
-<h2 id="作业练习">作业练习
-  <a class="heading-anchor" href="#%e4%bd%9c%e4%b8%9a%e7%bb%83%e4%b9%a0" aria-label="Copy link to this section">
-    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
-    </svg>
-  </a>
-</h2>
-<p><code>Docker安装nginx</code></p>
-<pre tabindex="0"><code class="language-powershell"># 1. 搜索镜像 ( search ) 建议大家去docker搜索，可以看到帮忙文档
-# 2. 下载镜像 ( pull )
-# 3. 运行测试 
-# 查看镜像
-docker images
-# 运行镜像
-docker run -d --name nginx -p 9002:80 nginx
-# -d 后台运行
-# 测试镜像运行情况
-curl localhost:9002</code></pre><pre tabindex="0"><code class="language-powershell">docker run -it --rm tomcat:9.0
-
-# 容器停止之后，容器就删除了(测试使用比较好)</code></pre>
-<h2 id="容器数据卷">容器数据卷
-  <a class="heading-anchor" href="#%e5%ae%b9%e5%99%a8%e6%95%b0%e6%8d%ae%e5%8d%b7" aria-label="Copy link to this section">
-    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
-    </svg>
-  </a>
-</h2>
-
-<h3 id="什么是数据卷">什么是数据卷
-  <a class="heading-anchor" href="#%e4%bb%80%e4%b9%88%e6%98%af%e6%95%b0%e6%8d%ae%e5%8d%b7" aria-label="Copy link to this section">
-    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
-    </svg>
-  </a>
-</h3>
-<p>将应用和环境打包成一个镜像!</p>
-<p>如果数据都在容器中，那么我们容器删除，数据就会丢失，需求，数据可以持久化</p>
-<p>Mysql，容器删除了，= 删库</p>
-<p>容器之间可以有一个数据共享技术！Docker 容器中产生的数据，同步到本地！</p>
-<p>这个就是卷技术！</p>
-<p>将容器内的目录挂载出来！类似同步机制</p>
-<p>容器的持久化和同步操作！容器间也是可以数据共享的</p>
-<p>使用数据卷</p>
-<pre tabindex="0"><code class="language-shell"># 使用命令挂载 -v
-docker run -it -v 主机目录地址:容器内目录 
-# 这个-v 可以类似 -p
-
-docker inspect 容器id # 查看容器详情
-# Mounts 挂载</code></pre><!-- 这是一张图片，ocr 内容为： -->
-<p><img src="/images/docker%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B6.png" alt=""></p>
-<p>:::info
-如果容器没有启动，数据依旧会同步数据</p>
-<p>:::</p>
-
-<h3 id="实战-安装mysql">实战: 安装mysql
-  <a class="heading-anchor" href="#%e5%ae%9e%e6%88%98-%e5%ae%89%e8%a3%85mysql" aria-label="Copy link to this section">
-    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
-    </svg>
-  </a>
-</h3>
-<p>:::info
-mysql的数据持久化问题</p>
-<p>:::</p>
-<pre tabindex="0"><code class="language-shell"># 获取镜像
-
-# 运行容器，需要做数据挂载
-docker run -d -p 3390:3306  \
--v /soft/mysql/conf:/etc/mysql/conf \
--v /soft/mysql/data:/var/lib/mysql \
--e MYSQL_ROOT_PASSWORD=zhl990106ZHL \
---name mysql \
-mysql:latest
-
-# 在本地测试创建一个数据库，查看一下我们映射的路径是否ok</code></pre><pre><code>假设我们将容器删除，我们挂载到本地的数据卷依旧存在，没有丢失。这就实现了容器数据持久化功能
-</code></pre>
-
-<h3 id="匿名具名挂载">匿名/具名挂载
-  <a class="heading-anchor" href="#%e5%8c%bf%e5%90%8d%e5%85%b7%e5%90%8d%e6%8c%82%e8%bd%bd" aria-label="Copy link to this section">
-    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
-    </svg>
-  </a>
-</h3>
-<pre tabindex="0"><code class="language-shell"># -v 容器内路径
-docker run -d -P --name nginx01 -v /etc/nginx nginx
-# 此时数据卷是乱码，所以是匿名挂载
-
-# 通过 -v 卷名:容器内路径 挂载
-# 查看卷名详情
-docker volume inspect 卷名
-
-# 查看数据卷
-docker volume --help 
-
-# 如何确定是具名挂载还是匿名挂载 
--v 容器内路径					# 匿名挂载
--v 卷名: 容器内路径  	# 具名挂载
--v /宿主机路径::容器内路径 		# 指定路径挂载
-
-# 拓展
--v 容器内路径:ro
--v 容器内路径:rw
-
-# 一旦设置了容器的权限，容器对我们挂载出来的就有限定了
-readonly: ro
-readwrite: rw</code></pre>
-<h2 id="dockerfile">DockerFile
-  <a class="heading-anchor" href="#dockerfile" aria-label="Copy link to this section">
-    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
-    </svg>
-  </a>
-</h2>
-<pre tabindex="0"><code class="language-shell"># 方式二
-# 使用 dockerFile 构建的一个镜像
-# 通过脚本可以生成一个镜像 镜像是一层一层的，脚本是一个一个的命令</code></pre>
-<h2 id="docker网络">Docker网络
-  <a class="heading-anchor" href="#docker%e7%bd%91%e7%bb%9c" aria-label="Copy link to this section">
-    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
-    </svg>
-  </a>
-</h2>
-
-<h1 id="外部访问容器">外部访问容器
-  <a class="heading-anchor" href="#%e5%a4%96%e9%83%a8%e8%ae%bf%e9%97%ae%e5%ae%b9%e5%99%a8" aria-label="Copy link to this section">
+<h1 id="函数式编程">函数式编程
+  <a class="heading-anchor" href="#%e5%87%bd%e6%95%b0%e5%bc%8f%e7%bc%96%e7%a8%8b" aria-label="Copy link to this section">
     <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
       <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
     </svg>
   </a>
 </h1>
-<p>容器中可以运行一些网络应用，要让外部也可以访问这些应用，可以通过 <code>-P</code> 或 <code>-p</code> 参数来指定端口映射。</p>
-<p>当使用 <code>-P</code> 标记时，Docker 会随机映射一个端口到内部容器开放的网络端口。</p>
-<p>使用 <code>docker container ls</code> 可以看到，本地主机的 32768 被映射到了容器的 80 端口。此时访问本机的 32768 端口即可访问容器内 NGINX 默认页面。</p>
-<pre tabindex="0"><code class="language-bash">$ docker run -d -P nginx:alpine
 
-$ docker container ls -l
-CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                   NAMES
-fae320d08268        nginx:alpine        &#34;/docker-entrypoint.…&#34;   24 seconds ago      Up 20 seconds       0.0.0.0:32768-&gt;80/tcp   bold_mcnulty</code></pre><p>同样的，可以通过 <code>docker logs</code> 命令来查看访问记录。</p>
-<pre tabindex="0"><code class="language-bash">$ docker logs fa
-172.17.0.1 - - [25/Aug/2020:08:34:04 &#43;0000] &#34;GET / HTTP/1.1&#34; 200 612 &#34;-&#34; &#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0&#34; &#34;-&#34;</code></pre><p><code>-p</code> 则可以指定要映射的端口，并且，在一个指定端口上只可以绑定一个容器。支持的格式有 <code>ip:hostPort:containerPort | ip::containerPort | hostPort:containerPort</code>。</p>
+<h2 id="1-概述学习自三更">1. 概述（学习自三更）
+  <a class="heading-anchor" href="#1-%e6%a6%82%e8%bf%b0%e5%ad%a6%e4%b9%a0%e8%87%aa%e4%b8%89%e6%9b%b4" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
 
-<h2 id="映射所有接口地址">映射所有接口地址
-  <a class="heading-anchor" href="#%e6%98%a0%e5%b0%84%e6%89%80%e6%9c%89%e6%8e%a5%e5%8f%a3%e5%9c%b0%e5%9d%80" aria-label="Copy link to this section">
+<h3 id="11-学习原因">1.1 学习原因
+  <a class="heading-anchor" href="#11-%e5%ad%a6%e4%b9%a0%e5%8e%9f%e5%9b%a0" aria-label="Copy link to this section">
     <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
       <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
     </svg>
   </a>
-</h2>
-<p>使用 <code>hostPort:containerPort</code> 格式本地的 80 端口映射到容器的 80 端口，可以执行</p>
-<pre tabindex="0"><code class="language-bash">$ docker run -d -p 80:80 nginx:alpine</code></pre><p>此时默认会绑定本地所有接口上的所有地址。</p>
+</h3>
+<p>能够看懂公司代码<br>
+大数量下处理集合效率高<br>
+代码可读性高<br>
+消灭嵌套地狱</p>
 
-<h2 id="映射到指定地址的指定端口">映射到指定地址的指定端口
-  <a class="heading-anchor" href="#%e6%98%a0%e5%b0%84%e5%88%b0%e6%8c%87%e5%ae%9a%e5%9c%b0%e5%9d%80%e7%9a%84%e6%8c%87%e5%ae%9a%e7%ab%af%e5%8f%a3" aria-label="Copy link to this section">
+<h3 id="12函数编程思想">1.2函数编程思想
+  <a class="heading-anchor" href="#12%e5%87%bd%e6%95%b0%e7%bc%96%e7%a8%8b%e6%80%9d%e6%83%b3" aria-label="Copy link to this section">
     <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
       <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
     </svg>
   </a>
-</h2>
-<p>可以使用 <code>ip:hostPort:containerPort</code> 格式指定映射使用一个特定地址，比如 localhost 地址 127.0.0.1</p>
-<pre tabindex="0"><code class="language-bash">$ docker run -d -p 127.0.0.1:80:80 nginx:alpine</code></pre>
-<h2 id="映射到指定地址的任意端口">映射到指定地址的任意端口
-  <a class="heading-anchor" href="#%e6%98%a0%e5%b0%84%e5%88%b0%e6%8c%87%e5%ae%9a%e5%9c%b0%e5%9d%80%e7%9a%84%e4%bb%bb%e6%84%8f%e7%ab%af%e5%8f%a3" aria-label="Copy link to this section">
+</h3>
+
+<h4 id="121-概念">1.2.1 概念
+  <a class="heading-anchor" href="#121-%e6%a6%82%e5%bf%b5" aria-label="Copy link to this section">
     <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
       <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
     </svg>
   </a>
-</h2>
-<p>使用 <code>ip::containerPort</code> 绑定 localhost 的任意端口到容器的 80 端口，本地主机会自动分配一个端口。</p>
-<pre tabindex="0"><code class="language-bash">$ docker run -d -p 127.0.0.1::80 nginx:alpine</code></pre><p>还可以使用 <code>udp</code> 标记来指定 <code>udp</code> 端口</p>
-<pre tabindex="0"><code class="language-bash">$ docker run -d -p 127.0.0.1:80:80/udp nginx:alpine</code></pre>
-<h2 id="查看映射端口配置">查看映射端口配置
-  <a class="heading-anchor" href="#%e6%9f%a5%e7%9c%8b%e6%98%a0%e5%b0%84%e7%ab%af%e5%8f%a3%e9%85%8d%e7%bd%ae" aria-label="Copy link to this section">
+</h4>
+<p>面向对象关注的是对象完成了什么事情，而函数编程关注的是数据进行了什么操作。</p>
+
+<h4 id="122-优点">1.2.2 优点
+  <a class="heading-anchor" href="#122-%e4%bc%98%e7%82%b9" aria-label="Copy link to this section">
     <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
       <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
     </svg>
   </a>
-</h2>
-<p>使用 <code>docker port</code> 来查看当前映射的端口配置，也可以查看到绑定的地址</p>
-<pre tabindex="0"><code class="language-bash">$ docker port fa 80
-0.0.0.0:32768</code></pre><p>注意：</p>
+</h4>
 <ul>
-<li>容器有自己的内部网络和 ip 地址（使用 <code>docker inspect</code> 查看，Docker 还可以有一个可变的网络配置。）</li>
-<li><code>-p</code> 标记可以多次使用来绑定多个端口</li>
+<li>代码简洁、开发迅速</li>
+<li>接近自然语言、易于理解</li>
+<li>易于“并发编程”</li>
 </ul>
-<p>例如</p>
-<pre tabindex="0"><code class="language-bash">$ docker run -d \
-    -p 80:80 \
-    -p 443:443 \
-    nginx:alpine</code></pre>
+
+<h2 id="2-lambad-表达式">2. lambad 表达式
+  <a class="heading-anchor" href="#2-lambad-%e8%a1%a8%e8%be%be%e5%bc%8f" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+
+<h3 id="21-概述">2.1 概述
+  <a class="heading-anchor" href="#21-%e6%a6%82%e8%bf%b0" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p>Lambda 是JDK8的一个语法糖，是函数式编程的一个重要体现，他可以对某些匿名内部类进行简化。</p>
+
+<h3 id="22-核心原则">2.2 核心原则
+  <a class="heading-anchor" href="#22-%e6%a0%b8%e5%bf%83%e5%8e%9f%e5%88%99" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p>可以推导可省略 ( 省略了很多代码， )</p>
+
+<h3 id="23-基本格式">2.3 基本格式
+  <a class="heading-anchor" href="#23-%e5%9f%ba%e6%9c%ac%e6%a0%bc%e5%bc%8f" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<pre tabindex="0"><code class="language-java">(参数列表) -&gt; {代码}
+
+    // TODO demo 1
+	new Thread(new Runnable(){
+    	@Override
+    	public void run(){
+	    }
+	}).start();
+	new Thread(() -&gt; {}).start();
+
+    // TODO demo 2 
+    public static void main(String[] args) {
+        calculateNum((left, right) -&gt; left &#43; right);
+    }
+    public static int calculateNum(IntBinaryOperator intBinaryOperator){
+        int a = 10;
+        int b = 20;
+        return intBinaryOperator.applyAsInt(a,b);
+    }
+
+	// TODO demo 3
+ 	public static void main(String[] args) {
+        printNum(value -&gt; value%2 == 0);
+    }
+    public static void printNum(IntPredicate predicate){
+        int[] arr= {1,2,3,4,5,6,7,8,9,10};
+        for (int i : arr){
+            if (predicate.test(i)){
+                System.out.println(i);
+            }
+        }
+    }
+
+	// TODO demo 4
+	 public static void main(String[] args) {
+        typeConver(Integer::valueOf); 					// 最简化
+        typeConver(val -&gt; Integer.valueOf(val));		// 简化
+    }
+    public static &lt;R&gt; R typeConver(Function&lt;String, R&gt; function){
+        String str = &#34;1235&#34;;
+        R result = function.apply(str);
+        return result;
+    }
+
+	// TODO demo 5
+  	public static void main(String[] args) {	
+        foreachArr(System.out::println);				// 最简化
+        foreachArr(value -&gt; System.out.println(value));	// 简化
+    }
+    public static void foreachArr(IntConsumer consumer){
+        int[] arr = {1,2,3,4,5,6,7,8,9,10};
+        for (int i : arr){
+            consumer.accept(i);
+        }
+    }</code></pre>
+<h3 id="24-省略规则">2.4 省略规则
+  <a class="heading-anchor" href="#24-%e7%9c%81%e7%95%a5%e8%a7%84%e5%88%99" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<ul>
+<li>参数类型可以省略</li>
+<li>方法体只有一句代码时大括号 return 和唯一一句代码的分号可以省略</li>
+<li>方法只有一个参数时，小括号可以省略</li>
+<li>以上这些规则 可以使用 Ctrl + enter 寻找</li>
+</ul>
+
+<h2 id="3-stream流">3. Stream流
+  <a class="heading-anchor" href="#3-stream%e6%b5%81" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+
+<h3 id="31-概述">3.1 概述
+  <a class="heading-anchor" href="#31-%e6%a6%82%e8%bf%b0" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p>java8的Stream 使用的是函数式编程的模式，如同他的名字一样，可以被用来对集合进行链状流式的操作。方便让我们对集合或数组操作。</p>
+
+<h3 id="32-常用操作">3.2 常用操作
+  <a class="heading-anchor" href="#32-%e5%b8%b8%e7%94%a8%e6%93%8d%e4%bd%9c" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+
+<h4 id="321-创建流">3.2.1 创建流
+  <a class="heading-anchor" href="#321-%e5%88%9b%e5%bb%ba%e6%b5%81" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h4>
+<p>单列集合:   集合对象,stream()</p>
+<pre tabindex="0"><code class="language-java">List&lt;Object&gt; list = new ArrayList&lt;&gt;();
+Stream&lt;Object&gt; stream = list.stream();</code></pre><p>数组:   Arrays.stream(数组)或者使用Stream.of创建</p>
+<pre tabindex="0"><code class="language-java">Integer[] arr = {1,2,3,4,5};
+Stream&lt;Integer&gt; stream1 = Arrays.stream(arr);
+Stream&lt;Integer&gt; stream2 = Stream.of(arr);</code></pre><p>双列集合:   转换成单列集合后在创建</p>
+<pre tabindex="0"><code class="language-java">Map&lt;String, Integer&gt; map = new HashMap&lt;&gt;();
+Stream&lt;Map.Entry&lt;String, Integer&gt;&gt; stream3 = map.entrySet().stream();</code></pre>
+<h4 id="322-中间操作">3.2.2 中间操作
+  <a class="heading-anchor" href="#322-%e4%b8%ad%e9%97%b4%e6%93%8d%e4%bd%9c" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h4>
+<p>filter</p>
+<p>可以对流中元素进行过滤，符号过滤条件的才能继续留在流中。</p>
+<pre tabindex="0"><code class="language-java">List&lt;User&gt; consumers = new ArrayList&lt;&gt;();
+// Stream 简化
+consumers.stream()
+    .filter(user -&gt; user.getLockFlag())
+    .forEach(user -&gt; System.out.println(user.getUserName()));
+// Stream 简化
+consumers.stream()
+    .filter(User::getLockFlag)
+    .forEach(user -&gt; System.out.println(user.getUserName()));
+// 普通形式写
+for (User user : consumers) {
+    if (user.getLockFlag()) {
+        System.out.println(user.getUserName());
+    }
+}</code></pre><p>map</p>
+<p>可以把对流中的元素进行计算或者转换</p>
+<pre tabindex="0"><code class="language-java">List&lt;User&gt; users = new ArrayList&lt;&gt;();
+// Stream 简化
+users.stream()
+    .map(user -&gt; user.getUserName())
+    .forEach(name -&gt; System.out.println(name));
+// Stream 简化
+users.stream()
+    .map(User::getUserName)
+    .forEach(System.out::println);
+// 普通形式写
+for (User user : users) {
+    String userName = user.getUserName();
+    System.out.println(userName);
+}</code></pre><p>distinct</p>
+<p>可以去除流中的重复元素 【 注意！！！ distinct 方法是依赖 Object的equals方法来判断是否是相同对象的。所以需要注意重写equals方法】  可以使用</p>
+<p>@EqualsAndHashCode   注解实现 equals 操作</p>
+<pre tabindex="0"><code class="language-plain">List&lt;User&gt; users = new ArrayList&lt;&gt;();
+// 依赖于实体类的 equals 方法
+users.stream()
+        .distinct()
+        .forEach(user -&gt; System.out.println(user.getUserName()));</code></pre><p>sorted</p>
+<p>可以对流中元素进行排序</p>
+<pre tabindex="0"><code class="language-java">List&lt;User&gt; users = new ArrayList&lt;&gt;();
+users.stream()                          // 对stream中的元素进行自然排序
+    .distinct()
+    .sorted()
+    .forEach(user -&gt; System.out.println(user.getUserName()));
+users.stream()                          // 对stream中的元素按自定义排序规则进行排序（重写compare方法的时候）
+    .distinct()
+    .sorted(Comparator.comparingInt(User::getTryNumber))
+    .forEach(user -&gt; System.out.println(user.getUserName()));</code></pre><p>limit</p>
+<p>可以设置流的最大长度，超出的部分将被抛弃</p>
+<pre tabindex="0"><code class="language-java">List&lt;User&gt; users = new ArrayList&lt;&gt;();
+users.stream()
+    .limit(5)
+    .forEach(System.out::println);</code></pre><p>skip</p>
+<p>跳过流中的第几个元素，返回剩下元素</p>
+<pre tabindex="0"><code class="language-java">List&lt;User&gt; users = new ArrayList&lt;&gt;();
+users.stream()
+    .skip(1)
+    .forEach(System.out::println);</code></pre><p>flatMap</p>
+<p>map只能把一个对象转换成另一个对象来作为流中的元素。而flatMap可以把一个对象转换成多个对象作为流中的元素。</p>
+<pre tabindex="0"><code class="language-java">List&lt;User&gt; users = new ArrayList&lt;&gt;();
+users.stream()
+    .flatMap(user -&gt; new ArrayList&lt;String&gt;().stream())
+    .distinct()
+    .forEach(System.out::println);</code></pre>
+<h4 id="323-终结操作">3.2.3 终结操作
+  <a class="heading-anchor" href="#323-%e7%bb%88%e7%bb%93%e6%93%8d%e4%bd%9c" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h4>
+<p>forEach</p>
+<p>对流中的元素进行遍历操作，我们通过传入的参数去指定对遍历到的元素进行什么具体操作</p>
+<pre tabindex="0"><code class="language-java">List&lt;User&gt; users = new ArrayList&lt;&gt;();
+users.stream()
+    .map(user -&gt; user.getTryNumber())
+    .distinct()
+    .forEach(System.out::println);</code></pre><p>count</p>
+<p>可以用来获取当前流中的元素个数</p>
+<pre tabindex="0"><code class="language-java">List&lt;User&gt; users = new ArrayList&lt;&gt;();
+long number = users.stream()
+    .map(user -&gt; user.getTryNumber())
+    .distinct()
+    .count();</code></pre><p>max 、 min</p>
+<p>可以用来获取流中的最值</p>
+<pre tabindex="0"><code class="language-java">List&lt;User&gt; users = new ArrayList&lt;&gt;();
+Optional&lt;Integer&gt; max = users.stream()
+    .map(user -&gt; user.getTryNumber())
+    .max((o1, o2) -&gt; o1 - o2);
+Optional&lt;Integer&gt; min = users.stream()
+    .map(user -&gt; user.getTryNumber())
+    .min(((o1, o2) -&gt; o1 - o2));
+System.out.println(max.get());</code></pre><p>collect</p>
+<p>把当前流转换成一个集合</p>
+<pre tabindex="0"><code class="language-java">List&lt;User&gt; users = new ArrayList&lt;&gt;();
+List&lt;String&gt; collect = users.stream()
+    .map(User::getUserName)
+    .collect(Collectors.toList());</code></pre><p>anyMatch</p>
+<p>可以用来判断是否有任意符合匹配条件的元素，结果为boolean类型</p>
+<pre tabindex="0"><code class="language-java">List&lt;User&gt; users = new ArrayList&lt;&gt;();
+boolean b = users.stream()
+    .allMatch(User::getLockFlag);</code></pre><p>allMatch</p>
+<p>可以用来判断是否都符合匹配条件，结果为boolean类型，如果都符合才会返回true，否则返回false</p>
+<p>noneMatch</p>
+<p>可以判断流中的元素是否都不符合匹配条件。如果都不符合结果为true，否则为false</p>
+<p>findAny</p>
+<p>获取流中的任意一个元素。该方法没有办法保证获取的一定是流中的第一个元素</p>
+<pre tabindex="0"><code class="language-java">List&lt;User&gt; users = new ArrayList&lt;&gt;();
+Optional&lt;User&gt; optional = users.stream().findAny();
+// 防止空指针异常的问题
+optional.ifPresent(user -&gt; System.out.println(user.getUserName()));</code></pre><p>findFirst</p>
+<p>获取流中的第一个元素</p>
+<pre tabindex="0"><code class="language-plain">List&lt;User&gt; users = new ArrayList&lt;&gt;();
+Optional&lt;User&gt; first = users.stream()
+        .findFirst();
+first.ifPresent(User::getUserName);</code></pre><p>reduce归并</p>
+<p>对流中的数据按照你制定的计算方式算出一个结果</p>
+<p>reduce的作用是吧stream中的元素组合起来，我们可以传入一个初始值，它会按照我们的计算方式依次拿流中的元素和在初始化值的基础上进行计算，计算结果在和后面的元素计算。</p>
+<pre tabindex="0"><code class="language-java">// TODO 累加操作
+Integer[] arr = {1,2,3,4,5};
+Integer reduce = Stream.of(arr)
+    			.reduce(0, (resault, id) -&gt; resault &#43; id);
+
+// TODO 取最大值
+Integer[] arr = {1,2,3,4,5};
+Integer reduce = Stream.of(arr)
+        		.reduce(Integer.MIN_VALUE, (integer, integer2) -&gt; integer &gt; integer2 ? integer : integer2);
+
+// TODO 取最小值
+Integer[] arr = {1,2,3,4,5};
+Integer reduce = Stream.of(arr)
+                .reduce(Integer.MAX_VALUE, ((integer, integer2) -&gt; integer &gt; integer2 ? integer2 : integer));
+
+// TODO 重载一个参数的
+Optional&lt;Integer&gt; reduce = Stream.of(arr)
+                		.reduce((integer, integer2) -&gt; integer &gt; integer2 ? integer : integer2);
+reduce.ifPresent(System.out::println);</code></pre>
+<h3 id="33-注意事项">3.3 注意事项
+  <a class="heading-anchor" href="#33-%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<ul>
+<li>惰性求值（如果没有终结操作，没有中间操作是不会得到执行的）</li>
+<li>流是一次性的（一旦一个流对象经过一个终结操作后。这个流就不能再被使用）</li>
+<li>不会影响原数据（我们在流中可以对数据做很多处理，但是正常情况下是不会影响原来集合中的元素的。这往往也是我们期望的）</li>
+</ul>
+
+<h2 id="4-optional">4. OPtional
+  <a class="heading-anchor" href="#4-optional" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+
+<h3 id="41-概述">4.1 概述
+  <a class="heading-anchor" href="#41-%e6%a6%82%e8%bf%b0" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p>我们在编写代码的时候出现最多的就是空指针异常。所以在很多情况下，我们需要做各种非空判断。</p>
+<p>尤其是对象中的属性还是一个对象的情况下，这种判断会更多。</p>
+<p>OPtional会避免空指针问题</p>
+
+<h3 id="42-使用">4.2 使用
+  <a class="heading-anchor" href="#42-%e4%bd%bf%e7%94%a8" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+
+<h4 id="421-创建对象">4.2.1 创建对象
+  <a class="heading-anchor" href="#421-%e5%88%9b%e5%bb%ba%e5%af%b9%e8%b1%a1" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h4>
+<pre tabindex="0"><code class="language-java">User user = new User();
+// TODO 不确定是不是空的
+Optional&lt;User&gt; userOptional = Optional.ofNullable(user);
+userOptional.ifPresent(user1 -&gt; System.out.println(user1.getUserName()));
+
+// TODO 确定是空的
+User user = new User();
+Optional&lt;User&gt; userOptional = Optional.of(user);
+userOptional.ifPresent(user1 -&gt; System.out.println(user1.getUserName()));
+
+// TODO
+// 其中使用的是empty函数进行操作的</code></pre>
+<h4 id="422-安全消费值">4.2.2 安全消费值
+  <a class="heading-anchor" href="#422-%e5%ae%89%e5%85%a8%e6%b6%88%e8%b4%b9%e5%80%bc" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h4>
+<p>我们获取到一个Optional对象后肯定需要对其中的数据进行使用。这时候我们可以使用其 ifPresent方法消费其中的值。</p>
+
+<h4 id="423-获取值">4.2.3 获取值
+  <a class="heading-anchor" href="#423-%e8%8e%b7%e5%8f%96%e5%80%bc" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h4>
+<p>使用get也可以获取数据，但是可能存在空指针异常。</p>
+
+<h4 id="424-安全获取值">4.2.4 安全获取值
+  <a class="heading-anchor" href="#424-%e5%ae%89%e5%85%a8%e8%8e%b7%e5%8f%96%e5%80%bc" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h4>
+<p>如果我们期望安全的获取值。我们不推荐使用get方法，而是使用OPtional提供的以下方法。</p>
+<ul>
+<li>orElseGet</li>
+</ul>
+<p>获取数据并且设置数据为空时的默认值。如果数据不为空就能获取到该数据。如果为空则根据你传入的参数来创建对象作为默认值返回。</p>
+<pre tabindex="0"><code class="language-java">User user = new User();
+Optional&lt;User&gt; userOptional = Optional.of(user);
+User user1 = userOptional.orElseGet(() -&gt; new User());</code></pre><ul>
+<li>orElseThrow</li>
+</ul>
+<p>获取数据，如果数据不为空就能获取到该数据。如果为空则根据你传入的参数来创建异常抛出。</p>
+<pre tabindex="0"><code class="language-java">User user = new User();
+Optional&lt;User&gt; userOptional = Optional.of(user);
+try {
+    User user2 = userOptional.orElseThrow((Supplier&lt;Throwable&gt;) () -&gt; new RuntimeException(&#34;user 为空&#34;));
+}catch (Throwable throwable){
+    throwable.printStackTrace();
+}</code></pre>
+<h4 id="425-过滤">4.2.5 过滤
+  <a class="heading-anchor" href="#425-%e8%bf%87%e6%bb%a4" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h4>
+<p>我们可以使用filter方法对数据进行过滤。如果原本是有数据的，但是不符合判断，也会变成一个无数据的OPtional对象。</p>
+<pre tabindex="0"><code class="language-java">User user = new User();
+Optional&lt;User&gt; userOptional = Optional.of(user);
+userOptional.filter(user1 -&gt; user1.getTryNumber() &gt; 100).ifPresent(System.out::println);</code></pre>
+<h4 id="426-判断">4.2.6 判断
+  <a class="heading-anchor" href="#426-%e5%88%a4%e6%96%ad" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h4>
+<p>我们可以使用isPresent方法进行是否存在数据的判断，如果为空返回值为false，如果不为空，返回值为true。但是不能体现OPtional的优点。更推荐使用ifPresent。</p>
+<pre tabindex="0"><code class="language-java">if (userOptional.isPresent()){
+    System.out.println(userOptional.get().getUserName());
+}</code></pre>
+<h4 id="427-数据转换">4.2.7 数据转换
+  <a class="heading-anchor" href="#427-%e6%95%b0%e6%8d%ae%e8%bd%ac%e6%8d%a2" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h4>
+<p>OPtional 还提供了map可以让我们对数据进行转换，并且转换得到的数据也还是被OPtional包装好的，保证了我们使用数据的安全。</p>
+<pre tabindex="0"><code class="language-java">Optional&lt;String&gt; stringOptional = userOptional.map(User::getUserName);
+stringOptional.ifPresent(System.out::println);</code></pre>
+<h2 id="5-函数式接口">5. 函数式接口
+  <a class="heading-anchor" href="#5-%e5%87%bd%e6%95%b0%e5%bc%8f%e6%8e%a5%e5%8f%a3" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+
+<h3 id="51-概述">5.1 概述
+  <a class="heading-anchor" href="#51-%e6%a6%82%e8%bf%b0" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p>只有一个抽象方法的接口，我们称之为函数接口。</p>
+<p>JDK的函数式接口上都加上了 @FunctionalInterface 注解进行标识。但是无论是否加上该注解，只要接口中只有一个抽象方法，都是函数式接口。</p>
+
+<h3 id="52-常见函数式接口">5.2 常见函数式接口
+  <a class="heading-anchor" href="#52-%e5%b8%b8%e8%a7%81%e5%87%bd%e6%95%b0%e5%bc%8f%e6%8e%a5%e5%8f%a3" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<ul>
+<li>Consumer</li>
+<li>Function</li>
+<li>Predicate</li>
+<li>Supplier</li>
+</ul>
+
+<h3 id="53-常用的默认方法">5.3 常用的默认方法
+  <a class="heading-anchor" href="#53-%e5%b8%b8%e7%94%a8%e7%9a%84%e9%bb%98%e8%ae%a4%e6%96%b9%e6%b3%95" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<ul>
+<li>and</li>
+</ul>
+<pre tabindex="0"><code class="language-java">List&lt;User&gt; users = new ArrayList&lt;&gt;();
+Stream&lt;User&gt; stream = users.stream();
+stream.filter(((Predicate&lt;User&gt;) user -&gt; user.getTryNumber() &gt; 10).and(user -&gt; !Objects.equals(user.getUserName(), &#34;&#34;)));</code></pre><ul>
+<li>or</li>
+</ul>
+<pre tabindex="0"><code class="language-java">List&lt;User&gt; users = new ArrayList&lt;&gt;();
+Stream&lt;User&gt; stream = users.stream();
+stream.filter(((Predicate&lt;User&gt;) user -&gt; user.getTryNumber() &gt; 10).or(user -&gt; !Objects.equals(user.getUserName(), &#34;&#34;)));</code></pre><ul>
+<li>negate</li>
+</ul>
+
+<h2 id="6-方法引用">6 方法引用
+  <a class="heading-anchor" href="#6-%e6%96%b9%e6%b3%95%e5%bc%95%e7%94%a8" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+<p>我们在使用lambda时，如果方法体中只有一个方法的调用的话(包括构造方法)，我们可以用方法引用进一步简化代码。</p>
+<p>6.1 推荐用法</p>
+<p>我们在使用lambda时不需要考虑什么时候用方法引用，用那种方法引用，方法引用的格式是什么。我们只需要在写完lambda方法发现方法体只有一行代码，并且是方法的调用时就可以尝试方法引用操作。</p>
+<p>6.2 基本格式</p>
+<p>类名或者对象名 :: 方法名</p>
+<p>6.3 语法详解</p>
+<ul>
+<li>引用类的静态方法</li>
+<li>引用对象的实例方法</li>
+<li>引用列的实例方法</li>
+<li>构造器引用</li>
+</ul>
+
+<h4 id="使用前提">使用前提
+  <a class="heading-anchor" href="#%e4%bd%bf%e7%94%a8%e5%89%8d%e6%8f%90" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h4>
+<p>如果我们重写方法的时候，方法体中只有一行代码，并且这行代码是调用了某个类的静态方法，并且我们把要重写的抽象方法中所有的参数都按照顺序传入这个静态方法中，这个时候我们就可以引用类的静态方法。</p>
+
+<h2 id="7-高级用法">7. 高级用法
+  <a class="heading-anchor" href="#7-%e9%ab%98%e7%ba%a7%e7%94%a8%e6%b3%95" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+
+<h3 id="基本数据类型优化">基本数据类型优化
+  <a class="heading-anchor" href="#%e5%9f%ba%e6%9c%ac%e6%95%b0%e6%8d%ae%e7%b1%bb%e5%9e%8b%e4%bc%98%e5%8c%96" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p>我们之前用到的很多Stream的方法由于都是用了泛型。所以涉及到的参数和返回值都是引用数据类型。</p>
+<p>即使我们操作的是整数、小数，但是实际用的都是他们的包装类。JDK5引入的自动装箱和自动拆箱让我们在使用对应的包装类时就好像使用基本数据类型一样方便。但是装箱和拆箱肯定是要消yxfwTmKhsqyyQftfdsbs耗时间的。虽然这个时间很短，但是在大量的数据不断的重复下，消耗时间就非常大了。</p>
+<p>mapToInt、mapToLong、mapToDouble、flatMapToInt、flatMapToDouble等</p>
+<pre tabindex="0"><code class="language-java">List&lt;User&gt; users = new ArrayList&lt;&gt;();
+users.stream()
+    .map(User::getTryNumber)
+    .map(number -&gt; number &#43; 10)
+    .filter(number -&gt; number &gt; 100000)
+    .map(number -&gt; number &#43; 2)
+    .forEach(System.out::println);
+users.stream()
+    .mapToInt(User::getTryNumber)
+    .map(number -&gt; number &#43; 10)
+    .filter(number -&gt; number &gt; 100000)
+    .map(number -&gt; number &#43; 2)
+    .forEach(System.out::println);</code></pre>
+<h3 id="并行流">并行流
+  <a class="heading-anchor" href="#%e5%b9%b6%e8%a1%8c%e6%b5%81" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p>当流中有大量元素时，我们可以使用并行流去提高操作的效率。其实并行流就是把任务分配给多个线程去完成。其实并行流就是把任务分配给多个线程去完成。如果我们自己去用代码实现的话会非常复杂，并且要求对并发线程有足够的理解和认识。而如果我们使用Stream的话，我们值㤇一个方法的调用就可以使用并行流帮我们实现，从而提高效率。</p>
+<pre tabindex="0"><code class="language-java">Integer[] arr = {1,2,3,4,5,6};
+// TODO 串行流
+Stream&lt;Integer&gt; stream = Stream.of(arr);
+Integer integer = stream
+        .filter(num -&gt; num &gt; 5)
+        .reduce((result, element) -&gt; result &#43; element)
+        .get();
+System.out.println(integer);
+// TODO 并行流
+integer = stream.parallel()
+        // 线程多线程调试函数
+        .peek(num -&gt; System.out.println(num &#43; Thread.currentThread().getName()))
+        .filter(num -&gt; num &gt; 5)
+        .reduce((result, element) -&gt; result &#43; element)
+        .get();
+System.out.println(integer);</code></pre>
     </div>
 
     
@@ -1050,12 +1316,12 @@ fae320d08268        nginx:alpine        &#34;/docker-entrypoint.…&#34;   24 se
   <div class="tags-container">
     <div class="text-gray-700 dark:text-gray-300 font-medium mb-2">Tags:</div>
     <div class="flex flex-wrap gap-2">
-        <a href="/tags/docker/" class="tag-chip inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
+        <a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" class="tag-chip inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-labelledby="tagIconTitle" role="img">
             <title id="tagIconTitle"></title>
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
           </svg>
-          Docker
+          函数式编程
         </a>
         <a href="/tags/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="tag-chip inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-labelledby="tagIconTitle" role="img">
@@ -1074,17 +1340,27 @@ fae320d08268        nginx:alpine        &#34;/docker-entrypoint.…&#34;   24 se
       
       <nav class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
         
-        <a href="/post/%E5%87%BD%E6%95%B0%E5%BC%8F%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="group block p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50/30 transition-colors">
+        <a href="/post/consul%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" class="group block p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50/30 transition-colors">
           <div class="text-xs text-gray-500 mb-1 flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
             Previous
           </div>
-          <div class="text-sm font-medium text-gray-900 group-hover:text-blue-700 line-clamp-2">函数式编程</div>
+          <div class="text-sm font-medium text-gray-900 group-hover:text-blue-700 line-clamp-2">consul安装教程</div>
         </a>
         
 
+        
+        <a href="/post/docker%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="group block p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50/30 transition-colors sm:text-right sm:col-start-2">
+          <div class="text-xs text-gray-500 mb-1 flex items-center sm:justify-end">
+            <span class="sm:order-1 mr-0 sm:ml-1">Next</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1.5 text-gray-400 sm:order-2 sm:ml-1 sm:mr-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+          <div class="text-sm font-medium text-gray-900 group-hover:text-blue-700 line-clamp-2">docker使用教程</div>
+        </a>
         
       </nav>
       
