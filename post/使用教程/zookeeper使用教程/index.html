@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr" class="h-full">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Zookeeper使用教程 | blueberryclub</title>
+
+
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b1220">
+<script>
+  (function() {
+    try {
+      var t = localStorage.getItem('theme');
+      var dark = t ? (t === 'dark') : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark');
+    } catch (_) {}
+  })();
+  </script>
+<style>
+   
+  html.dark, html.dark body { background-color: #0b1220; }
+  html { color-scheme: light dark; }
+  </style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+<link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+<link rel="preconnect" href="https://busuanzi.ibruce.info" crossorigin>
+
+
+<link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+<link rel="shortcut icon" href="/favicon/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+<link rel="manifest" href="/favicon/site.webmanifest" />
+
+
+
+  
+  
+    
+    
+      
+        <link rel="stylesheet" href="/css/main.css">
+      
+    
+  
+
+
+
+
+
+<link rel="stylesheet" href="/css/style.min.b8957659e8f2f20e0a23b5cc1f1154837f41cca9f5570fd8f30cd1c087568650.css" media="screen" integrity="sha256-uJV2Wejy8g4KI7XMHxFUg39BzKn1Vw/Y8wzRwIdWhlA=">
+
+
+<link id="hljs-theme-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+<link id="hljs-theme-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+<script>
+  (function(){
+    try{
+      var t = localStorage.getItem('theme');
+      var dark = t ? (t === 'dark') : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      var l = document.getElementById('hljs-theme-light');
+      var d = document.getElementById('hljs-theme-dark');
+      if(l && d){ l.disabled = dark; d.disabled = !dark; }
+    }catch(e){}
+  })();
+  </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  
+      <script src="/js/main.js"></script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "$", right: "$", display: false}
+      ],
+      throwOnError: false
+    });
+    
+    
+    document.querySelectorAll('pre code').forEach(function(codeBlock) {
+      
+      let language = '';
+      codeBlock.className.split(' ').forEach(function(cls) {
+        if (cls.startsWith('language-')) {
+          language = cls.substring(9);
+        }
+      });
+      
+      
+      const pre = codeBlock.parentNode;
+      const wrapper = pre.parentNode;
+      
+      
+      const container = document.createElement('div');
+      container.className = 'code-block-container';
+      
+      
+      const header = document.createElement('div');
+      header.className = 'code-block-header';
+      
+      
+      if (language) {
+        const langLabel = document.createElement('span');
+        langLabel.className = 'code-language-label';
+        langLabel.textContent = language.toUpperCase();
+        header.appendChild(langLabel);
+      }
+      
+      
+      const copyButton = document.createElement('button');
+      copyButton.className = 'copy-button';
+      copyButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg> Copy';
+      
+      copyButton.addEventListener('click', function() {
+        
+        const code = codeBlock.textContent;
+        
+        
+        navigator.clipboard.writeText(code).then(function() {
+          
+          copyButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Copied!';
+          
+          
+          setTimeout(function() {
+            copyButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg> Copy';
+          }, 2000);
+        });
+      });
+      
+      header.appendChild(copyButton);
+      
+      container.appendChild(header);
+      
+      if (pre.parentNode) {
+        pre.parentNode.replaceChild(container, pre);
+      }
+      container.appendChild(pre);
+      
+      
+      if (window.hljs) hljs.highlightElement(codeBlock);
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    
+    const footnoteBacklinks = document.querySelectorAll('.footnote-backref');
+    
+    footnoteBacklinks.forEach(function(backlink) {
+      backlink.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        
+        const href = backlink.getAttribute('href');
+        
+        if (href) {
+          
+          const target = document.querySelector(href);
+          
+          if (target) {
+            
+            target.scrollIntoView({ behavior: 'smooth' });
+            
+            
+            target.classList.add('footnote-highlight');
+            setTimeout(function() {
+              target.classList.remove('footnote-highlight');
+            }, 2000);
+          }
+        }
+      });
+    });
+  });
+</script>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    
+    (function themeInit() {
+      const storageKey = 'theme';
+      const root = document.documentElement;
+      const btn = document.getElementById('theme-toggle');
+      const hlLight = document.getElementById('hljs-theme-light');
+      const hlDark = document.getElementById('hljs-theme-dark');
+
+      function systemPrefersDark() {
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      }
+
+      function currentPref() {
+        const v = localStorage.getItem(storageKey);
+        if (v === 'dark') return 'dark';
+        if (v === 'light') return 'light';
+        return systemPrefersDark() ? 'dark' : 'light';
+      }
+
+      function apply(theme) {
+        root.classList.toggle('dark', theme === 'dark');
+        if (btn) btn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+        if (btn) btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+        if (hlLight && hlDark) { hlLight.disabled = theme === 'dark'; hlDark.disabled = theme !== 'dark'; }
+      }
+
+      let theme = currentPref();
+      apply(theme);
+
+      if (btn) {
+        btn.addEventListener('click', function () {
+          theme = theme === 'dark' ? 'light' : 'dark';
+          localStorage.setItem(storageKey, theme);
+          apply(theme);
+        });
+      }
+
+      
+      try {
+        const media = window.matchMedia('(prefers-color-scheme: dark)');
+        const handler = function () {
+          const explicit = localStorage.getItem(storageKey);
+          if (!explicit) { theme = currentPref(); apply(theme); }
+        };
+        if (media && media.addEventListener) media.addEventListener('change', handler);
+        else if (media && media.addListener) media.addListener(handler);
+      } catch (_) {}
+    })();
+    let currentHighlighted = null;
+    let scrollArmTimer = null;
+
+    function removeHandlers() {
+      window.removeEventListener('scroll', clearOnce);
+      window.removeEventListener('keydown', clearOnce);
+      window.removeEventListener('pointerdown', clearOnce);
+      window.removeEventListener('touchstart', clearOnce);
+    }
+
+    function clearOnce() {
+      if (currentHighlighted) {
+        currentHighlighted.classList.remove('anchor-highlight');
+        currentHighlighted = null;
+      }
+      removeHandlers();
+    }
+
+    function headerHeight() {
+      const hd = document.querySelector('body > header');
+      return hd ? hd.getBoundingClientRect().height : 0;
+    }
+
+    function scrollToTarget(el) {
+      if (!el) return;
+      const offset = headerHeight() + 8; 
+      const rect = el.getBoundingClientRect();
+      const top = window.pageYOffset + rect.top - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+
+    function pickHighlightTarget(el) {
+      if (!el) return null;
+      
+      
+      if (el.tagName === 'IMG') return el;
+      
+      if (el.classList && (el.classList.contains('katex-display') || el.classList.contains('katex'))) return el;
+      
+      if (el.tagName === 'SPAN') {
+        const img = el.querySelector('img');
+        if (img) return img;
+        const kx = el.querySelector('.katex-display, .katex');
+        if (kx) return kx;
+        
+        return el;
+      }
+      
+      const head = el.closest('h1,h2,h3,h4,h5,h6');
+      if (head) return head;
+      
+      const code = el.closest('.code-block-container');
+      if (code) return code;
+      
+      const math = el.closest('.katex-display');
+      if (math) return math;
+      
+      const blk = el.closest('pre,figure,table,blockquote,li');
+      if (blk) return blk;
+      
+      if (el.closest('p')) return el;
+      return el;
+    }
+
+    function highlightById(id) {
+      if (!id) return;
+      try { id = decodeURIComponent(id); } catch (e) {}
+      const el = document.getElementById(id);
+      if (!el) return;
+      const target = pickHighlightTarget(el);
+      if (currentHighlighted && currentHighlighted !== target) {
+        currentHighlighted.classList.remove('anchor-highlight');
+      }
+      target.classList.add('anchor-highlight');
+      currentHighlighted = target;
+      
+      setTocActive(id);
+      scrollToTarget(target);
+      
+      removeHandlers();
+      
+      window.addEventListener('keydown', clearOnce, { once: true });
+      window.addEventListener('pointerdown', clearOnce, { once: true });
+      window.addEventListener('touchstart', clearOnce, { once: true });
+      if (scrollArmTimer) clearTimeout(scrollArmTimer);
+      scrollArmTimer = setTimeout(() => {
+        window.addEventListener('scroll', clearOnce, { once: true });
+      }, 1500);
+    }
+
+    
+    if (location.hash && location.hash.length > 1) {
+      
+      setTimeout(() => highlightById(location.hash.slice(1)), 0);
+    }
+
+    
+    window.addEventListener('hashchange', function () {
+      if (location.hash && location.hash.length > 1) {
+        highlightById(location.hash.slice(1));
+      }
+    });
+
+    
+    document.addEventListener('click', function (e) {
+      const a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      
+      if (a.classList && a.classList.contains('heading-anchor')) return;
+      const href = a.getAttribute('href');
+      if (!href || href === '#' || href.length < 2) return;
+      const id = href.slice(1);
+      if (!document.getElementById(id)) return; 
+      e.preventDefault();
+      if (history.pushState) { history.pushState(null, '', '#' + id); }
+      else { location.hash = id; }
+      highlightById(id);
+    }, true);
+
+    
+    window.addEventListener('popstate', function () {
+      if (location.hash && location.hash.length > 1) highlightById(location.hash.slice(1));
+    });
+
+    function setTocActive(id) {
+      try { id = decodeURIComponent(id); } catch (e) {}
+      const toc = document.getElementById('TableOfContents');
+      if (!toc) return;
+      const esc = (window.CSS && CSS.escape) ? CSS.escape : (s)=>String(s).replace(/[^a-zA-Z0-9_\-]/g, '\\$&');
+      toc.querySelectorAll('a.toc-active').forEach(a => a.classList.remove('toc-active'));
+      const link = toc.querySelector('a[href="#' + esc(id) + '"]');
+      if (link) link.classList.add('toc-active');
+    }
+
+    
+    function copyText(text) {
+      if (window.isSecureContext && navigator.clipboard && navigator.clipboard.writeText) {
+        return navigator.clipboard.writeText(text);
+      }
+      return new Promise(function (resolve, reject) {
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'fixed'; ta.style.top = '-1000px'; ta.style.left = '-1000px'; ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.focus(); ta.select();
+          try { ta.setSelectionRange(0, ta.value.length); } catch (_) {}
+          const ok = document.execCommand && document.execCommand('copy');
+          document.body.removeChild(ta);
+          ok ? resolve() : reject(new Error('copy failed'));
+        } catch (e) { reject(e); }
+      });
+    }
+
+    
+    (function addHeadingAnchorCopy() {
+      const container = document.querySelector('article .prose');
+      if (!container) return;
+      const heads = container.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+      heads.forEach((h) => {
+        const id = h.getAttribute('id');
+        if (!id) return;
+        let a = h.querySelector('.heading-anchor');
+        if (!a) {
+          a = document.createElement('a');
+          a.className = 'heading-anchor';
+          a.href = '#' + id;
+          a.setAttribute('aria-label', 'Copy link to this section');
+          a.innerHTML = '<svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/></svg>';
+          h.appendChild(a);
+        }
+        function copyPermalink() {
+          const url = location.origin + location.pathname + '#' + id;
+          const done = function () {
+            a.classList.add('copied');
+            a.setAttribute('aria-label', 'Copied');
+            setTimeout(() => { a.classList.remove('copied'); a.setAttribute('aria-label', 'Copy link to this section'); }, 1200);
+          };
+          copyText(url).then(done).catch(done);
+        }
+        a.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); copyPermalink(); });
+
+        
+        h.classList.add('heading-clickable');
+        h.addEventListener('click', function (e) {
+          if (e.target.closest('a') && !e.target.closest('.heading-anchor')) return; 
+          copyPermalink();
+        });
+      });
+
+      
+      document.addEventListener('click', function (e) {
+        const btn = e.target.closest('a.heading-anchor');
+        if (!btn) return;
+        
+        e.preventDefault(); e.stopPropagation();
+        const href = btn.getAttribute('href') || '';
+        const id = href.startsWith('#') ? href.slice(1) : '';
+        const url = href.startsWith('#') ? (location.origin + location.pathname + href) : href;
+        copyText(url).finally(() => {
+          btn.classList.add('copied'); btn.setAttribute('aria-label', 'Copied');
+          setTimeout(() => { btn.classList.remove('copied'); btn.setAttribute('aria-label', 'Copy link to this section'); }, 1200);
+          if (id) {
+            try { if (history.pushState) history.pushState(null, '', '#' + id); else location.hash = id; } catch (_) {}
+            try { highlightById(id); } catch (_) {}
+          }
+        });
+      }, false);
+    })();
+  });
+</script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+</head>
+<body class="flex flex-col bg-gray-50 font-bilingual">
+  <header class="fixed top-0 left-0 z-30 w-full bg-white shadow-sm">
+    <div class="w-full max-w-4xl mx-auto px-6 overflow-x-auto sm:overflow-visible">
+      <div class="flex items-center justify-between py-3">
+  <div class="text-lg sm:text-xl font-bold flex-shrink-0 max-w-[40%] sm:max-w-md truncate">
+    <a href="/" class="no-underline transition-colors text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-300">
+      blueberryclub
+    </a>
+  </div>
+  <div class="flex items-center gap-2">
+    
+  <nav class="flex justify-end w-full whitespace-nowrap">
+    <ul class="list-none flex flex-row items-center space-x-2 sm:space-x-4 md:space-x-6 py-2">
+    <li class="text-gray-600 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white text-base sm:text-lg">
+      <a
+        class="px-2 py-1 sm:px-3 sm:py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors" href="/">主页</a>
+    </li>
+    <li class="text-gray-600 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white text-base sm:text-lg">
+      <a
+        class="px-2 py-1 sm:px-3 sm:py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors" href="/post">博客</a>
+    </li>
+    <li class="text-gray-600 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white text-base sm:text-lg">
+      <a
+        class="px-2 py-1 sm:px-3 sm:py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors" href="/categories">分类</a>
+    </li>
+    <li class="text-gray-600 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white text-base sm:text-lg">
+      <a
+        class="px-2 py-1 sm:px-3 sm:py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors" href="/tags">标签</a>
+    </li>
+    <li class="text-gray-600 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white text-base sm:text-lg">
+      <a
+        class="px-2 py-1 sm:px-3 sm:py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors" href="/about">关于</a>
+    </li>
+    </ul>
+  </nav>
+
+    <button id="theme-toggle" type="button" class="theme-toggle theme-toggle-btn ml-2 relative inline-flex h-7 w-7 items-center justify-center p-0 bg-transparent border-0 text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-300 focus:outline-none cursor-pointer" aria-label="Toggle dark mode" aria-pressed="false">
+      
+      <svg class="icon-sun h-full w-full" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M512 192c179.2 0 320 140.8 320 320s-140.8 320-320 320-320-140.8-320-320S332.8 192 512 192M512 128C300.8 128 128 300.8 128 512s172.8 384 384 384 384-172.8 384-384S723.2 128 512 128L512 128z" fill="currentColor"></path>
+        <path d="M544 416l236.8 0C774.4 403.2 768 384 761.6 371.2L544 371.2 544 416z" fill="currentColor"></path>
+        <path d="M544 608l0 44.8 217.6 0c6.4-12.8 12.8-32 19.2-44.8L544 608z" fill="currentColor"></path>
+        <path d="M544 723.2 544 768 640 768c25.6-12.8 44.8-25.6 64-44.8L544 723.2z" fill="currentColor"></path>
+        <path d="M800 492.8l-256 0 0 44.8 256 0c0-6.4 0-12.8 0-25.6S800 499.2 800 492.8z" fill="currentColor"></path>
+        <path d="M544 300.8 704 300.8c-19.2-19.2-38.4-32-64-44.8L544 256 544 300.8z" fill="currentColor"></path>
+      </svg>
+      
+      <svg class="icon-moon h-full w-full" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M512 832c-179.2 0-320-140.8-320-320s140.8-320 320-320 320 140.8 320 320S691.2 832 512 832M512 896c211.2 0 384-172.8 384-384s-172.8-384-384-384S128 300.8 128 512 300.8 896 512 896L512 896zM800 512c0-160-128-288-288-288l0 576C672 800 800 672 800 512zM480 608 243.2 608C249.6 620.8 256 640 262.4 652.8l217.6 0L480 608zM480 416 480 371.2 262.4 371.2C256 384 249.6 403.2 243.2 416L480 416zM480 300.8 480 256 384 256C358.4 268.8 339.2 281.6 320 300.8L480 300.8zM224 537.6l256 0L480 492.8l-256 0c0 6.4 0 12.8 0 19.2S224 524.8 224 537.6zM480 723.2 320 723.2c19.2 19.2 38.4 32 64 44.8l96 0L480 723.2z" fill="currentColor"></path>
+      </svg>
+    </button>
+  </div>
+</div>
+
+    </div>
+  </header>
+  
+  <div class="flex-1 flex flex-col min-h-screen pt-24">
+    <main class="flex-1 w-full max-w-4xl mx-auto px-6 overflow-x-auto sm:overflow-visible">
+      
+  <article class="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+    <header class="p-8 border-b border-gray-100 relative overflow-hidden">
+      
+      
+      
+      
+      <div class="mb-3 flex">
+        
+        <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F" class="text-xs inline-flex items-center px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors">
+          分布式
+        </a>
+        
+      </div>
+      
+      
+      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 relative">Zookeeper使用教程</h1>
+      
+      <div class="flex flex-wrap items-center text-sm text-gray-500 gap-4 relative">
+        
+        
+        
+        <time datetime="2025-12-09T10:00:00&#43;08:00" class="flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          2025-12-09
+        </time>
+        
+        
+        <span class="flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          11 分钟阅读
+        </span>
+
+        
+        <span id="busuanzi_container_page_pv" class="inline-flex items-center whitespace-nowrap">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400 inline-block flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+          </svg><span class="whitespace-nowrap">阅读量 <span id="busuanzi_value_page_pv"></span></span>
+        </span>
+      </div>
+    </header>
+
+    
+    
+    
+    
+    
+    
+    
+    <div class="px-8 pt-6" x-data="{ open: false }">
+      <button
+        class="w-full flex items-center justify-between text-sm text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-200 dark:border-slate-700 rounded-md px-4 py-2 transition-colors"
+        @click="open = !open"
+        aria-controls="toc-content"
+        :aria-expanded="open.toString()"
+      >
+        <span>Table of Contents</span>
+        <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+        </svg>
+        <svg x-show="open" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M5 9a1 1 0 000 2h10a1 1 0 100-2H5z" clip-rule="evenodd" />
+        </svg>
+      </button>
+      <div id="toc-content" x-cloak x-show="open" x-transition class="mt-3 border border-gray-100 rounded-md bg-white p-4 text-sm leading-relaxed">
+        <div class="prose prose-sm max-w-none">
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#zookeeper使用教程">Zookeeper使用教程</a>
+      <ul>
+        <li><a href="#1-zookeeper入门">1 Zookeeper入门</a>
+          <ul>
+            <li><a href="#11-概述">1.1 概述</a></li>
+            <li><a href="#12-zookeeper特点">1.2 Zookeeper特点</a></li>
+            <li><a href="#13-数据结构">1.3 数据结构</a></li>
+            <li><a href="#14-应用场景">1.4 应用场景</a></li>
+            <li><a href="#15-下载地址">1.5 下载地址</a></li>
+          </ul>
+        </li>
+        <li><a href="#2-zookeeper本地安装">2 Zookeeper本地安装</a>
+          <ul>
+            <li><a href="#21-本地模式安装">2.1 本地模式安装</a></li>
+            <li><a href="#22-配置参数解读">2.2 配置参数解读</a></li>
+          </ul>
+        </li>
+        <li><a href="#3-zookeeper基础操作">3 Zookeeper基础操作</a>
+          <ul>
+            <li><a href="#31-集群操作">3.1 集群操作</a>
+              <ul>
+                <li><a href="#311-集群安装">3.1.1 集群安装</a></li>
+                <li><a href="#312-选举机制面试重点">3.1.2 选举机制（面试重点）</a></li>
+              </ul>
+            </li>
+            <li><a href="#32-客户端命令行操作">3.2 客户端命令行操作</a></li>
+            <li><a href="#33-客户端api操作">3.3 客户端API操作</a></li>
+            <li><a href="#34-客户端向服务端写数据流程">3.4 客户端向服务端写数据流程</a></li>
+          </ul>
+        </li>
+        <li><a href="#4-服务器动态上下线监听案例">4 服务器动态上下线监听案例</a></li>
+        <li><a href="#5-zookeeper分布式锁案例">5 Zookeeper分布式锁案例</a>
+          <ul>
+            <li><a href="#51-原生zookeeper实现分布式锁案例">5.1 原生Zookeeper实现分布式锁案例</a></li>
+            <li><a href="#52-curator框架实现分布式锁案例">5.2 Curator框架实现分布式锁案例</a></li>
+          </ul>
+        </li>
+        <li><a href="#6-企业面试真题面试重点">6 企业面试真题（面试重点）</a>
+          <ul>
+            <li><a href="#61-选举机制">6.1 选举机制</a></li>
+            <li><a href="#62-生产集群安装多少zk合适">6.2 生产集群安装多少zk合适？</a></li>
+            <li><a href="#63-常用命令">6.3 常用命令</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="p-8 prose prose-sm sm:prose lg:prose-lg max-w-none">
+      
+<h1 id="zookeeper使用教程">Zookeeper使用教程
+  <a class="heading-anchor" href="#zookeeper%e4%bd%bf%e7%94%a8%e6%95%99%e7%a8%8b" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h1>
+<p>本文尚硅谷平台，仅学习使用。</p>
+
+<h2 id="1-zookeeper入门">1 Zookeeper入门
+  <a class="heading-anchor" href="#1-zookeeper%e5%85%a5%e9%97%a8" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+
+<h3 id="11-概述">1.1 概述
+  <a class="heading-anchor" href="#11-%e6%a6%82%e8%bf%b0" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p>Zookeeper是一个开源的分布式的，为分布式框架提供协调服务的 Apache 项目。</p>
+<p><strong>Zookeeper工作机制</strong></p>
+<p>Zookeeper从设计模式角度来理解：是一个基于观察者模式设计的分布式服务管理框架，它负责存储和管理大家都关心的数据，然后接受观察者的注册，一旦这些数据的状态发生变化，Zookeeper就将负责通知已经在Zookeeper上注册的那些观察者做出相应的反应。</p>
+<p>Zookeeper=文件系统+通知机制</p>
+
+<h3 id="12-zookeeper特点">1.2 Zookeeper特点
+  <a class="heading-anchor" href="#12-zookeeper%e7%89%b9%e7%82%b9" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<ol>
+<li>Zookeeper：一个领导者（Leader），多个跟随者（Follower）组成的集群。</li>
+<li>集群中只要有半数以上节点存活，Zookeeper集群就能正常服务。所以Zookeeper适合安装奇数台服务器。</li>
+<li>全局数据一致：每个Server保存一份相同的数据副本，Client无论连接到那个Server，数据都是一致的。</li>
+<li>更新请求顺序执行，来自同一个Client的更新请求按其发送顺序依次执行。</li>
+<li>数据更新原子性，一次数据更新要么成功，要么失败。</li>
+<li>实时性，在一定时间范围内，Client能读到最新数据。</li>
+</ol>
+
+<h3 id="13-数据结构">1.3 数据结构
+  <a class="heading-anchor" href="#13-%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p>Zookeeper数据模型的结构与Unix文件系统很类似，整体上可以看做是一棵树，每个节点称作一个ZNode。每一个ZNode默认能够存储1MB的数据，每个ZNode都可以通过其路径唯一标识。</p>
+
+<h3 id="14-应用场景">1.4 应用场景
+  <a class="heading-anchor" href="#14-%e5%ba%94%e7%94%a8%e5%9c%ba%e6%99%af" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p>提供的服务包括：统一命名服务、统一配置管理、统一集群管理、服务器节点动态上下线、软负载均衡等。</p>
+<ul>
+<li><strong>统一命名服务</strong>：在分布式环境下，经常需要对应用/服务进行统一命名，便于识别。</li>
+<li><strong>统一配置管理</strong>：分布式环境下，配置文件同步非常常见。可将配置信息写入Zookeeper上的一个ZNode，各个客户端服务器监听这个ZNode。</li>
+<li><strong>统一集群管理</strong>：实时掌握每个节点的状态是必要的。可以将节点信息写入Zookeeper上的一个ZNode，监听这个ZNode可获取它的实时状态变化。</li>
+<li><strong>服务器动态上下线</strong>：客户端能实时洞察到服务器上下线的变化。</li>
+<li><strong>负载均衡</strong>：在Zookeeper中记录每台服务器的访问数，让访问数最少得服务器去处理最新的客户端请求。</li>
+</ul>
+
+<h3 id="15-下载地址">1.5 下载地址
+  <a class="heading-anchor" href="#15-%e4%b8%8b%e8%bd%bd%e5%9c%b0%e5%9d%80" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p>官网首页：Apache ZooKeeper</p>
+
+<h2 id="2-zookeeper本地安装">2 Zookeeper本地安装
+  <a class="heading-anchor" href="#2-zookeeper%e6%9c%ac%e5%9c%b0%e5%ae%89%e8%a3%85" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+
+<h3 id="21-本地模式安装">2.1 本地模式安装
+  <a class="heading-anchor" href="#21-%e6%9c%ac%e5%9c%b0%e6%a8%a1%e5%bc%8f%e5%ae%89%e8%a3%85" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<ol>
+<li>安装前准备：安装JDK</li>
+<li>拷贝apache-zookeeper-3.5.7-bin.tar.gz安装包到Linux系统下</li>
+<li>解压到指定目录</li>
+<li>修改名称</li>
+</ol>
+<p><strong>配置修改</strong></p>
+<ol>
+<li>将/opt/module/zookeeper-3.5.7/conf这个路径下的 zoo_sample.cfg 修改为 zoo.cfg</li>
+<li>打开 zoo.cfg 文件，修改dataDir 路径</li>
+<li>在/opt/module/zookeeper-3.5.7/这个目录上创建 zkData文件夹</li>
+</ol>
+<p><strong>操作Zookeeper</strong></p>
+<ol>
+<li>启动Zookeeper</li>
+<li>查看进程是否启动</li>
+<li>查看状态</li>
+<li>启动客户端</li>
+<li>退出客户端</li>
+<li>停止Zookeeper</li>
+</ol>
+
+<h3 id="22-配置参数解读">2.2 配置参数解读
+  <a class="heading-anchor" href="#22-%e9%85%8d%e7%bd%ae%e5%8f%82%e6%95%b0%e8%a7%a3%e8%af%bb" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p>Zookeeper中的配置文件 zoo.cfg 中参数含义解读如下：</p>
+<ul>
+<li><code>tickTime=2000</code>: 通信心跳时间，Zookeeper服务器与客户端心跳时间，单位毫秒</li>
+<li><code>initLimit=10</code>：LF初始通信时限，Leader和Follower初始链接时能容忍的最多心跳数（tickTime的数量）</li>
+<li><code>syncLimit=5</code>：LF同步通信时限，Leader和Follower之间通信时间如果超过syncLimit * tickTime，Leader认为Follower死掉，从服务器列表中删除Follower。</li>
+<li><code>dataDir</code>：保存Zookeeper中的数据，注意：默认的tmp目录，容易被linux系统定期删除，所以一般不用默认的tmp目录。</li>
+<li><code>clientPort=2181</code>：客户端连接端口，通常不做修改。</li>
+</ul>
+
+<h2 id="3-zookeeper基础操作">3 Zookeeper基础操作
+  <a class="heading-anchor" href="#3-zookeeper%e5%9f%ba%e7%a1%80%e6%93%8d%e4%bd%9c" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+
+<h3 id="31-集群操作">3.1 集群操作
+  <a class="heading-anchor" href="#31-%e9%9b%86%e7%be%a4%e6%93%8d%e4%bd%9c" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+
+<h4 id="311-集群安装">3.1.1 集群安装
+  <a class="heading-anchor" href="#311-%e9%9b%86%e7%be%a4%e5%ae%89%e8%a3%85" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h4>
+<ol>
+<li>集群规划：在hadoop102、hadoop103和hadoop104三个节点上都部署Zookeeper</li>
+<li>解压安装</li>
+<li>配置服务器编号：在zkData目录下创建myid文件，添加与server对应的编号</li>
+<li>配置zoo.cfg文件</li>
+<li>集群操作：分别启动Zookeeper，查看状态</li>
+</ol>
+
+<h4 id="312-选举机制面试重点">3.1.2 选举机制（面试重点）
+  <a class="heading-anchor" href="#312-%e9%80%89%e4%b8%be%e6%9c%ba%e5%88%b6%e9%9d%a2%e8%af%95%e9%87%8d%e7%82%b9" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h4>
+<p><strong>SID</strong>：服务器ID，用来唯一标识一台Zookeeper集群中的机器，每台机器不能重复，和myid一致。</p>
+<p><strong>ZXID</strong>：事务ID。用来标识一次服务器状态的变更。</p>
+<p><strong>Epoch</strong>：每个Leader任期的代号。</p>
+<p><strong>第一次启动选举流程：</strong></p>
+<ol>
+<li>服务器1启动，发起一次选举，投给自己一票</li>
+<li>服务器2启动，服务器1发现服务器2的myid比自己大，更改选票为推举服务器2</li>
+<li>服务器3启动，服务器1和2都会更改选票为服务器3，服务器3当选Leader</li>
+<li>服务器4、5启动，服从多数，更改选票信息为服务器3</li>
+</ol>
+<p><strong>非第一次启动选举规则：</strong></p>
+<ol>
+<li>EPOCH大的直接胜出</li>
+<li>EPOCH相同，事务id大的胜出</li>
+<li>事务id相同，服务器id大的胜出</li>
+</ol>
+
+<h3 id="32-客户端命令行操作">3.2 客户端命令行操作
+  <a class="heading-anchor" href="#32-%e5%ae%a2%e6%88%b7%e7%ab%af%e5%91%bd%e4%bb%a4%e8%a1%8c%e6%93%8d%e4%bd%9c" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>命令</th>
+          <th>功能描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>help</td>
+          <td>显示所有操作命令</td>
+      </tr>
+      <tr>
+          <td>ls path</td>
+          <td>查看当前znode的子节点（可监听）</td>
+      </tr>
+      <tr>
+          <td>create</td>
+          <td>普通创建（-s 含有序列，-e 临时）</td>
+      </tr>
+      <tr>
+          <td>get path</td>
+          <td>获得节点的值（可监听）</td>
+      </tr>
+      <tr>
+          <td>set</td>
+          <td>设置节点的具体值</td>
+      </tr>
+      <tr>
+          <td>stat</td>
+          <td>查看节点状态</td>
+      </tr>
+      <tr>
+          <td>delete</td>
+          <td>删除节点</td>
+      </tr>
+      <tr>
+          <td>deleteall</td>
+          <td>递归删除节点</td>
+      </tr>
+  </tbody>
+</table>
+
+<h3 id="33-客户端api操作">3.3 客户端API操作
+  <a class="heading-anchor" href="#33-%e5%ae%a2%e6%88%b7%e7%ab%afapi%e6%93%8d%e4%bd%9c" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p>包括IDEA环境搭建、创建Zookeeper客户端、创建子节点、获取子节点并监听节点变化、判断ZNode是否存在等。</p>
+
+<h3 id="34-客户端向服务端写数据流程">3.4 客户端向服务端写数据流程
+  <a class="heading-anchor" href="#34-%e5%ae%a2%e6%88%b7%e7%ab%af%e5%90%91%e6%9c%8d%e5%8a%a1%e7%ab%af%e5%86%99%e6%95%b0%e6%8d%ae%e6%b5%81%e7%a8%8b" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+
+<h2 id="4-服务器动态上下线监听案例">4 服务器动态上下线监听案例
+  <a class="heading-anchor" href="#4-%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%8a%a8%e6%80%81%e4%b8%8a%e4%b8%8b%e7%ba%bf%e7%9b%91%e5%90%ac%e6%a1%88%e4%be%8b" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+
+<h2 id="5-zookeeper分布式锁案例">5 Zookeeper分布式锁案例
+  <a class="heading-anchor" href="#5-zookeeper%e5%88%86%e5%b8%83%e5%bc%8f%e9%94%81%e6%a1%88%e4%be%8b" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+
+<h3 id="51-原生zookeeper实现分布式锁案例">5.1 原生Zookeeper实现分布式锁案例
+  <a class="heading-anchor" href="#51-%e5%8e%9f%e7%94%9fzookeeper%e5%ae%9e%e7%8e%b0%e5%88%86%e5%b8%83%e5%bc%8f%e9%94%81%e6%a1%88%e4%be%8b" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+
+<h3 id="52-curator框架实现分布式锁案例">5.2 Curator框架实现分布式锁案例
+  <a class="heading-anchor" href="#52-curator%e6%a1%86%e6%9e%b6%e5%ae%9e%e7%8e%b0%e5%88%86%e5%b8%83%e5%bc%8f%e9%94%81%e6%a1%88%e4%be%8b" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+
+<h2 id="6-企业面试真题面试重点">6 企业面试真题（面试重点）
+  <a class="heading-anchor" href="#6-%e4%bc%81%e4%b8%9a%e9%9d%a2%e8%af%95%e7%9c%9f%e9%a2%98%e9%9d%a2%e8%af%95%e9%87%8d%e7%82%b9" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+
+<h3 id="61-选举机制">6.1 选举机制
+  <a class="heading-anchor" href="#61-%e9%80%89%e4%b8%be%e6%9c%ba%e5%88%b6" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+
+<h3 id="62-生产集群安装多少zk合适">6.2 生产集群安装多少zk合适？
+  <a class="heading-anchor" href="#62-%e7%94%9f%e4%ba%a7%e9%9b%86%e7%be%a4%e5%ae%89%e8%a3%85%e5%a4%9a%e5%b0%91zk%e5%90%88%e9%80%82" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+
+<h3 id="63-常用命令">6.3 常用命令
+  <a class="heading-anchor" href="#63-%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p><img src="/images/Zookeeper%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B1.png" alt=""></p>
+<p><img src="/images/Zookeeper%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B2.png" alt=""></p>
+
+    </div>
+
+    
+    
+    
+    
+    <div class="px-8 pb-2 text-sm text-gray-500 flex items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+      </svg>
+      最后更新于 2025-12-09
+    </div>
+    
+
+    <footer class="px-8 py-6 bg-gray-50 border-t border-gray-100">
+      
+  <div class="tags-container">
+    <div class="text-gray-700 dark:text-gray-300 font-medium mb-2">Tags:</div>
+    <div class="flex flex-wrap gap-2">
+        <a href="/tags/zookeeper/" class="tag-chip inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-labelledby="tagIconTitle" role="img">
+            <title id="tagIconTitle"></title>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+          </svg>
+          Zookeeper
+        </a>
+        <a href="/tags/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="tag-chip inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-labelledby="tagIconTitle" role="img">
+            <title id="tagIconTitle"></title>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+          </svg>
+          使用教程
+        </a>
+    </div>
+  </div>
+
+      
+      
+      
+      
+      
+      <nav class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        
+        <a href="/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="group block p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50/30 transition-colors">
+          <div class="text-xs text-gray-500 mb-1 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            Previous
+          </div>
+          <div class="text-sm font-medium text-gray-900 group-hover:text-blue-700 line-clamp-2">设计模式学习笔记</div>
+        </a>
+        
+
+        
+        <a href="/post/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/zookeeper%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" class="group block p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50/30 transition-colors sm:text-right sm:col-start-2">
+          <div class="text-xs text-gray-500 mb-1 flex items-center sm:justify-end">
+            <span class="sm:order-1 mr-0 sm:ml-1">Next</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1.5 text-gray-400 sm:order-2 sm:ml-1 sm:mr-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+          <div class="text-sm font-medium text-gray-900 group-hover:text-blue-700 line-clamp-2">Zookeeper安装教程</div>
+        </a>
+        
+      </nav>
+      
+      
+      
+      <div class="mt-6 flex justify-center">
+        <a href="/" class="inline-flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          返回首页
+        </a>
+      </div>
+    </footer>
+  </article>
+
+  
+  <div class="max-w-4xl mx-auto mt-8 bg-white rounded-lg shadow-md overflow-hidden theme-card" style="--tw-prose-body: #374151; --tw-prose-headings: #111827; --tw-prose-links: #2563eb; --tw-prose-links-hover: #1d4ed8; --tw-prose-code-bg: #f3f4f6; color: #374151;">
+    
+ 
+  </div>
+
+    </main>
+  </div>
+  
+  <footer class="w-full max-w-4xl mx-auto px-6 overflow-x-auto sm:overflow-visible">
+    <div class="py-8 border-t border-gray-200 bg-gray-50 shadow-inner mt-10">
+  <div class="container mx-auto px-4 max-w-4xl">
+    
+     
+     
+       
+         
+       
+     
+       
+         
+       
+    
+
+    
+    <div class="flex justify-center space-x-8">
+      
+      
+      <div class="transform transition duration-200 hover:scale-110">
+        <a
+          href="https://github.com/blueberryclub"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-gray-600 hover:text-gray-900"
+          aria-label="GitHub"
+        >
+          <svg
+            class="h-7 w-7"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </a>
+      </div>
+      
+
+      
+      
+
+      
+      
+      <div class="transform transition duration-200 hover:scale-110">
+        <a
+          href="mailto:1568413588@163.com"
+          rel="noopener noreferrer"
+          class="text-gray-600 hover:text-gray-900"
+          aria-label="邮箱"
+        >
+          <svg
+            class="h-7 w-7"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z"
+            />
+            <path
+              d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z"
+            />
+          </svg>
+        </a>
+      </div>
+      
+    </div>
+
+    <div class="text-center mt-6 text-sm text-gray-500">
+      &copy; 2026 blueberryclub | Powered by <a href="https://github.com/Daucloud/hugo-theme-void" class="text-gray-600 hover:text-gray-900 hover:underline">hugo-theme-void</a> | <span id="busuanzi_container_site_pv" style="display: none;">Total visits: <span id="busuanzi_value_site_pv" class="text-gray-600"></span></span>
+    </div>
+    
+  </div>
+</div>
+
+  </footer>
+</body>
+</html>

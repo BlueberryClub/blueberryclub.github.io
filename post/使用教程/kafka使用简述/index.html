@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr" class="h-full">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Kafka使用简述 | blueberryclub</title>
+
+
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b1220">
+<script>
+  (function() {
+    try {
+      var t = localStorage.getItem('theme');
+      var dark = t ? (t === 'dark') : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark');
+    } catch (_) {}
+  })();
+  </script>
+<style>
+   
+  html.dark, html.dark body { background-color: #0b1220; }
+  html { color-scheme: light dark; }
+  </style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+<link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+<link rel="preconnect" href="https://busuanzi.ibruce.info" crossorigin>
+
+
+<link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+<link rel="shortcut icon" href="/favicon/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+<link rel="manifest" href="/favicon/site.webmanifest" />
+
+
+
+  
+  
+    
+    
+      
+        <link rel="stylesheet" href="/css/main.css">
+      
+    
+  
+
+
+
+
+
+<link rel="stylesheet" href="/css/style.min.b8957659e8f2f20e0a23b5cc1f1154837f41cca9f5570fd8f30cd1c087568650.css" media="screen" integrity="sha256-uJV2Wejy8g4KI7XMHxFUg39BzKn1Vw/Y8wzRwIdWhlA=">
+
+
+<link id="hljs-theme-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+<link id="hljs-theme-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+<script>
+  (function(){
+    try{
+      var t = localStorage.getItem('theme');
+      var dark = t ? (t === 'dark') : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      var l = document.getElementById('hljs-theme-light');
+      var d = document.getElementById('hljs-theme-dark');
+      if(l && d){ l.disabled = dark; d.disabled = !dark; }
+    }catch(e){}
+  })();
+  </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  
+      <script src="/js/main.js"></script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "$", right: "$", display: false}
+      ],
+      throwOnError: false
+    });
+    
+    
+    document.querySelectorAll('pre code').forEach(function(codeBlock) {
+      
+      let language = '';
+      codeBlock.className.split(' ').forEach(function(cls) {
+        if (cls.startsWith('language-')) {
+          language = cls.substring(9);
+        }
+      });
+      
+      
+      const pre = codeBlock.parentNode;
+      const wrapper = pre.parentNode;
+      
+      
+      const container = document.createElement('div');
+      container.className = 'code-block-container';
+      
+      
+      const header = document.createElement('div');
+      header.className = 'code-block-header';
+      
+      
+      if (language) {
+        const langLabel = document.createElement('span');
+        langLabel.className = 'code-language-label';
+        langLabel.textContent = language.toUpperCase();
+        header.appendChild(langLabel);
+      }
+      
+      
+      const copyButton = document.createElement('button');
+      copyButton.className = 'copy-button';
+      copyButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg> Copy';
+      
+      copyButton.addEventListener('click', function() {
+        
+        const code = codeBlock.textContent;
+        
+        
+        navigator.clipboard.writeText(code).then(function() {
+          
+          copyButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Copied!';
+          
+          
+          setTimeout(function() {
+            copyButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg> Copy';
+          }, 2000);
+        });
+      });
+      
+      header.appendChild(copyButton);
+      
+      container.appendChild(header);
+      
+      if (pre.parentNode) {
+        pre.parentNode.replaceChild(container, pre);
+      }
+      container.appendChild(pre);
+      
+      
+      if (window.hljs) hljs.highlightElement(codeBlock);
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    
+    const footnoteBacklinks = document.querySelectorAll('.footnote-backref');
+    
+    footnoteBacklinks.forEach(function(backlink) {
+      backlink.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        
+        const href = backlink.getAttribute('href');
+        
+        if (href) {
+          
+          const target = document.querySelector(href);
+          
+          if (target) {
+            
+            target.scrollIntoView({ behavior: 'smooth' });
+            
+            
+            target.classList.add('footnote-highlight');
+            setTimeout(function() {
+              target.classList.remove('footnote-highlight');
+            }, 2000);
+          }
+        }
+      });
+    });
+  });
+</script>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    
+    (function themeInit() {
+      const storageKey = 'theme';
+      const root = document.documentElement;
+      const btn = document.getElementById('theme-toggle');
+      const hlLight = document.getElementById('hljs-theme-light');
+      const hlDark = document.getElementById('hljs-theme-dark');
+
+      function systemPrefersDark() {
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      }
+
+      function currentPref() {
+        const v = localStorage.getItem(storageKey);
+        if (v === 'dark') return 'dark';
+        if (v === 'light') return 'light';
+        return systemPrefersDark() ? 'dark' : 'light';
+      }
+
+      function apply(theme) {
+        root.classList.toggle('dark', theme === 'dark');
+        if (btn) btn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+        if (btn) btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+        if (hlLight && hlDark) { hlLight.disabled = theme === 'dark'; hlDark.disabled = theme !== 'dark'; }
+      }
+
+      let theme = currentPref();
+      apply(theme);
+
+      if (btn) {
+        btn.addEventListener('click', function () {
+          theme = theme === 'dark' ? 'light' : 'dark';
+          localStorage.setItem(storageKey, theme);
+          apply(theme);
+        });
+      }
+
+      
+      try {
+        const media = window.matchMedia('(prefers-color-scheme: dark)');
+        const handler = function () {
+          const explicit = localStorage.getItem(storageKey);
+          if (!explicit) { theme = currentPref(); apply(theme); }
+        };
+        if (media && media.addEventListener) media.addEventListener('change', handler);
+        else if (media && media.addListener) media.addListener(handler);
+      } catch (_) {}
+    })();
+    let currentHighlighted = null;
+    let scrollArmTimer = null;
+
+    function removeHandlers() {
+      window.removeEventListener('scroll', clearOnce);
+      window.removeEventListener('keydown', clearOnce);
+      window.removeEventListener('pointerdown', clearOnce);
+      window.removeEventListener('touchstart', clearOnce);
+    }
+
+    function clearOnce() {
+      if (currentHighlighted) {
+        currentHighlighted.classList.remove('anchor-highlight');
+        currentHighlighted = null;
+      }
+      removeHandlers();
+    }
+
+    function headerHeight() {
+      const hd = document.querySelector('body > header');
+      return hd ? hd.getBoundingClientRect().height : 0;
+    }
+
+    function scrollToTarget(el) {
+      if (!el) return;
+      const offset = headerHeight() + 8; 
+      const rect = el.getBoundingClientRect();
+      const top = window.pageYOffset + rect.top - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+
+    function pickHighlightTarget(el) {
+      if (!el) return null;
+      
+      
+      if (el.tagName === 'IMG') return el;
+      
+      if (el.classList && (el.classList.contains('katex-display') || el.classList.contains('katex'))) return el;
+      
+      if (el.tagName === 'SPAN') {
+        const img = el.querySelector('img');
+        if (img) return img;
+        const kx = el.querySelector('.katex-display, .katex');
+        if (kx) return kx;
+        
+        return el;
+      }
+      
+      const head = el.closest('h1,h2,h3,h4,h5,h6');
+      if (head) return head;
+      
+      const code = el.closest('.code-block-container');
+      if (code) return code;
+      
+      const math = el.closest('.katex-display');
+      if (math) return math;
+      
+      const blk = el.closest('pre,figure,table,blockquote,li');
+      if (blk) return blk;
+      
+      if (el.closest('p')) return el;
+      return el;
+    }
+
+    function highlightById(id) {
+      if (!id) return;
+      try { id = decodeURIComponent(id); } catch (e) {}
+      const el = document.getElementById(id);
+      if (!el) return;
+      const target = pickHighlightTarget(el);
+      if (currentHighlighted && currentHighlighted !== target) {
+        currentHighlighted.classList.remove('anchor-highlight');
+      }
+      target.classList.add('anchor-highlight');
+      currentHighlighted = target;
+      
+      setTocActive(id);
+      scrollToTarget(target);
+      
+      removeHandlers();
+      
+      window.addEventListener('keydown', clearOnce, { once: true });
+      window.addEventListener('pointerdown', clearOnce, { once: true });
+      window.addEventListener('touchstart', clearOnce, { once: true });
+      if (scrollArmTimer) clearTimeout(scrollArmTimer);
+      scrollArmTimer = setTimeout(() => {
+        window.addEventListener('scroll', clearOnce, { once: true });
+      }, 1500);
+    }
+
+    
+    if (location.hash && location.hash.length > 1) {
+      
+      setTimeout(() => highlightById(location.hash.slice(1)), 0);
+    }
+
+    
+    window.addEventListener('hashchange', function () {
+      if (location.hash && location.hash.length > 1) {
+        highlightById(location.hash.slice(1));
+      }
+    });
+
+    
+    document.addEventListener('click', function (e) {
+      const a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      
+      if (a.classList && a.classList.contains('heading-anchor')) return;
+      const href = a.getAttribute('href');
+      if (!href || href === '#' || href.length < 2) return;
+      const id = href.slice(1);
+      if (!document.getElementById(id)) return; 
+      e.preventDefault();
+      if (history.pushState) { history.pushState(null, '', '#' + id); }
+      else { location.hash = id; }
+      highlightById(id);
+    }, true);
+
+    
+    window.addEventListener('popstate', function () {
+      if (location.hash && location.hash.length > 1) highlightById(location.hash.slice(1));
+    });
+
+    function setTocActive(id) {
+      try { id = decodeURIComponent(id); } catch (e) {}
+      const toc = document.getElementById('TableOfContents');
+      if (!toc) return;
+      const esc = (window.CSS && CSS.escape) ? CSS.escape : (s)=>String(s).replace(/[^a-zA-Z0-9_\-]/g, '\\$&');
+      toc.querySelectorAll('a.toc-active').forEach(a => a.classList.remove('toc-active'));
+      const link = toc.querySelector('a[href="#' + esc(id) + '"]');
+      if (link) link.classList.add('toc-active');
+    }
+
+    
+    function copyText(text) {
+      if (window.isSecureContext && navigator.clipboard && navigator.clipboard.writeText) {
+        return navigator.clipboard.writeText(text);
+      }
+      return new Promise(function (resolve, reject) {
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'fixed'; ta.style.top = '-1000px'; ta.style.left = '-1000px'; ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.focus(); ta.select();
+          try { ta.setSelectionRange(0, ta.value.length); } catch (_) {}
+          const ok = document.execCommand && document.execCommand('copy');
+          document.body.removeChild(ta);
+          ok ? resolve() : reject(new Error('copy failed'));
+        } catch (e) { reject(e); }
+      });
+    }
+
+    
+    (function addHeadingAnchorCopy() {
+      const container = document.querySelector('article .prose');
+      if (!container) return;
+      const heads = container.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+      heads.forEach((h) => {
+        const id = h.getAttribute('id');
+        if (!id) return;
+        let a = h.querySelector('.heading-anchor');
+        if (!a) {
+          a = document.createElement('a');
+          a.className = 'heading-anchor';
+          a.href = '#' + id;
+          a.setAttribute('aria-label', 'Copy link to this section');
+          a.innerHTML = '<svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/></svg>';
+          h.appendChild(a);
+        }
+        function copyPermalink() {
+          const url = location.origin + location.pathname + '#' + id;
+          const done = function () {
+            a.classList.add('copied');
+            a.setAttribute('aria-label', 'Copied');
+            setTimeout(() => { a.classList.remove('copied'); a.setAttribute('aria-label', 'Copy link to this section'); }, 1200);
+          };
+          copyText(url).then(done).catch(done);
+        }
+        a.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); copyPermalink(); });
+
+        
+        h.classList.add('heading-clickable');
+        h.addEventListener('click', function (e) {
+          if (e.target.closest('a') && !e.target.closest('.heading-anchor')) return; 
+          copyPermalink();
+        });
+      });
+
+      
+      document.addEventListener('click', function (e) {
+        const btn = e.target.closest('a.heading-anchor');
+        if (!btn) return;
+        
+        e.preventDefault(); e.stopPropagation();
+        const href = btn.getAttribute('href') || '';
+        const id = href.startsWith('#') ? href.slice(1) : '';
+        const url = href.startsWith('#') ? (location.origin + location.pathname + href) : href;
+        copyText(url).finally(() => {
+          btn.classList.add('copied'); btn.setAttribute('aria-label', 'Copied');
+          setTimeout(() => { btn.classList.remove('copied'); btn.setAttribute('aria-label', 'Copy link to this section'); }, 1200);
+          if (id) {
+            try { if (history.pushState) history.pushState(null, '', '#' + id); else location.hash = id; } catch (_) {}
+            try { highlightById(id); } catch (_) {}
+          }
+        });
+      }, false);
+    })();
+  });
+</script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+</head>
+<body class="flex flex-col bg-gray-50 font-bilingual">
+  <header class="fixed top-0 left-0 z-30 w-full bg-white shadow-sm">
+    <div class="w-full max-w-4xl mx-auto px-6 overflow-x-auto sm:overflow-visible">
+      <div class="flex items-center justify-between py-3">
+  <div class="text-lg sm:text-xl font-bold flex-shrink-0 max-w-[40%] sm:max-w-md truncate">
+    <a href="/" class="no-underline transition-colors text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-300">
+      blueberryclub
+    </a>
+  </div>
+  <div class="flex items-center gap-2">
+    
+  <nav class="flex justify-end w-full whitespace-nowrap">
+    <ul class="list-none flex flex-row items-center space-x-2 sm:space-x-4 md:space-x-6 py-2">
+    <li class="text-gray-600 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white text-base sm:text-lg">
+      <a
+        class="px-2 py-1 sm:px-3 sm:py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors" href="/">主页</a>
+    </li>
+    <li class="text-gray-600 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white text-base sm:text-lg">
+      <a
+        class="px-2 py-1 sm:px-3 sm:py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors" href="/post">博客</a>
+    </li>
+    <li class="text-gray-600 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white text-base sm:text-lg">
+      <a
+        class="px-2 py-1 sm:px-3 sm:py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors" href="/categories">分类</a>
+    </li>
+    <li class="text-gray-600 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white text-base sm:text-lg">
+      <a
+        class="px-2 py-1 sm:px-3 sm:py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors" href="/tags">标签</a>
+    </li>
+    <li class="text-gray-600 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white text-base sm:text-lg">
+      <a
+        class="px-2 py-1 sm:px-3 sm:py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors" href="/about">关于</a>
+    </li>
+    </ul>
+  </nav>
+
+    <button id="theme-toggle" type="button" class="theme-toggle theme-toggle-btn ml-2 relative inline-flex h-7 w-7 items-center justify-center p-0 bg-transparent border-0 text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-300 focus:outline-none cursor-pointer" aria-label="Toggle dark mode" aria-pressed="false">
+      
+      <svg class="icon-sun h-full w-full" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M512 192c179.2 0 320 140.8 320 320s-140.8 320-320 320-320-140.8-320-320S332.8 192 512 192M512 128C300.8 128 128 300.8 128 512s172.8 384 384 384 384-172.8 384-384S723.2 128 512 128L512 128z" fill="currentColor"></path>
+        <path d="M544 416l236.8 0C774.4 403.2 768 384 761.6 371.2L544 371.2 544 416z" fill="currentColor"></path>
+        <path d="M544 608l0 44.8 217.6 0c6.4-12.8 12.8-32 19.2-44.8L544 608z" fill="currentColor"></path>
+        <path d="M544 723.2 544 768 640 768c25.6-12.8 44.8-25.6 64-44.8L544 723.2z" fill="currentColor"></path>
+        <path d="M800 492.8l-256 0 0 44.8 256 0c0-6.4 0-12.8 0-25.6S800 499.2 800 492.8z" fill="currentColor"></path>
+        <path d="M544 300.8 704 300.8c-19.2-19.2-38.4-32-64-44.8L544 256 544 300.8z" fill="currentColor"></path>
+      </svg>
+      
+      <svg class="icon-moon h-full w-full" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M512 832c-179.2 0-320-140.8-320-320s140.8-320 320-320 320 140.8 320 320S691.2 832 512 832M512 896c211.2 0 384-172.8 384-384s-172.8-384-384-384S128 300.8 128 512 300.8 896 512 896L512 896zM800 512c0-160-128-288-288-288l0 576C672 800 800 672 800 512zM480 608 243.2 608C249.6 620.8 256 640 262.4 652.8l217.6 0L480 608zM480 416 480 371.2 262.4 371.2C256 384 249.6 403.2 243.2 416L480 416zM480 300.8 480 256 384 256C358.4 268.8 339.2 281.6 320 300.8L480 300.8zM224 537.6l256 0L480 492.8l-256 0c0 6.4 0 12.8 0 19.2S224 524.8 224 537.6zM480 723.2 320 723.2c19.2 19.2 38.4 32 64 44.8l96 0L480 723.2z" fill="currentColor"></path>
+      </svg>
+    </button>
+  </div>
+</div>
+
+    </div>
+  </header>
+  
+  <div class="flex-1 flex flex-col min-h-screen pt-24">
+    <main class="flex-1 w-full max-w-4xl mx-auto px-6 overflow-x-auto sm:overflow-visible">
+      
+  <article class="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+    <header class="p-8 border-b border-gray-100 relative overflow-hidden">
+      
+      
+      
+      
+      <div class="mb-3 flex">
+        
+        <a href="/categories/%E6%95%B0%E6%8D%AE%E6%8E%A5%E5%85%A5" class="text-xs inline-flex items-center px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors">
+          数据接入
+        </a>
+        
+      </div>
+      
+      
+      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 relative">Kafka使用简述</h1>
+      
+      <div class="flex flex-wrap items-center text-sm text-gray-500 gap-4 relative">
+        
+        
+        
+        <time datetime="2026-10-21T09:06:52&#43;08:00" class="flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          2026-10-21
+        </time>
+        
+        
+        <span class="flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          12 分钟阅读
+        </span>
+
+        
+        <span id="busuanzi_container_page_pv" class="inline-flex items-center whitespace-nowrap">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400 inline-block flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+          </svg><span class="whitespace-nowrap">阅读量 <span id="busuanzi_value_page_pv"></span></span>
+        </span>
+      </div>
+    </header>
+
+    
+    
+    
+    
+    
+    
+    
+    <div class="px-8 pt-6" x-data="{ open: false }">
+      <button
+        class="w-full flex items-center justify-between text-sm text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-200 dark:border-slate-700 rounded-md px-4 py-2 transition-colors"
+        @click="open = !open"
+        aria-controls="toc-content"
+        :aria-expanded="open.toString()"
+      >
+        <span>Table of Contents</span>
+        <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+        </svg>
+        <svg x-show="open" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M5 9a1 1 0 000 2h10a1 1 0 100-2H5z" clip-rule="evenodd" />
+        </svg>
+      </button>
+      <div id="toc-content" x-cloak x-show="open" x-transition class="mt-3 border border-gray-100 rounded-md bg-white p-4 text-sm leading-relaxed">
+        <div class="prose prose-sm max-w-none">
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#kafka使用教程">Kafka使用教程</a>
+      <ul>
+        <li><a href="#1-kafka简介">1. Kafka简介</a>
+          <ul>
+            <li><a href="#11-主要特性">1.1 主要特性</a></li>
+            <li><a href="#12-消息队列的种类">1.2 消息队列的种类</a></li>
+            <li><a href="#13-kafka的服务">1.3 kafka的服务</a></li>
+          </ul>
+        </li>
+        <li><a href="#2-kafka使用">2. Kafka使用</a>
+          <ul>
+            <li><a href="#21-依赖引入">2.1 依赖引入</a></li>
+            <li><a href="#22-消费者代码">2.2 消费者代码</a></li>
+            <li><a href="#23-消费者主题">2.3 消费者主题</a></li>
+            <li><a href="#24-生产者代码">2.4 生产者代码</a></li>
+          </ul>
+        </li>
+        <li><a href="#3-kafka使用中的问题和解决方案">3. Kafka使用中的问题和解决方案</a>
+          <ul>
+            <li><a href="#31-数据接入缓慢">3.1 数据接入缓慢</a></li>
+            <li><a href="#32-数据接入方式不一致">3.2 数据接入方式不一致</a></li>
+            <li><a href="#33-数据不能重复接收">3.3 数据不能重复接收</a></li>
+            <li><a href="#34-kafka接入的数据出现乱码">3.4 Kafka接入的数据出现乱码</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#zookeeper安装教程">Zookeeper安装教程</a>
+      <ul>
+        <li><a href="#1-概述">1. 概述</a></li>
+        <li><a href="#2-提前准备">2. 提前准备</a></li>
+        <li><a href="#3-开始安装">3. 开始安装</a></li>
+      </ul>
+    </li>
+    <li><a href="#kafka软件安装">kafka软件安装</a>
+      <ul>
+        <li><a href="#1-概述-1">1. 概述</a></li>
+        <li><a href="#2-提前准备-1">2. 提前准备</a></li>
+        <li><a href="#3-开始安装-1">3. 开始安装</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="p-8 prose prose-sm sm:prose lg:prose-lg max-w-none">
+      
+<h1 id="kafka使用教程">Kafka使用教程
+  <a class="heading-anchor" href="#kafka%e4%bd%bf%e7%94%a8%e6%95%99%e7%a8%8b" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h1>
+
+<h2 id="1-kafka简介"><font style="color:rgb(79, 79, 79);">1. Kafka简介</font>
+  <a class="heading-anchor" href="#1-kafka%e7%ae%80%e4%bb%8b" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+<p>:::color1
+Kafka是由Apache软件基金会开发的一个开源流处理平台，由Scala和Java编写。Kafka是一种高吞吐量的分布式发布订阅消息系统，它可以处理消费者在网站中的所有动作流数据。 这些数据通常是由于吞吐量的要求而通过处理日志和日志聚合来解决。 对于实时性要求比较高的日志数据和离线分析系统，Kafka就成为一种解决工具。</p>
+<p>:::</p>
+
+<h3 id="11-主要特性"><font style="color:rgb(79, 79, 79);">1.1 主要特性</font>
+  <a class="heading-anchor" href="#11-%e4%b8%bb%e8%a6%81%e7%89%b9%e6%80%a7" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p>:::color1</p>
+<ol>
+<li>通过O(1)的磁盘数据结构提供消息的持久化，这种结构对于即使数以TB的消息存储也能够保持长时间的稳定性能。</li>
+<li>高吞吐量，即使是非常普通的硬件Kafka也可以支持每秒数百万的消息。</li>
+<li>支持通过Kafka服务器和消费机集群来分区消息。</li>
+<li>支持Hadoop并行数据加载。</li>
+</ol>
+<p>:::</p>
+<p>:::color4</p>
+<ol>
+<li>因为数据存储形式为顺序io这样磁盘读取速度，减少了寻址的时间，但是这样就有一个缺陷，无法删除数据。</li>
+<li>采用了MMFile的，采用分页存储进行提高I/O利用率。</li>
+</ol>
+<p>:::</p>
+
+<h3 id="12-消息队列的种类"><font style="color:rgb(79, 79, 79);">1.2 消息队列的种类</font>
+  <a class="heading-anchor" href="#12-%e6%b6%88%e6%81%af%e9%98%9f%e5%88%97%e7%9a%84%e7%a7%8d%e7%b1%bb" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p>:::color1
+<font style="color:rgb(0, 0, 0);">MQ分为两种: </font></p>
+<ol>
+<li><font style="color:rgb(0, 0, 0);">P2P : peer to peer  点对点 				不可以重复消费    （梧州的消费方式与之类似）</font></li>
+<li><font style="color:rgb(0, 0, 0);">Pub/Sub : 发布与订阅 					可以重复消费	   (广州局的消费方式与之类似)</font></li>
+</ol>
+<p>:::</p>
+
+<h3 id="13-kafka的服务">1.3 kafka的服务
+  <a class="heading-anchor" href="#13-kafka%e7%9a%84%e6%9c%8d%e5%8a%a1" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p>:::color1
+topic : 主题，kafka处理的消息分为不同的分类，分类就是按照主题来划分。</p>
+<p>broker：消息服务器的代理。kafka集群中的一个节点一般我都门都叫做一个broker；主要是用来存储消息。存在硬盘中。</p>
+<p>partition：分区。Topic的在物理上的分组。一个topic在broker上被分为1个或者多个partition。分区在创建主题的时候指定的。</p>
+<p>message：消息，通信的基本单位，每个消息属于某一个partition</p>
+<p>Producer: 生产者，消息和数据都是由这个组件产生的，由它发送到kafka集群中的。</p>
+<p>Consumer：消费者，消息和数据都是由这个组件来消费的。</p>
+<p>Zookeeper: 他需要zk来做分布式协调</p>
+<p>:::</p>
+
+<h2 id="2-kafka使用"><font style="color:rgb(79, 79, 79);">2. Kafka使用</font>
+  <a class="heading-anchor" href="#2-kafka%e4%bd%bf%e7%94%a8" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+<p>kafka安装的教程在最后，首先安装Zookeeper然后再安装kafka。</p>
+
+<h3 id="21-依赖引入">2.1 依赖引入
+  <a class="heading-anchor" href="#21-%e4%be%9d%e8%b5%96%e5%bc%95%e5%85%a5" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p>:::color1</p>
+<ol>
+<li>kafka的消费，首先是引入kafka的依赖。</li>
+</ol>
+<p>:::</p>
+<pre tabindex="0"><code class="language-java">&lt;!-- 这是kafka的jar包  --&gt;
+&lt;!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-streams --&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;org.apache.kafka&lt;/groupId&gt;
+&lt;artifactId&gt;kafka-streams&lt;/artifactId&gt;
+&lt;version&gt;3.4.0&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!-- https://mvnrepository.com/artifact/org.springframework.kafka/spring-kafka --&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;org.springframework.kafka&lt;/groupId&gt;
+&lt;artifactId&gt;spring-kafka&lt;/artifactId&gt;
+&lt;version&gt;2.8.6&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+<h3 id="22-消费者代码">2.2 消费者代码
+  <a class="heading-anchor" href="#22-%e6%b6%88%e8%b4%b9%e8%80%85%e4%bb%a3%e7%a0%81" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<pre tabindex="0"><code class="language-java">package com.xy.kafkatest.service.kafka;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Component;
+
+
+@Component
+public class ReceiveKafkaData {
+
+    @Value(&#34;${kafka.topic.name}&#34;)
+    private String topicName;
+
+    //    static {
+    JdbcTemplate jdbcTemplate = new JdbcTemplate(DataSourceConfig.getDataSource());
+    //    }
+
+
+    private static String[] parsePatterns = {&#34;yyyy-MM-dd&#34;,&#34;yyyy年MM月dd日&#34;,
+                                             &#34;yyyy-MM-dd HH:mm:ss&#34;, &#34;yyyy-MM-dd HH:mm&#34;, &#34;yyyy/MM/dd&#34;,
+                                             &#34;yyyy/MM/dd HH:mm:ss&#34;, &#34;yyyy/MM/dd HH:mm&#34;, &#34;yyyyMMdd&#34;};
+
+    /**
+     *  消费
+     *  his_hospital_1 是获取数据的标识，可在我kafka的发送博客中查看
+     *  topics 里的数据在 我kafka的发送博客中
+     *  TopicMessageDTO 在 kafka的发送博客中也有提到。不同的系统要把这个类复制过来
+     *  SurgeryOrder你的数据对象而已 自己定义的要跟发送的数据一直
+     *  @param record
+     */
+    @KafkaListener(topics = &#34;#{&#39;${kafka.topic.name}&#39;.split(&#39;,&#39;)}&#34; )
+    public void consumerHisData(ConsumerRecord&lt;String, String&gt; record){
+        // System.out.println(&#34;consumerHisData record :&#34; &#43; record);
+        // Topic  通过这个获取表名称
+        String topic = record.topic();
+        // System.out.println(&#34;consumerHisData topic :&#34; &#43; topic);
+        // TimeStamp  时间格式
+        long timestamp = record.timestamp();
+        // System.out.println(&#34;consumerHisData timestamp :&#34; &#43; timestamp);
+        // value提前输出下
+        // System.out.println(&#34;consumerHisData value :&#34; &#43; record.value());
+        // value 数据
+        JSONObject jsonObject = JSON.parseObject(record.value());      //转换成object
+        // System.out.println(&#34;consumerHisData jsonObject :&#34; &#43; jsonObject);
+        // 将topic解析了  获取表明   BLINK_DATASERVICE_{znaqydfx}_
+        String tableName = topic.replace(&#34;BLINK_DATASERVICE_znaqydfx_&#34;, &#34;&#34;);
+        tableName = tableName.replace(&#34;GX_DSJPT_&#34;, &#34;&#34;);
+        tableName = changeTableName(tableName);
+        // System.out.println(&#34;consumerHisData tableName :&#34; &#43; tableName);
+        // 解析value到sql中
+        StringBuffer sql = new StringBuffer(&#34;insert into &#34; &#43; tableName &#43; &#34;(&#34;);
+        for (String key : jsonObject.keySet()){
+            sql.append(key &#43; &#34;,&#34;);
+        }
+        sql.deleteCharAt(sql.length() - 1);
+        sql.append(&#34;) values(&#34;);
+        for (String key : jsonObject.keySet()){
+            // Boolean flag = checkDate(jsonObject.get(key).toString());
+            if (jsonObject.get(key) == null || jsonObject.get(key).equals(&#34;null&#34;) || jsonObject.get(key).equals(&#34;NULL&#34;)){
+                sql.append(jsonObject.get(key) &#43; &#34;,&#34;);
+            }else {
+                sql.append(&#34;&#39;&#34; &#43; jsonObject.get(key) &#43; &#34;&#39;,&#34;);
+            }
+
+        }
+        sql.deleteCharAt(sql.length() - 1);
+        sql.append(&#34;)&#34;);
+        // System.out.println(sql.toString());
+
+        try {
+            jdbcTemplate.execute(sql.toString());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public String changeTableName(String tableName) {
+        if (tableName.equals(&#34;MK_CU_ELEC_CUST&#34;) || tableName.equals(&#34;MK_CU_ELEC_CUST_POWER&#34;) || tableName.equals(&#34;MK_PG_RUN_TRANSF&#34;) || tableName.equals(&#34;MK_CU_RUN_IT&#34;) ||
+            tableName.equals(&#34;MK_SV_IMP_CUST&#34;) || tableName.equals(&#34;MK_MC_EMS_TERM_RELA_RECORD&#34;) || tableName.equals(&#34;MK_CU_RUN_METER&#34;) || tableName.equals(&#34;MK_MC_METER_TECH_PARAM&#34;) ||
+            tableName.equals(&#34;MK_MC_METER_FAULT_DEAL_TASK&#34;) || tableName.equals(&#34;MK_CU_MP&#34;) || tableName.equals(&#34;MK_CU_CHECK_RUN_TRANSF&#34;) || tableName.equals(&#34;MK_SV_CHECK_PLAN_DET&#34;) ||
+            tableName.equals(&#34;MK_SV_STEAL_INF&#34;) || tableName.equals(&#34;MK_SV_CHECK_RECORD&#34;) || tableName.equals(&#34;MK_SV_CHECK_REFORM_INF&#34;) || tableName.equals(&#34;MK_SV_REFORM_DET&#34;) ||
+            tableName.equals(&#34;MK_SV_ACCI_SURVEY&#34;) || tableName.equals(&#34;MK_CA_MP_INF&#34;) || tableName.equals(&#34;MK_BI_ARREARS_RECORD&#34;)){
+            return &#34;YXXT_&#34; &#43; tableName;
+        }else if (tableName.equals(&#34;KH_YDKH_LS_04&#34;) || tableName.equals(&#34;DW_YXBYQ_LS_04&#34;) || tableName.equals(&#34;KH_JLDYXBYQGX_LS_04&#34;) || tableName.equals(&#34;KH_JLDDNBGX_LS_04&#34;) ||
+            tableName.equals(&#34;KH_JLD_LS_04&#34;) || tableName.equals(&#34;FH_JLDFHJZ_LS_04&#34;) || tableName.equals(&#34;PBYX_BYQFZL_LS_04&#34;) || tableName.equals(&#34;SB_YXDNB_LS_04&#34;)) {
+            return &#34;JLXT_&#34; &#43; tableName.replace(&#34;_LS_04&#34;,&#34;&#34;);
+        }
+            return null;
+        }
+
+    }</code></pre>
+<h3 id="23-消费者主题">2.3 消费者主题
+  <a class="heading-anchor" href="#23-%e6%b6%88%e8%b4%b9%e8%80%85%e4%b8%bb%e9%a2%98" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<pre tabindex="0"><code class="language-yaml">kafka:
+  topic:
+    # kafka 接数的 topic
+    name: BLINK_DATASERVICE_znaqydfx_GX_DSJPT_MK_CU_ELEC_CUST,BLINK_DATASERVICE_znaqydfx_GX_DSJPT_MK_CU_ELEC_CUST_POWER,BLINK_DATASERVICE_znaqydfx_GX_DSJPT_MK_PG_RUN_TRANSF,BLINK_DATASERVICE_znaqydfx_GX_DSJPT_MK_CU_RUN_IT,BLINK_DATASERVICE_znaqydfx_GX_DSJPT_MK_SV_IMP_CUST,BLINK_DATASERVICE_znaqydfx_GX_DSJPT_MK_MC_EMS_TERM_RELA_RECORD,BLINK_DATASERVICE_znaqydfx_GX_DSJPT_MK_CU_RUN_METER,BLINK_DATASERVICE_znaqydfx_GX_DSJPT_MK_MC_METER_TECH_PARAM,BLINK_DATASERVICE_znaqydfx_GX_DSJPT_MK_MC_METER_FAULT_DEAL_TASK,BLINK_DATASERVICE_znaqydfx_GX_DSJPT_MK_CU_MP,BLINK_DATASERVICE_znaqydfx_GX_DSJPT_MK_CU_CHECK_RUN_TRANSF,BLINK_DATASERVICE_znaqydfx_GX_DSJPT_MK_SV_CHECK_PLAN_DET,BLINK_DATASERVICE_znaqydfx_GX_DSJPT_MK_SV_STEAL_INF,BLINK_DATASERVICE_znaqydfx_GX_DSJPT_MK_SV_CHECK_RECORD,BLINK_DATASERVICE_znaqydfx_GX_DSJPT_MK_SV_CHECK_REFORM_INF,BLINK_DATASERVICE_znaqydfx_GX_DSJPT_MK_SV_REFORM_DET,BLINK_DATASERVICE_znaqydfx_GX_DSJPT_MK_SV_ACCI_SURVEY,BLINK_DATASERVICE_znaqydfx_GX_DSJPT_MK_CA_MP_INF,BLINK_DATASERVICE_znaqydfx_GX_DSJPT_MK_BI_ARREARS_RECORD,BLINK_DATASERVICE_znaqydfx_GX_DSJPT_KH_YDKH_LS_04,BLINK_DATASERVICE_znaqydfx_GX_DSJPT_DW_YXBYQ_LS_04,BLINK_DATASERVICE_znaqydfx_GX_DSJPT_KH_JLDYXBYQGX_LS_04,BLINK_DATASERVICE_znaqydfx_GX_DSJPT_KH_JLDDNBGX_LS_04,BLINK_DATASERVICE_znaqydfx_GX_DSJPT_KH_JLD_LS_04,BLINK_DATASERVICE_znaqydfx_FH_JLDFHJZ,BLINK_DATASERVICE_znaqydfx_GX_DSJPT_PBYX_BYQFZL_LS_04,BLINK_DATASERVICE_znaqydfx_GX_DSJPT_SB_YXDNB_LS_04</code></pre>
+<h3 id="24-生产者代码">2.4 生产者代码
+  <a class="heading-anchor" href="#24-%e7%94%9f%e4%ba%a7%e8%80%85%e4%bb%a3%e7%a0%81" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<pre tabindex="0"><code class="language-java">/**
+ * 送检订单推送到kafka
+ * @param orderList 要发送的数据 T泛型
+ * @param hospitalId 医院id
+ * @param submitType 发送的 数据类型
+ */
+@ApiOperation(&#34;业扩工单走廊-工单详细信息列表&#34;)
+@PostMapping(&#34;/kafkaTest&#34;)
+private &lt;T&gt; void sendToKafka(@RequestBody Map&lt;String,Object&gt; map) {
+    List&lt;T&gt; orderList = (List&lt;T&gt;) map.get(&#34;orderList&#34;);
+    Integer hospitalId = (Integer) map.get(&#34;hospitalId&#34;);
+    String submitType = (String) map.get(&#34;submitType&#34;);
+    String topic = (String) map.get(&#34;topic&#34;);
+
+
+    TopicMessageDTO&lt;List&lt;T&gt;&gt; topicMessageDTO = new TopicMessageDTO&lt;&gt;();
+    // 获取kafka的标识 由 his_hospital_&#43; 医院id（hospitalId）
+    topicMessageDTO.setTopicName(topic);
+    topicMessageDTO.setMessageType(submitType);
+    topicMessageDTO.setActionCode(&#34;created&#34;);
+    topicMessageDTO.setTimestamp(new Date().toString());
+    topicMessageDTO.setKeyValue(hospitalId&#43;&#34;&#34;);
+    topicMessageDTO.setHospitalId(hospitalId);
+    topicMessageDTO.setData(orderList);
+    kafkaProducerService.send(topicMessageDTO);
+}</code></pre><pre tabindex="0"><code class="language-java">package com.xy.springsecurity.service.kafka;
+
+import com.alibaba.fastjson.JSON;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+
+@Service
+public class KafkaProducerService {
+
+    @Resource
+    private KafkaTemplate&lt;String,Object&gt; kafkaTemplate;
+
+    /**
+     * 异步发送kafka消息
+     * @param topicMessageDTO
+     * @return
+     */
+    public void synchronousSend(TopicMessageDTO topicMessageDTO){
+        if(StringUtils.isNotEmpty(topicMessageDTO.getKeyValue())){
+            kafkaTemplate.send(topicMessageDTO.getTopicName()
+                               ,topicMessageDTO.getKeyValue(), JSON.toJSONString(topicMessageDTO));
+        }else {
+            kafkaTemplate.send(topicMessageDTO.getTopicName(), JSON.toJSONString(topicMessageDTO));
+        }
+    }
+    // 一般用这个方法
+    public boolean send(TopicMessageDTO topicMessageDTO){
+        try {
+            if(StringUtils.isNotEmpty(topicMessageDTO.getKeyValue())){
+                kafkaTemplate.send(topicMessageDTO.getTopicName()
+                                   ,topicMessageDTO.getKeyValue(),JSON.toJSONString(topicMessageDTO)).get();
+            }else {
+                kafkaTemplate.send(topicMessageDTO.getTopicName(),JSON.toJSONString(topicMessageDTO)).get();
+            }
+        } catch (Exception e) {
+
+            //            throw new MyException(ExceptionMsg.KAFAK_SEND_ERROR.getCode(),ExceptionMsg.KAFAK_SEND_ERROR.getMsg());
+        }
+        return true;
+    }
+}</code></pre>
+<h2 id="3-kafka使用中的问题和解决方案"><font style="color:rgb(79, 79, 79);">3. Kafka使用中的问题和解决方案</font>
+  <a class="heading-anchor" href="#3-kafka%e4%bd%bf%e7%94%a8%e4%b8%ad%e7%9a%84%e9%97%ae%e9%a2%98%e5%92%8c%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+
+<h3 id="31-数据接入缓慢">3.1 数据接入缓慢
+  <a class="heading-anchor" href="#31-%e6%95%b0%e6%8d%ae%e6%8e%a5%e5%85%a5%e7%bc%93%e6%85%a2" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p>:::color1
+通过分析，数据接入瓶颈主要由于insert语句导致。</p>
+<ol>
+<li>采用批量插入语句进行插入。</li>
+<li>采用异步方式进行插入。</li>
+</ol>
+<p>:::</p>
+<!-- 这是一张图片，ocr 内容为：单条数据插入 记录数 多条数据插入 1百 0.149S 0.011S 1千 1.231S 0.047S 1万 11.678S 0.218S -->
+<p><img src="/images/Kafka%E4%BD%BF%E7%94%A8%E7%AE%80%E8%BF%B01.png" alt=""></p>
+<p><a href="https://www.modb.pro/db/619137">https://www.modb.pro/db/619137</a></p>
+<p><a href="http://anyun.org/a/jishuguanzhu/DataBase/Mysql/2014/1217/3941.html">http://anyun.org/a/jishuguanzhu/DataBase/Mysql/2014/1217/3941.html</a></p>
+
+<h3 id="32-数据接入方式不一致">3.2 数据接入方式不一致
+  <a class="heading-anchor" href="#32-%e6%95%b0%e6%8d%ae%e6%8e%a5%e5%85%a5%e6%96%b9%e5%bc%8f%e4%b8%8d%e4%b8%80%e8%87%b4" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p>:::color1
+广州局的kafka数据接入是实时发送数据，并进行接受。</p>
+<p>在梧州项目中，是需要首先执行请求，然后第三方按照请求进行sql拼接，取得数据，传到kafka，我们再接受。</p>
+<p>:::</p>
+
+<h3 id="33-数据不能重复接收">3.3 数据不能重复接收
+  <a class="heading-anchor" href="#33-%e6%95%b0%e6%8d%ae%e4%b8%8d%e8%83%bd%e9%87%8d%e5%a4%8d%e6%8e%a5%e6%94%b6" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p>:::color1
+在梧州项目中，要接入最近几年的数据，单次接入数据量比较大，但是因为表结构有异常，然后重新修改表结构，导致部分数据有异常，所以就只能等数据接完重新接入。</p>
+<p>方案：1. 后面就接入一个月数据，作为测试数据，将表结构修改好后，清空表结构，再进行大量数据的接入。</p>
+<p>:::</p>
+
+<h3 id="34-kafka接入的数据出现乱码">3.4 Kafka接入的数据出现乱码
+  <a class="heading-anchor" href="#34-kafka%e6%8e%a5%e5%85%a5%e7%9a%84%e6%95%b0%e6%8d%ae%e5%87%ba%e7%8e%b0%e4%b9%b1%e7%a0%81" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p>:::color1
+项目启动的时候需要增加   -Dfile.encoding=utf-8</p>
+<p>:::</p>
+<p>资料参考</p>
+<p><a href="https://blog.csdn.net/m0_51197424/article/details/120766914">https://blog.csdn.net/m0_51197424/article/details/120766914</a></p>
+<p><a href="https://www.cnblogs.com/javammc/p/15230299.html">https://www.cnblogs.com/javammc/p/15230299.html</a></p>
+<!-- 这是一张图片，ocr 内容为：RABBITMQ ROCKETMQ ACTIVEMQ KAFKA MOZLLA PUBLIC LICENSE 所属社区公司 APACHE APACHE AL 比较成熟 成款 成款度 成熟 成变热 开源 开源 授权方式 开源 开源 开发语言 SCALA&JAVA ERLANG JAVA JAVA 官方支持JAVA.开源社区有 JAVA,C 多语言版本,如PHP. C++. 官方支持ERLANG,JAVA,RUBY等,社区产 JAVA PYTHON. 客户端支持语言 PYTHON,GO,C/C++.RUBY. 出多种语言API,几乎支持所有常用语言 C++(不成熟) PHP NODEJS等编程语言,详见 PERL, NET等 KAFKA 客户端列表 OPENWIRE, 自己定义的一 STOMP 多协议支持:AMQP,XMPP,SMTP. 自有协议,社区封装了 协议支持 套(社区提供 REST,XMPP HTTP协议支持 STOMP JMS-不成熟 AMOP 支持 支持 支持 消息批量操作 不支持 多协议 多协议.PULL/PUSH 消息推拉模式 多协议,PUIL/PUSH均有支持 PULL/PUSH均有 PULL 均有支持 支持 支持多MASTER 模 式,多 MASTER 多 基于ZOOKEEPER 支持REPLICA机制,LEADER容 SLAVE 模式,异步 掉后,备份自动项替,并重 MASTER/SLAVE模式,MASTER提供服务. LEVEIDB的 HA 复制模式,多 新选举LEADER(基于 SLAVE仅作备份 MASTER-SLAVE 多SLAVE MASTER 实现方式 ZOOKEEPER) 模式,同步双写 支持异步实时刷 数据可靠,并且有REPLICA 盘,同步刷盘,同 可以保证数据不丢.有SLAVE用作备份 数据可靠性 MASTER/SLAVE 机制,有容错容灾能力 步复制,异步复制 其次万级) 最差(万级) 次之(十万级) 最高(十万级) 单机香吐量 比KATKA快 消息延迟 毫秒级 徽秒级 磁盘文件,只要磁盘容量 内存,文件,支持数据堆积,但数据堆积 内存,文件,数 磁盘文件 持久化能力 够,可以做到无限消息堆 反过来影响生产速率 据库 多CLIENT保证有序 是否有序 若想有序,只能使用一个CLIENT 可以支持有序 有序 不支持,但可以通过LOW 不支持 事务 支持 支持 LEVEL API保证仅消费一次 支持 集群 支持 支持 支持 负载均衡 支持 支持 支持 支持 官方只提供了命令行版 YAHOO开源自己的KA 较好 命令行界面 管理界面 一般 WEB管理界面KAFKA 知乎@老购说LAVA 独立 独立 独立 部署方式 独立 -->
+<p><img src="/images/Kafka%E4%BD%BF%E7%94%A8%E7%AE%80%E8%BF%B02.png" alt=""></p>
+
+<h1 id="zookeeper安装教程">Zookeeper安装教程
+  <a class="heading-anchor" href="#zookeeper%e5%ae%89%e8%a3%85%e6%95%99%e7%a8%8b" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h1>
+
+<h2 id="1-概述">1. 概述
+  <a class="heading-anchor" href="#1-%e6%a6%82%e8%bf%b0" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+<p>因为公司需要使用 KafKa 来进行接数据，所以需要安装，但是前置条件是需要安装这个 ZooKeeper</p>
+
+<h2 id="2-提前准备"><font style="color:#000000;">2. 提前准备</font>
+  <a class="heading-anchor" href="#2-%e6%8f%90%e5%89%8d%e5%87%86%e5%a4%87" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+<p>:::tips</p>
+<ol>
+<li>需要提前安装 java</li>
+<li>准备Zookeeper安装包</li>
+<li>参考资料   <a href="https://blog.csdn.net/Eternal_Blue/article/details/94762494">https://blog.csdn.net/Eternal_Blue/article/details/94762494</a></li>
+</ol>
+<p>:::</p>
+
+<h2 id="3-开始安装">3. 开始安装
+  <a class="heading-anchor" href="#3-%e5%bc%80%e5%a7%8b%e5%ae%89%e8%a3%85" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+<p>:::tips</p>
+<!-- 这是一张图片，ocr 内容为：ZOOKEEPER]# LS [ROOT@VM-12-5-CENTOS Z ZOOKEEPER-3.8.1.TAR.GZ ZOOKEEPER [ROOT@VM-12-5-CENTOS ZOOKEEPER]# CD ZOOKEEPER [ROOT@VM-12-5-CENTOS ZOOKEEPER]# LS APACHE-ZOOKEEPER-3.8.1-BIN [ROOT@VM-12-5-CENTOS ZOOKEEPER]# CD APACHE-ZOOKEEPER-3.8.1-BIN/ [ROOT@VM-12-5-CENTOS APACHE-ZOOKEEPER-3.8.1-BIN]# LS LIB NOTICE.TXT  README.MD  README_PACKAGING.MD LOGS LICENSE.TXT BIN CONF DATA DOCS APACHE-ZOOKEEPER-3.8.1-BIN]# [ROOT@VM-12-5-CENTOS -->
+<p><img src="/images/Kafka%E4%BD%BF%E7%94%A8%E7%AE%80%E8%BF%B03.png" alt=""></p>
+<ol>
+<li>将压缩文件解压后.</li>
+<li>创建两个文件夹 data、logs</li>
+<li>将 conf文件夹下的  zoo_sample.cfg 改名字为 zoo.cfg</li>
+</ol>
+<p>将zoo.cfg的<font style="color:rgb(150, 152, 150);"><br>
+</font><font style="color:rgb(150, 152, 150);">	dataDi</font><font style="color:rgb(196, 196, 200) !important;">r=/usr/local/zookeeper/apache-zookeeper-</font><font style="color:rgb(222, 147, 95);">3.5.5</font><font style="color:rgb(196, 196, 200) !important;">/</font><font style="color:rgb(178, 148, 187);">data  改为你创建的那个 data文件夹</font></p>
+<ol start="4">
+<li>启动命令  bin/zkServer.sh start</li>
+<li>使用JPS命令就可以查询到进程信息，QuorumPeerMain就是Zookeeper的进程</li>
+</ol>
+<p>补充命令</p>
+<p>重启命令    bin/zkServer.sh restart</p>
+<p>停止命令    bin/zkServer.sh stop</p>
+<p>客户端启动  bin/zkCli.sh</p>
+<p>:::</p>
+
+<h1 id="kafka软件安装"><font style="color:rgb(34, 34, 38);">kafka软件安装</font>
+  <a class="heading-anchor" href="#kafka%e8%bd%af%e4%bb%b6%e5%ae%89%e8%a3%85" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h1>
+
+<h2 id="1-概述-1">1. 概述
+  <a class="heading-anchor" href="#1-%e6%a6%82%e8%bf%b0-1" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+<p>因为需要做数据接入功能的开发，所以使用到了kafka的工具。不过测试不好测试，所以就在远程服务器安装一个kafka，来进行测试，故记录此次安装过程为以后做积累。</p>
+
+<h2 id="2-提前准备-1">2. 提前准备
+  <a class="heading-anchor" href="#2-%e6%8f%90%e5%89%8d%e5%87%86%e5%a4%87-1" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+<p>:::tips</p>
+<ol>
+<li>需要安装 Zookeeper</li>
+<li>将程序包放入服务器上。(程序包很好搞)</li>
+</ol>
+<p>:::</p>
+
+<h2 id="3-开始安装-1">3. 开始安装
+  <a class="heading-anchor" href="#3-%e5%bc%80%e5%a7%8b%e5%ae%89%e8%a3%85-1" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+<p>:::tips</p>
+<ol>
+<li>将压缩包解压  </li>
+</ol>
+<p>tar -xzf kafka_2.11-0.11.0.2.tgz</p>
+<ol start="2">
+<li>进入文件下，修改  vi config/server.properties</li>
+</ol>
+<!-- 这是一张图片，ocr 内容为：# CD KAFKA_2.11-0.11.0.2 [ROOT@VM-12-5-CENTOS KAFKA]# CD WEL [ROOTQVM-12-5-CENTOS KAFKA_2.11-0.11.0.2]# LS  LICENSE  NOTICE  SITE-DOCS G LIBS LI BIN CONFIG [ROOTAVM-12-5-CENTOS KAFKA_2.11-0.11.0.2]# VI CONFIG/SERVER.PROPERTIES [ROOT@VM-12-5-CENTOS KAFKA_2.11-0.11.0.2]# -->
+<p><img src="/images/Kafka%E4%BD%BF%E7%94%A8%E7%AE%80%E8%BF%B04.png" alt=""></p>
+<p>修改这个的  <font style="color:rgb(0, 0, 0);">zookeeper.connect=192.168.1.202:2181</font></p>
+<p>修改  vi bin/kafka-run-class.sh 去查看问题，因为java的路径是分块安装的。</p>
+<ol start="3">
+<li>bin/kafka-server-start.sh config/server.properties 启动kafka</li>
+<li>去  /lib/systemd/system 下面新建一个 kafka.service 将命令放入</li>
+</ol>
+<p>[Unit]</p>
+<p>Description=kafkaservice</p>
+<p>After=network.target</p>
+<p>[Service]</p>
+<p>WorkingDirectory=/soft/KafKa/kafka_2.11-0.11.0.2</p>
+<p>ExecStart=/soft/KafKa/kafka_2.11-0.11.0.2/bin/kafka-server-start.sh config/server.properties</p>
+<p>ExecStop=/soft/KafKa/kafka_2.11-0.11.0.2/bin/kafka-server-stop.sh</p>
+<p>User=root</p>
+<p>Group=root</p>
+<p>Restart=always</p>
+<p>RestartSec=10</p>
+<p>[Install]</p>
+<p>WantedBy=multi-user.target</p>
+<ol start="4">
+<li>让自启动生效   systemctl enable kafka.service</li>
+<li>立即启动服务   systemctl start kafka.service</li>
+<li>查看启动状态    systemctl status kafka.service</li>
+</ol>
+<p>:::</p>
+
+    </div>
+
+    
+    
+    
+    
+    <div class="px-8 pb-2 text-sm text-gray-500 flex items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+      </svg>
+      最后更新于 2026-10-21
+    </div>
+    
+
+    <footer class="px-8 py-6 bg-gray-50 border-t border-gray-100">
+      
+  <div class="tags-container">
+    <div class="text-gray-700 dark:text-gray-300 font-medium mb-2">Tags:</div>
+    <div class="flex flex-wrap gap-2">
+        <a href="/tags/kafka/" class="tag-chip inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-labelledby="tagIconTitle" role="img">
+            <title id="tagIconTitle"></title>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+          </svg>
+          Kafka
+        </a>
+        <a href="/tags/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="tag-chip inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-labelledby="tagIconTitle" role="img">
+            <title id="tagIconTitle"></title>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+          </svg>
+          使用教程
+        </a>
+    </div>
+  </div>
+
+      
+      
+      
+      
+      
+      <nav class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        
+        <a href="/post/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/kafka%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="group block p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50/30 transition-colors">
+          <div class="text-xs text-gray-500 mb-1 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            Previous
+          </div>
+          <div class="text-sm font-medium text-gray-900 group-hover:text-blue-700 line-clamp-2">kafka使用教程</div>
+        </a>
+        
+
+        
+        <a href="/post/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/openclaw%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" class="group block p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50/30 transition-colors sm:text-right sm:col-start-2">
+          <div class="text-xs text-gray-500 mb-1 flex items-center sm:justify-end">
+            <span class="sm:order-1 mr-0 sm:ml-1">Next</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1.5 text-gray-400 sm:order-2 sm:ml-1 sm:mr-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+          <div class="text-sm font-medium text-gray-900 group-hover:text-blue-700 line-clamp-2">open claw安装教程</div>
+        </a>
+        
+      </nav>
+      
+      
+      
+      <div class="mt-6 flex justify-center">
+        <a href="/" class="inline-flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          返回首页
+        </a>
+      </div>
+    </footer>
+  </article>
+
+  
+  <div class="max-w-4xl mx-auto mt-8 bg-white rounded-lg shadow-md overflow-hidden theme-card" style="--tw-prose-body: #374151; --tw-prose-headings: #111827; --tw-prose-links: #2563eb; --tw-prose-links-hover: #1d4ed8; --tw-prose-code-bg: #f3f4f6; color: #374151;">
+    
+ 
+  </div>
+
+    </main>
+  </div>
+  
+  <footer class="w-full max-w-4xl mx-auto px-6 overflow-x-auto sm:overflow-visible">
+    <div class="py-8 border-t border-gray-200 bg-gray-50 shadow-inner mt-10">
+  <div class="container mx-auto px-4 max-w-4xl">
+    
+     
+     
+       
+         
+       
+     
+       
+         
+       
+    
+
+    
+    <div class="flex justify-center space-x-8">
+      
+      
+      <div class="transform transition duration-200 hover:scale-110">
+        <a
+          href="https://github.com/blueberryclub"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-gray-600 hover:text-gray-900"
+          aria-label="GitHub"
+        >
+          <svg
+            class="h-7 w-7"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </a>
+      </div>
+      
+
+      
+      
+
+      
+      
+      <div class="transform transition duration-200 hover:scale-110">
+        <a
+          href="mailto:1568413588@163.com"
+          rel="noopener noreferrer"
+          class="text-gray-600 hover:text-gray-900"
+          aria-label="邮箱"
+        >
+          <svg
+            class="h-7 w-7"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z"
+            />
+            <path
+              d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z"
+            />
+          </svg>
+        </a>
+      </div>
+      
+    </div>
+
+    <div class="text-center mt-6 text-sm text-gray-500">
+      &copy; 2026 blueberryclub | Powered by <a href="https://github.com/Daucloud/hugo-theme-void" class="text-gray-600 hover:text-gray-900 hover:underline">hugo-theme-void</a> | <span id="busuanzi_container_site_pv" style="display: none;">Total visits: <span id="busuanzi_value_site_pv" class="text-gray-600"></span></span>
+    </div>
+    
+  </div>
+</div>
+
+  </footer>
+</body>
+</html>
