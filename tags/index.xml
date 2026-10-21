@@ -2,10 +2,263 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on blueberryclub</title>
-    <link>https://blueberryclub.github.io/tags/</link>
+    <link>http://localhost:1313/tags/</link>
     <description>Recent content in Tags on blueberryclub</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <atom:link href="https://blueberryclub.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 21 Oct 2026 09:39:00 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Openclaw</title>
+      <link>http://localhost:1313/tags/openclaw/</link>
+      <pubDate>Wed, 21 Oct 2026 09:39:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/openclaw/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>使用教程</title>
+      <link>http://localhost:1313/tags/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</link>
+      <pubDate>Wed, 21 Oct 2026 09:39:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Kafka</title>
+      <link>http://localhost:1313/tags/kafka/</link>
+      <pubDate>Wed, 21 Oct 2026 09:06:52 +0800</pubDate>
+      <guid>http://localhost:1313/tags/kafka/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Docker</title>
+      <link>http://localhost:1313/tags/docker/</link>
+      <pubDate>Wed, 04 Feb 2026 08:06:52 +0800</pubDate>
+      <guid>http://localhost:1313/tags/docker/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>函数式编程</title>
+      <link>http://localhost:1313/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Wed, 04 Feb 2026 08:06:52 +0800</pubDate>
+      <guid>http://localhost:1313/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Consul</title>
+      <link>http://localhost:1313/tags/consul/</link>
+      <pubDate>Mon, 15 Dec 2025 11:06:52 +0800</pubDate>
+      <guid>http://localhost:1313/tags/consul/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>安装教程</title>
+      <link>http://localhost:1313/tags/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</link>
+      <pubDate>Mon, 15 Dec 2025 11:06:52 +0800</pubDate>
+      <guid>http://localhost:1313/tags/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Mysql</title>
+      <link>http://localhost:1313/tags/mysql/</link>
+      <pubDate>Mon, 15 Dec 2025 10:54:52 +0800</pubDate>
+      <guid>http://localhost:1313/tags/mysql/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Nginx</title>
+      <link>http://localhost:1313/tags/nginx/</link>
+      <pubDate>Mon, 15 Dec 2025 10:48:52 +0800</pubDate>
+      <guid>http://localhost:1313/tags/nginx/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Clickhouse</title>
+      <link>http://localhost:1313/tags/clickhouse/</link>
+      <pubDate>Mon, 15 Dec 2025 10:45:52 +0800</pubDate>
+      <guid>http://localhost:1313/tags/clickhouse/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Jenkins</title>
+      <link>http://localhost:1313/tags/jenkins/</link>
+      <pubDate>Fri, 12 Dec 2025 16:33:52 +0800</pubDate>
+      <guid>http://localhost:1313/tags/jenkins/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Opengauss</title>
+      <link>http://localhost:1313/tags/opengauss/</link>
+      <pubDate>Fri, 12 Dec 2025 16:31:52 +0800</pubDate>
+      <guid>http://localhost:1313/tags/opengauss/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Zookeeper</title>
+      <link>http://localhost:1313/tags/zookeeper/</link>
+      <pubDate>Fri, 12 Dec 2025 10:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/zookeeper/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>源码分析</title>
+      <link>http://localhost:1313/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</link>
+      <pubDate>Fri, 12 Dec 2025 10:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Redis</title>
+      <link>http://localhost:1313/tags/redis/</link>
+      <pubDate>Fri, 12 Dec 2025 08:31:52 +0800</pubDate>
+      <guid>http://localhost:1313/tags/redis/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Mq</title>
+      <link>http://localhost:1313/tags/mq/</link>
+      <pubDate>Thu, 11 Dec 2025 10:31:52 +0800</pubDate>
+      <guid>http://localhost:1313/tags/mq/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>LibreOffice</title>
+      <link>http://localhost:1313/tags/libreoffice/</link>
+      <pubDate>Thu, 11 Dec 2025 10:30:52 +0800</pubDate>
+      <guid>http://localhost:1313/tags/libreoffice/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Oracle</title>
+      <link>http://localhost:1313/tags/oracle/</link>
+      <pubDate>Thu, 11 Dec 2025 10:30:52 +0800</pubDate>
+      <guid>http://localhost:1313/tags/oracle/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>设计模式</title>
+      <link>http://localhost:1313/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Fri, 20 Jun 2025 16:10:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>学习笔记</title>
+      <link>http://localhost:1313/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Fri, 20 Jun 2025 16:10:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ElasticSearch</title>
+      <link>http://localhost:1313/tags/elasticsearch/</link>
+      <pubDate>Fri, 20 Jun 2025 11:16:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/elasticsearch/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>搜索引擎</title>
+      <link>http://localhost:1313/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/</link>
+      <pubDate>Fri, 20 Jun 2025 11:16:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Nacos</title>
+      <link>http://localhost:1313/tags/nacos/</link>
+      <pubDate>Mon, 20 Jan 2025 10:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/nacos/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>JVM</title>
+      <link>http://localhost:1313/tags/jvm/</link>
+      <pubDate>Tue, 06 Aug 2024 09:23:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/jvm/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Java</title>
+      <link>http://localhost:1313/tags/java/</link>
+      <pubDate>Wed, 22 May 2024 15:14:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/java/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Quartz</title>
+      <link>http://localhost:1313/tags/quartz/</link>
+      <pubDate>Thu, 18 Apr 2024 10:54:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/quartz/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>SQL</title>
+      <link>http://localhost:1313/tags/sql/</link>
+      <pubDate>Wed, 21 Feb 2024 13:59:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/sql/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>执行过程</title>
+      <link>http://localhost:1313/tags/%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B/</link>
+      <pubDate>Wed, 21 Feb 2024 13:59:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>SpringCloud</title>
+      <link>http://localhost:1313/tags/springcloud/</link>
+      <pubDate>Mon, 05 Feb 2024 10:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/springcloud/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Git</title>
+      <link>http://localhost:1313/tags/git/</link>
+      <pubDate>Mon, 15 Jan 2024 10:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/git/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>异常处理</title>
+      <link>http://localhost:1313/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</link>
+      <pubDate>Fri, 12 Jan 2024 10:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Icon</title>
+      <link>http://localhost:1313/tags/icon/</link>
+      <pubDate>Tue, 01 Aug 2023 10:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/icon/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>SpringBoot</title>
+      <link>http://localhost:1313/tags/springboot/</link>
+      <pubDate>Mon, 08 May 2023 10:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/springboot/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>注解</title>
+      <link>http://localhost:1313/tags/%E6%B3%A8%E8%A7%A3/</link>
+      <pubDate>Mon, 08 May 2023 10:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/%E6%B3%A8%E8%A7%A3/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Spring Security</title>
+      <link>http://localhost:1313/tags/spring-security/</link>
+      <pubDate>Tue, 02 May 2023 10:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/spring-security/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Jdk</title>
+      <link>http://localhost:1313/tags/jdk/</link>
+      <pubDate>Fri, 02 Dec 2022 10:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/tags/jdk/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>
