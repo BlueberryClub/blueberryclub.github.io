@@ -3,7 +3,7 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>docker安装mysql | blueberryclub</title>
+<title>源码分析 | blueberryclub</title>
 
 
 <meta name="color-scheme" content="light dark">
@@ -526,226 +526,82 @@
   <div class="flex-1 flex flex-col min-h-screen pt-24">
     <main class="flex-1 w-full max-w-4xl mx-auto px-6 overflow-x-auto sm:overflow-visible">
       
-  <article class="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
-    <header class="p-8 border-b border-gray-100 relative overflow-hidden">
+  <div class="max-w-4xl mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">源码分析</h1>
+    
+    <div class="space-y-16">
       
-      
-      
-      
-      <div class="mb-3 flex">
+      <div class="relative">
         
-        <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93" class="text-xs inline-flex items-center px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors">
-          数据库
-        </a>
-        
-      </div>
-      
-      
-      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 relative">docker安装mysql</h1>
-      
-      <div class="flex flex-wrap items-center text-sm text-gray-500 gap-4 relative">
+        <div class="mb-6 flex items-center">
+          <div class="flex-shrink-0 w-16 h-16 rounded-full bg-gradient-to-br from-blue-50 to-blue-100 dark:from-slate-700/40 dark:to-slate-800/40 flex items-center justify-center text-blue-700 dark:text-blue-300 font-bold text-xl shadow-sm">
+            2026
+          </div>
+          <div class="ml-4 h-px bg-gradient-to-r from-blue-200 dark:from-slate-600 to-transparent flex-grow"></div>
+        </div>
         
         
-        
-        <time datetime="2025-01-20T10:00:00&#43;08:00" class="flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-          </svg>
-          2025-01-20
-        </time>
-        
-        
-        <span class="flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          0 分钟阅读
-        </span>
+        <div class="ml-8 space-y-6">
+          
+          <div class="relative">
+            <a href="/post/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/zookeeper%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="absolute inset-0 z-10" aria-label="Zookeeper源码分析"></a>
+            <div class="bg-white dark:bg-slate-900 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden group">
+              <div class="p-5">
+                <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-3">
+                  <h3 class="text-xl font-medium text-gray-800 dark:text-gray-100 group-hover:text-blue-600 transition-colors">
+                    Zookeeper源码分析
+                  </h3>
+                  <time class="text-sm text-gray-500 dark:text-gray-400 mt-1 sm:mt-0 sm:ml-4 flex-shrink-0 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    10月21日
+                  </time>
+                </div>
+                
+                
+                <div class="text-gray-600 dark:text-gray-300 text-sm line-clamp-2">
+                  Zookeeper源码分析 本文尚硅谷平台，仅学习使用。
 
-        
-        <span id="busuanzi_container_page_pv" class="inline-flex items-center whitespace-nowrap">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400 inline-block flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-          </svg><span class="whitespace-nowrap">阅读量 <span id="busuanzi_value_page_pv"></span></span>
-        </span>
-      </div>
-    </header>
-
-    
-    
-    
-    
-    
-    
-    
-    <div class="px-8 pt-6" x-data="{ open: false }">
-      <button
-        class="w-full flex items-center justify-between text-sm text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-200 dark:border-slate-700 rounded-md px-4 py-2 transition-colors"
-        @click="open = !open"
-        aria-controls="toc-content"
-        :aria-expanded="open.toString()"
-      >
-        <span>Table of Contents</span>
-        <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-        </svg>
-        <svg x-show="open" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M5 9a1 1 0 000 2h10a1 1 0 100-2H5z" clip-rule="evenodd" />
-        </svg>
-      </button>
-      <div id="toc-content" x-cloak x-show="open" x-transition class="mt-3 border border-gray-100 rounded-md bg-white p-4 text-sm leading-relaxed">
-        <div class="prose prose-sm max-w-none">
-          <nav id="TableOfContents">
-  <ul>
-    <li><a href="#docker安装mysql">docker安装mysql</a>
-      <ul>
-        <li><a href="#1-查询版本">1 查询版本</a></li>
-        <li><a href="#2-下载对应版本">2 下载对应版本</a></li>
-        <li><a href="#3-启动mysql">3 启动mysql</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+                </div>
+                
+                
+                
+                <div class="mt-3 flex flex-wrap gap-2 relative z-20">
+                  
+                  <a href="/tags/zookeeper" 
+                     class="tag-chip text-xs bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-300 px-2 py-1 rounded hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors"
+                     onclick="event.stopPropagation();">
+                    Zookeeper
+                  </a>
+                  
+                  <a href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90" 
+                     class="tag-chip text-xs bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-300 px-2 py-1 rounded hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors"
+                     onclick="event.stopPropagation();">
+                    源码分析
+                  </a>
+                  
+                </div>
+                
+                
+                <div class="mt-4">
+                  <span class="inline-flex items-center text-blue-600 text-sm group-hover:translate-x-1 transition-transform duration-300">
+                    阅读全文
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
         </div>
       </div>
+      
     </div>
     
-
-    <div class="p-8 prose prose-sm sm:prose lg:prose-lg max-w-none">
-      
-<h1 id="docker安装mysql">docker安装mysql
-  <a class="heading-anchor" href="#docker%e5%ae%89%e8%a3%85mysql" aria-label="Copy link to this section">
-    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
-    </svg>
-  </a>
-</h1>
-
-<h2 id="1-查询版本">1 查询版本
-  <a class="heading-anchor" href="#1-%e6%9f%a5%e8%af%a2%e7%89%88%e6%9c%ac" aria-label="Copy link to this section">
-    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
-    </svg>
-  </a>
-</h2>
-<pre tabindex="0"><code class="language-bash">docker search docker.1ms.run/mysql</code></pre>
-<h2 id="2-下载对应版本">2 下载对应版本
-  <a class="heading-anchor" href="#2-%e4%b8%8b%e8%bd%bd%e5%af%b9%e5%ba%94%e7%89%88%e6%9c%ac" aria-label="Copy link to this section">
-    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
-    </svg>
-  </a>
-</h2>
-<pre tabindex="0"><code class="language-bash">docker pull mysql</code></pre>
-<h2 id="3-启动mysql">3 启动mysql
-  <a class="heading-anchor" href="#3-%e5%90%af%e5%8a%a8mysql" aria-label="Copy link to this section">
-    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
-    </svg>
-  </a>
-</h2>
-<pre tabindex="0"><code class="language-bash">docker run --name nacos-standalone \
-  -e MODE=standalone \
-  -e NACOS_AUTH_ENABLE=true \
-  -e NACOS_AUTH_TOKEN=ZDRjYzJmY2I3YTU5NDk2ZDhhZDJlNDQyMDEzM2JiYmJiYjEyMzQ1Njc4OQ== \
-  -e NACOS_AUTH_IDENTITY_KEY=your_identity_key \
-  -e NACOS_AUTH_IDENTITY_VALUE=your_identity_value \
-  -p 8080:8080 \
-  -p 8848:8848 \
-  -p 9848:9848 \
-  -d nacos/nacos-server:latest</code></pre>
-    </div>
-
     
-    
-    
-    
-    <div class="px-8 pb-2 text-sm text-gray-500 flex items-center">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-      </svg>
-      最后更新于 2025-01-20
-    </div>
-    
-
-    <footer class="px-8 py-6 bg-gray-50 border-t border-gray-100">
-      
-  <div class="tags-container">
-    <div class="text-gray-700 dark:text-gray-300 font-medium mb-2">Tags:</div>
-    <div class="flex flex-wrap gap-2">
-        <a href="/tags/docker/" class="tag-chip inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-labelledby="tagIconTitle" role="img">
-            <title id="tagIconTitle"></title>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-          </svg>
-          Docker
-        </a>
-        <a href="/tags/mysql/" class="tag-chip inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-labelledby="tagIconTitle" role="img">
-            <title id="tagIconTitle"></title>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-          </svg>
-          Mysql
-        </a>
-        <a href="/tags/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" class="tag-chip inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-labelledby="tagIconTitle" role="img">
-            <title id="tagIconTitle"></title>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-          </svg>
-          安装教程
-        </a>
-    </div>
-  </div>
-
-      
-      
-      
-      
-      
-      <nav class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-        
-        <a href="/post/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/docker%E5%AE%89%E8%A3%85nacos/" class="group block p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50/30 transition-colors">
-          <div class="text-xs text-gray-500 mb-1 flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
-            Previous
-          </div>
-          <div class="text-sm font-medium text-gray-900 group-hover:text-blue-700 line-clamp-2">docker安装nacos</div>
-        </a>
-        
-
-        
-        <a href="/post/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/redis%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="group block p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50/30 transition-colors sm:text-right sm:col-start-2">
-          <div class="text-xs text-gray-500 mb-1 flex items-center sm:justify-end">
-            <span class="sm:order-1 mr-0 sm:ml-1">Next</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1.5 text-gray-400 sm:order-2 sm:ml-1 sm:mr-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
-          </div>
-          <div class="text-sm font-medium text-gray-900 group-hover:text-blue-700 line-clamp-2">redis使用教程</div>
-        </a>
-        
-      </nav>
-      
-      
-      
-      <div class="mt-6 flex justify-center">
-        <a href="/" class="inline-flex items-center text-gray-600 hover:text-blue-600 transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          返回首页
-        </a>
-      </div>
-    </footer>
-  </article>
-
-  
-  <div class="max-w-4xl mx-auto mt-8 bg-white rounded-lg shadow-md overflow-hidden theme-card" style="--tw-prose-body: #374151; --tw-prose-headings: #111827; --tw-prose-links: #2563eb; --tw-prose-links-hover: #1d4ed8; --tw-prose-code-bg: #f3f4f6; color: #374151;">
-    
- 
   </div>
 
     </main>
