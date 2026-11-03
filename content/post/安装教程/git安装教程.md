@@ -2,8 +2,8 @@
 date = '2024-01-15T10:00:00+08:00'
 draft = true
 title = 'git安装教程'
-tags = ["git","使用教程"]
-series = ["使用教程"]
+tags = ["git","安装教程"]
+series = ["安装教程"]
 categories = ["版本控制", "git"]
 +++
 

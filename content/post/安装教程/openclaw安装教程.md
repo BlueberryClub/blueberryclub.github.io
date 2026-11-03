@@ -2,8 +2,8 @@
 date = '2026-10-21T09:39:00+08:00'
 draft = true
 title = 'open claw安装教程'
-tags = ["openclaw","使用教程"]
-series = ["使用教程"]
+tags = ["openclaw","安装教程"]
+series = ["安装教程"]
 categories = ["AI工具", "openclaw"]
 +++
 

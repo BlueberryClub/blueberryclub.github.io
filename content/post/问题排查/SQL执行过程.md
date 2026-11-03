@@ -1,9 +1,9 @@
 +++
-date = '2024-02-21T13:59:00+08:00'
+date = '2026-10-21T10:00:00+08:00'
 draft = true
 title = 'SQL执行过程'
-tags = ["SQL","执行过程"]
-series = ["使用教程"]
+tags = ["SQL","问题排查"]
+series = ["问题排查"]
 categories = ["数据库", "MySQL"]
 +++
 

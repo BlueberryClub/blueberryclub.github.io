@@ -1,5 +1,5 @@
 +++
-date = '2024-02-05T10:00:00+08:00'
+date = '2026-10-21T10:00:00+08:00'
 draft = true
 title = 'springCloud使用教程'
 tags = ["springCloud","使用教程"]

@@ -1,9 +1,9 @@
 +++
-date = '2025-12-12T10:00:00+08:00'
+date = '2026-10-21T10:00:00+08:00'
 draft = true
 title = 'Zookeeper源码分析'
 tags = ["Zookeeper","源码分析"]
-series = ["使用教程"]
+series = ["源码分析"]
 categories = ["分布式", "Zookeeper"]
 +++
 

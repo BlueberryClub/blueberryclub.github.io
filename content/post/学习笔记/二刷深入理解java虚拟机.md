@@ -1,9 +1,9 @@
 +++
-date = '2024-08-06T09:23:00+08:00'
+date = '2026-10-21T10:00:00+08:00'
 draft = true
 title = '二刷深入理解java虚拟机'
 tags = ["JVM","学习笔记"]
-series = ["使用教程"]
+series = ["学习笔记"]
 categories = ["Java", "JVM"]
 +++
 

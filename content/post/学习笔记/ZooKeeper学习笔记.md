@@ -1,9 +1,9 @@
 +++
-date = '2023-05-07T10:00:00+08:00'
+date = '2026-10-21T10:00:00+08:00'
 draft = true
 title = 'ZooKeeper 学习笔记'
 tags = ["ZooKeeper","学习笔记"]
-series = ["使用教程"]
+series = ["学习笔记"]
 categories = ["分布式", "ZooKeeper"]
 +++
 

@@ -1,9 +1,9 @@
 +++
-date = '2025-01-20T10:00:00+08:00'
+date = '2026-10-21T10:00:00+08:00'
 draft = true
 title = 'docker安装nacos'
 tags = ["docker","nacos","安装教程"]
-series = ["使用教程"]
+series = ["安装教程"]
 categories = ["微服务", "docker"]
 +++
 

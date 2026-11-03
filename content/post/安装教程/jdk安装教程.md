@@ -3,7 +3,7 @@ date = '2022-12-02T10:00:00+08:00'
 draft = true
 title = 'jdk安装教程'
 tags = ["jdk","安装教程"]
-series = ["使用教程"]
+series = ["安装教程"]
 categories = ["Java", "jdk"]
 +++
 
