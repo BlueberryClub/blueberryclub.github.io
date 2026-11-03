@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>综合 on blueberryclub</title>
-    <link>http://localhost:1313/categories/%E7%BB%BC%E5%90%88/</link>
+    <link>https://blueberryclub.github.io/categories/%E7%BB%BC%E5%90%88/</link>
     <description>Recent content in 综合 on blueberryclub</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 21 Oct 2026 10:00:00 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/%E7%BB%BC%E5%90%88/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://blueberryclub.github.io/categories/%E7%BB%BC%E5%90%88/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>记录学习的一些知识点</title>
-      <link>http://localhost:1313/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%AE%B0%E5%BD%95%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E7%9F%A5%E8%AF%86%E7%82%B9/</link>
+      <link>https://blueberryclub.github.io/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%AE%B0%E5%BD%95%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E7%9F%A5%E8%AF%86%E7%82%B9/</link>
       <pubDate>Wed, 21 Oct 2026 10:00:00 +0800</pubDate>
-      <guid>http://localhost:1313/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%AE%B0%E5%BD%95%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E7%9F%A5%E8%AF%86%E7%82%B9/</guid>
+      <guid>https://blueberryclub.github.io/post/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E8%AE%B0%E5%BD%95%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E7%9F%A5%E8%AF%86%E7%82%B9/</guid>
       <description>&lt;h1 id=&#34;记录学习的一些知识点&#34;&gt;记录学习的一些知识点&#xA;  &lt;a class=&#34;heading-anchor&#34; href=&#34;#%e8%ae%b0%e5%bd%95%e5%ad%a6%e4%b9%a0%e7%9a%84%e4%b8%80%e4%ba%9b%e7%9f%a5%e8%af%86%e7%82%b9&#34; aria-label=&#34;Copy link to this section&#34;&gt;&#xA;    &lt;svg viewBox=&#34;0 0 1024 1024&#34; width=&#34;18&#34; height=&#34;18&#34; fill=&#34;currentColor&#34; aria-hidden=&#34;true&#34;&gt;&#xA;      &lt;path d=&#34;M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z&#34;/&gt;&#xA;    &lt;/svg&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&#xA;&lt;h2 id=&#34;1-java基础&#34;&gt;1 java基础&#xA;  &lt;a class=&#34;heading-anchor&#34; href=&#34;#1-java%e5%9f%ba%e7%a1%80&#34; aria-label=&#34;Copy link to this section&#34;&gt;&#xA;    &lt;svg viewBox=&#34;0 0 1024 1024&#34; width=&#34;18&#34; height=&#34;18&#34; fill=&#34;currentColor&#34; aria-hidden=&#34;true&#34;&gt;&#xA;      &lt;path d=&#34;M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z&#34;/&gt;&#xA;    &lt;/svg&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;很想知道一点，为什么要去做这些控制，其实很多思考是依照实际的问题演化出来的，但是我们作为一个单纯学习理论的人来说，很难去了解为什么，所以高并发，异步请求，时间限制这些我们几乎没有涉及。&lt;/p&gt;</description>
     </item>
   </channel>

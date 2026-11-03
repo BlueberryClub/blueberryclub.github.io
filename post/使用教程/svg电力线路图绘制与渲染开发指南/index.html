@@ -1,0 +1,2030 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr" class="h-full">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>SVG电力线路图绘制与渲染开发指南 | blueberryclub</title>
+
+
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b1220">
+<script>
+  (function() {
+    try {
+      var t = localStorage.getItem('theme');
+      var dark = t ? (t === 'dark') : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark');
+    } catch (_) {}
+  })();
+  </script>
+<style>
+   
+  html.dark, html.dark body { background-color: #0b1220; }
+  html { color-scheme: light dark; }
+  </style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+<link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+<link rel="preconnect" href="https://busuanzi.ibruce.info" crossorigin>
+
+
+<link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+<link rel="shortcut icon" href="/favicon/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+<link rel="manifest" href="/favicon/site.webmanifest" />
+
+
+
+  
+  
+    
+    
+      
+        
+          <link rel="stylesheet" href="/css/main.0107a911aa19072ade9eb43c0e7f7b24bd9593eead575ac1ab76ff5f6664be9f.css" integrity="sha256-AQepEaoZByrenrQ8Dn97JL2Vk&#43;6tV1rBq3b/X2Zkvp8=" crossorigin="anonymous">
+        
+      
+    
+  
+
+
+
+
+
+<link rel="stylesheet" href="/css/style.min.b8957659e8f2f20e0a23b5cc1f1154837f41cca9f5570fd8f30cd1c087568650.css" media="screen" integrity="sha256-uJV2Wejy8g4KI7XMHxFUg39BzKn1Vw/Y8wzRwIdWhlA=">
+
+
+<link id="hljs-theme-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+<link id="hljs-theme-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+<script>
+  (function(){
+    try{
+      var t = localStorage.getItem('theme');
+      var dark = t ? (t === 'dark') : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      var l = document.getElementById('hljs-theme-light');
+      var d = document.getElementById('hljs-theme-dark');
+      if(l && d){ l.disabled = dark; d.disabled = !dark; }
+    }catch(e){}
+  })();
+  </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  
+      <script src="/js/main.3590efd59d4d3b0c802b8f46fac9c42cf893d10d7894b51073bad78a48b82463.js" integrity="sha256-NZDv1Z1NOwyAK49G&#43;snELPiT0Q14lLUQc7rXiki4JGM=" crossorigin="anonymous"></script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "$", right: "$", display: false}
+      ],
+      throwOnError: false
+    });
+    
+    
+    document.querySelectorAll('pre code').forEach(function(codeBlock) {
+      
+      let language = '';
+      codeBlock.className.split(' ').forEach(function(cls) {
+        if (cls.startsWith('language-')) {
+          language = cls.substring(9);
+        }
+      });
+      
+      
+      const pre = codeBlock.parentNode;
+      const wrapper = pre.parentNode;
+      
+      
+      const container = document.createElement('div');
+      container.className = 'code-block-container';
+      
+      
+      const header = document.createElement('div');
+      header.className = 'code-block-header';
+      
+      
+      if (language) {
+        const langLabel = document.createElement('span');
+        langLabel.className = 'code-language-label';
+        langLabel.textContent = language.toUpperCase();
+        header.appendChild(langLabel);
+      }
+      
+      
+      const copyButton = document.createElement('button');
+      copyButton.className = 'copy-button';
+      copyButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg> Copy';
+      
+      copyButton.addEventListener('click', function() {
+        
+        const code = codeBlock.textContent;
+        
+        
+        navigator.clipboard.writeText(code).then(function() {
+          
+          copyButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Copied!';
+          
+          
+          setTimeout(function() {
+            copyButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg> Copy';
+          }, 2000);
+        });
+      });
+      
+      header.appendChild(copyButton);
+      
+      container.appendChild(header);
+      
+      if (pre.parentNode) {
+        pre.parentNode.replaceChild(container, pre);
+      }
+      container.appendChild(pre);
+      
+      
+      if (window.hljs) hljs.highlightElement(codeBlock);
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    
+    const footnoteBacklinks = document.querySelectorAll('.footnote-backref');
+    
+    footnoteBacklinks.forEach(function(backlink) {
+      backlink.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        
+        const href = backlink.getAttribute('href');
+        
+        if (href) {
+          
+          const target = document.querySelector(href);
+          
+          if (target) {
+            
+            target.scrollIntoView({ behavior: 'smooth' });
+            
+            
+            target.classList.add('footnote-highlight');
+            setTimeout(function() {
+              target.classList.remove('footnote-highlight');
+            }, 2000);
+          }
+        }
+      });
+    });
+  });
+</script>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    
+    (function themeInit() {
+      const storageKey = 'theme';
+      const root = document.documentElement;
+      const btn = document.getElementById('theme-toggle');
+      const hlLight = document.getElementById('hljs-theme-light');
+      const hlDark = document.getElementById('hljs-theme-dark');
+
+      function systemPrefersDark() {
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      }
+
+      function currentPref() {
+        const v = localStorage.getItem(storageKey);
+        if (v === 'dark') return 'dark';
+        if (v === 'light') return 'light';
+        return systemPrefersDark() ? 'dark' : 'light';
+      }
+
+      function apply(theme) {
+        root.classList.toggle('dark', theme === 'dark');
+        if (btn) btn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+        if (btn) btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+        if (hlLight && hlDark) { hlLight.disabled = theme === 'dark'; hlDark.disabled = theme !== 'dark'; }
+      }
+
+      let theme = currentPref();
+      apply(theme);
+
+      if (btn) {
+        btn.addEventListener('click', function () {
+          theme = theme === 'dark' ? 'light' : 'dark';
+          localStorage.setItem(storageKey, theme);
+          apply(theme);
+        });
+      }
+
+      
+      try {
+        const media = window.matchMedia('(prefers-color-scheme: dark)');
+        const handler = function () {
+          const explicit = localStorage.getItem(storageKey);
+          if (!explicit) { theme = currentPref(); apply(theme); }
+        };
+        if (media && media.addEventListener) media.addEventListener('change', handler);
+        else if (media && media.addListener) media.addListener(handler);
+      } catch (_) {}
+    })();
+    let currentHighlighted = null;
+    let scrollArmTimer = null;
+
+    function removeHandlers() {
+      window.removeEventListener('scroll', clearOnce);
+      window.removeEventListener('keydown', clearOnce);
+      window.removeEventListener('pointerdown', clearOnce);
+      window.removeEventListener('touchstart', clearOnce);
+    }
+
+    function clearOnce() {
+      if (currentHighlighted) {
+        currentHighlighted.classList.remove('anchor-highlight');
+        currentHighlighted = null;
+      }
+      removeHandlers();
+    }
+
+    function headerHeight() {
+      const hd = document.querySelector('body > header');
+      return hd ? hd.getBoundingClientRect().height : 0;
+    }
+
+    function scrollToTarget(el) {
+      if (!el) return;
+      const offset = headerHeight() + 8; 
+      const rect = el.getBoundingClientRect();
+      const top = window.pageYOffset + rect.top - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+
+    function pickHighlightTarget(el) {
+      if (!el) return null;
+      
+      
+      if (el.tagName === 'IMG') return el;
+      
+      if (el.classList && (el.classList.contains('katex-display') || el.classList.contains('katex'))) return el;
+      
+      if (el.tagName === 'SPAN') {
+        const img = el.querySelector('img');
+        if (img) return img;
+        const kx = el.querySelector('.katex-display, .katex');
+        if (kx) return kx;
+        
+        return el;
+      }
+      
+      const head = el.closest('h1,h2,h3,h4,h5,h6');
+      if (head) return head;
+      
+      const code = el.closest('.code-block-container');
+      if (code) return code;
+      
+      const math = el.closest('.katex-display');
+      if (math) return math;
+      
+      const blk = el.closest('pre,figure,table,blockquote,li');
+      if (blk) return blk;
+      
+      if (el.closest('p')) return el;
+      return el;
+    }
+
+    function highlightById(id) {
+      if (!id) return;
+      try { id = decodeURIComponent(id); } catch (e) {}
+      const el = document.getElementById(id);
+      if (!el) return;
+      const target = pickHighlightTarget(el);
+      if (currentHighlighted && currentHighlighted !== target) {
+        currentHighlighted.classList.remove('anchor-highlight');
+      }
+      target.classList.add('anchor-highlight');
+      currentHighlighted = target;
+      
+      setTocActive(id);
+      scrollToTarget(target);
+      
+      removeHandlers();
+      
+      window.addEventListener('keydown', clearOnce, { once: true });
+      window.addEventListener('pointerdown', clearOnce, { once: true });
+      window.addEventListener('touchstart', clearOnce, { once: true });
+      if (scrollArmTimer) clearTimeout(scrollArmTimer);
+      scrollArmTimer = setTimeout(() => {
+        window.addEventListener('scroll', clearOnce, { once: true });
+      }, 1500);
+    }
+
+    
+    if (location.hash && location.hash.length > 1) {
+      
+      setTimeout(() => highlightById(location.hash.slice(1)), 0);
+    }
+
+    
+    window.addEventListener('hashchange', function () {
+      if (location.hash && location.hash.length > 1) {
+        highlightById(location.hash.slice(1));
+      }
+    });
+
+    
+    document.addEventListener('click', function (e) {
+      const a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      
+      if (a.classList && a.classList.contains('heading-anchor')) return;
+      const href = a.getAttribute('href');
+      if (!href || href === '#' || href.length < 2) return;
+      const id = href.slice(1);
+      if (!document.getElementById(id)) return; 
+      e.preventDefault();
+      if (history.pushState) { history.pushState(null, '', '#' + id); }
+      else { location.hash = id; }
+      highlightById(id);
+    }, true);
+
+    
+    window.addEventListener('popstate', function () {
+      if (location.hash && location.hash.length > 1) highlightById(location.hash.slice(1));
+    });
+
+    function setTocActive(id) {
+      try { id = decodeURIComponent(id); } catch (e) {}
+      const toc = document.getElementById('TableOfContents');
+      if (!toc) return;
+      const esc = (window.CSS && CSS.escape) ? CSS.escape : (s)=>String(s).replace(/[^a-zA-Z0-9_\-]/g, '\\$&');
+      toc.querySelectorAll('a.toc-active').forEach(a => a.classList.remove('toc-active'));
+      const link = toc.querySelector('a[href="#' + esc(id) + '"]');
+      if (link) link.classList.add('toc-active');
+    }
+
+    
+    function copyText(text) {
+      if (window.isSecureContext && navigator.clipboard && navigator.clipboard.writeText) {
+        return navigator.clipboard.writeText(text);
+      }
+      return new Promise(function (resolve, reject) {
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'fixed'; ta.style.top = '-1000px'; ta.style.left = '-1000px'; ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.focus(); ta.select();
+          try { ta.setSelectionRange(0, ta.value.length); } catch (_) {}
+          const ok = document.execCommand && document.execCommand('copy');
+          document.body.removeChild(ta);
+          ok ? resolve() : reject(new Error('copy failed'));
+        } catch (e) { reject(e); }
+      });
+    }
+
+    
+    (function addHeadingAnchorCopy() {
+      const container = document.querySelector('article .prose');
+      if (!container) return;
+      const heads = container.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+      heads.forEach((h) => {
+        const id = h.getAttribute('id');
+        if (!id) return;
+        let a = h.querySelector('.heading-anchor');
+        if (!a) {
+          a = document.createElement('a');
+          a.className = 'heading-anchor';
+          a.href = '#' + id;
+          a.setAttribute('aria-label', 'Copy link to this section');
+          a.innerHTML = '<svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/></svg>';
+          h.appendChild(a);
+        }
+        function copyPermalink() {
+          const url = location.origin + location.pathname + '#' + id;
+          const done = function () {
+            a.classList.add('copied');
+            a.setAttribute('aria-label', 'Copied');
+            setTimeout(() => { a.classList.remove('copied'); a.setAttribute('aria-label', 'Copy link to this section'); }, 1200);
+          };
+          copyText(url).then(done).catch(done);
+        }
+        a.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); copyPermalink(); });
+
+        
+        h.classList.add('heading-clickable');
+        h.addEventListener('click', function (e) {
+          if (e.target.closest('a') && !e.target.closest('.heading-anchor')) return; 
+          copyPermalink();
+        });
+      });
+
+      
+      document.addEventListener('click', function (e) {
+        const btn = e.target.closest('a.heading-anchor');
+        if (!btn) return;
+        
+        e.preventDefault(); e.stopPropagation();
+        const href = btn.getAttribute('href') || '';
+        const id = href.startsWith('#') ? href.slice(1) : '';
+        const url = href.startsWith('#') ? (location.origin + location.pathname + href) : href;
+        copyText(url).finally(() => {
+          btn.classList.add('copied'); btn.setAttribute('aria-label', 'Copied');
+          setTimeout(() => { btn.classList.remove('copied'); btn.setAttribute('aria-label', 'Copy link to this section'); }, 1200);
+          if (id) {
+            try { if (history.pushState) history.pushState(null, '', '#' + id); else location.hash = id; } catch (_) {}
+            try { highlightById(id); } catch (_) {}
+          }
+        });
+      }, false);
+    })();
+  });
+</script>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+</head>
+<body class="flex flex-col bg-gray-50 font-bilingual">
+  <header class="fixed top-0 left-0 z-30 w-full bg-white shadow-sm">
+    <div class="w-full max-w-4xl mx-auto px-6 overflow-x-auto sm:overflow-visible">
+      <div class="flex items-center justify-between py-3">
+  <div class="text-lg sm:text-xl font-bold flex-shrink-0 max-w-[40%] sm:max-w-md truncate">
+    <a href="/" class="no-underline transition-colors text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-300">
+      blueberryclub
+    </a>
+  </div>
+  <div class="flex items-center gap-2">
+    
+  <nav class="flex justify-end w-full whitespace-nowrap">
+    <ul class="list-none flex flex-row items-center space-x-2 sm:space-x-4 md:space-x-6 py-2">
+    <li class="text-gray-600 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white text-base sm:text-lg">
+      <a
+        class="px-2 py-1 sm:px-3 sm:py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors" href="/">主页</a>
+    </li>
+    <li class="text-gray-600 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white text-base sm:text-lg">
+      <a
+        class="px-2 py-1 sm:px-3 sm:py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors" href="/post">博客</a>
+    </li>
+    <li class="text-gray-600 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white text-base sm:text-lg">
+      <a
+        class="px-2 py-1 sm:px-3 sm:py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors" href="/categories">分类</a>
+    </li>
+    <li class="text-gray-600 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white text-base sm:text-lg">
+      <a
+        class="px-2 py-1 sm:px-3 sm:py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors" href="/tags">标签</a>
+    </li>
+    <li class="text-gray-600 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white text-base sm:text-lg">
+      <a
+        class="px-2 py-1 sm:px-3 sm:py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors" href="/about">关于</a>
+    </li>
+    </ul>
+  </nav>
+
+    <button id="theme-toggle" type="button" class="theme-toggle theme-toggle-btn ml-2 relative inline-flex h-7 w-7 items-center justify-center p-0 bg-transparent border-0 text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-300 focus:outline-none cursor-pointer" aria-label="Toggle dark mode" aria-pressed="false">
+      
+      <svg class="icon-sun h-full w-full" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M512 192c179.2 0 320 140.8 320 320s-140.8 320-320 320-320-140.8-320-320S332.8 192 512 192M512 128C300.8 128 128 300.8 128 512s172.8 384 384 384 384-172.8 384-384S723.2 128 512 128L512 128z" fill="currentColor"></path>
+        <path d="M544 416l236.8 0C774.4 403.2 768 384 761.6 371.2L544 371.2 544 416z" fill="currentColor"></path>
+        <path d="M544 608l0 44.8 217.6 0c6.4-12.8 12.8-32 19.2-44.8L544 608z" fill="currentColor"></path>
+        <path d="M544 723.2 544 768 640 768c25.6-12.8 44.8-25.6 64-44.8L544 723.2z" fill="currentColor"></path>
+        <path d="M800 492.8l-256 0 0 44.8 256 0c0-6.4 0-12.8 0-25.6S800 499.2 800 492.8z" fill="currentColor"></path>
+        <path d="M544 300.8 704 300.8c-19.2-19.2-38.4-32-64-44.8L544 256 544 300.8z" fill="currentColor"></path>
+      </svg>
+      
+      <svg class="icon-moon h-full w-full" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M512 832c-179.2 0-320-140.8-320-320s140.8-320 320-320 320 140.8 320 320S691.2 832 512 832M512 896c211.2 0 384-172.8 384-384s-172.8-384-384-384S128 300.8 128 512 300.8 896 512 896L512 896zM800 512c0-160-128-288-288-288l0 576C672 800 800 672 800 512zM480 608 243.2 608C249.6 620.8 256 640 262.4 652.8l217.6 0L480 608zM480 416 480 371.2 262.4 371.2C256 384 249.6 403.2 243.2 416L480 416zM480 300.8 480 256 384 256C358.4 268.8 339.2 281.6 320 300.8L480 300.8zM224 537.6l256 0L480 492.8l-256 0c0 6.4 0 12.8 0 19.2S224 524.8 224 537.6zM480 723.2 320 723.2c19.2 19.2 38.4 32 64 44.8l96 0L480 723.2z" fill="currentColor"></path>
+      </svg>
+    </button>
+  </div>
+</div>
+
+    </div>
+  </header>
+  
+  <div class="flex-1 flex flex-col min-h-screen pt-24">
+    <main class="flex-1 w-full max-w-4xl mx-auto px-6 overflow-x-auto sm:overflow-visible">
+      
+  <article class="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+    <header class="p-8 border-b border-gray-100 relative overflow-hidden">
+      
+      
+      
+      
+      <div class="mb-3 flex">
+        
+        <a href="/categories/%E5%89%8D%E7%AB%AF" class="text-xs inline-flex items-center px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors">
+          前端
+        </a>
+        
+      </div>
+      
+      
+      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 relative">SVG电力线路图绘制与渲染开发指南</h1>
+      
+      <div class="flex flex-wrap items-center text-sm text-gray-500 gap-4 relative">
+        
+        
+        
+        <time datetime="2026-10-21T14:00:00&#43;08:00" class="flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          2026-10-21
+        </time>
+        
+        
+        <span class="flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          28 分钟阅读
+        </span>
+
+        
+        <span id="busuanzi_container_page_pv" class="inline-flex items-center whitespace-nowrap">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400 inline-block flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+          </svg><span class="whitespace-nowrap">阅读量 <span id="busuanzi_value_page_pv"></span></span>
+        </span>
+      </div>
+    </header>
+
+    
+    
+    
+    
+    
+    
+    
+    <div class="px-8 pt-6" x-data="{ open: false }">
+      <button
+        class="w-full flex items-center justify-between text-sm text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-200 dark:border-slate-700 rounded-md px-4 py-2 transition-colors"
+        @click="open = !open"
+        aria-controls="toc-content"
+        :aria-expanded="open.toString()"
+      >
+        <span>Table of Contents</span>
+        <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+        </svg>
+        <svg x-show="open" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M5 9a1 1 0 000 2h10a1 1 0 100-2H5z" clip-rule="evenodd" />
+        </svg>
+      </button>
+      <div id="toc-content" x-cloak x-show="open" x-transition class="mt-3 border border-gray-100 rounded-md bg-white p-4 text-sm leading-relaxed">
+        <div class="prose prose-sm max-w-none">
+          <nav id="TableOfContents">
+  <ul>
+    <li><a href="#svg电力线路图绘制与渲染开发指南">SVG电力线路图绘制与渲染开发指南</a>
+      <ul>
+        <li><a href="#1-数据模型概述">1. 数据模型概述</a>
+          <ul>
+            <li><a href="#11-xml-数据模型iec-cim">1.1 XML 数据模型（IEC CIM）</a></li>
+            <li><a href="#12-svg-图形模型">1.2 SVG 图形模型</a></li>
+          </ul>
+        </li>
+        <li><a href="#2-拓扑分析从-xml-构建节点图">2. 拓扑分析：从 XML 构建节点图</a>
+          <ul>
+            <li><a href="#21-核心思路">2.1 核心思路</a></li>
+            <li><a href="#22-解析代码java">2.2 解析代码（Java）</a></li>
+            <li><a href="#23-拓扑遍历从出线开关沿线路走">2.3 拓扑遍历：从出线开关沿线路走</a></li>
+          </ul>
+        </li>
+        <li><a href="#3-svg-渲染图标文字连线">3. SVG 渲染：图标、文字、连线</a>
+          <ul>
+            <li><a href="#31-defs-中定义通用图标">3.1 defs 中定义通用图标</a></li>
+            <li><a href="#32-在图层中引用图标">3.2 在图层中引用图标</a></li>
+            <li><a href="#33-动态渲染代码前端-javascript">3.3 动态渲染代码（前端 JavaScript）</a></li>
+          </ul>
+        </li>
+        <li><a href="#4-线路颜色渲染">4. 线路颜色渲染</a>
+          <ul>
+            <li><a href="#41-颜色配置方案">4.1 颜色配置方案</a></li>
+            <li><a href="#42-按馈线着色">4.2 按馈线着色</a></li>
+            <li><a href="#43-使用示例">4.3 使用示例</a></li>
+          </ul>
+        </li>
+        <li><a href="#5-xml-与-svg-的关联映射">5. XML 与 SVG 的关联映射</a></li>
+        <li><a href="#6-完整处理流程">6. 完整处理流程</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="p-8 prose prose-sm sm:prose lg:prose-lg max-w-none">
+      
+<h1 id="svg电力线路图绘制与渲染开发指南">SVG电力线路图绘制与渲染开发指南
+  <a class="heading-anchor" href="#svg%e7%94%b5%e5%8a%9b%e7%ba%bf%e8%b7%af%e5%9b%be%e7%bb%98%e5%88%b6%e4%b8%8e%e6%b8%b2%e6%9f%93%e5%bc%80%e5%8f%91%e6%8c%87%e5%8d%97" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h1>
+
+<h2 id="1-数据模型概述">1. 数据模型概述
+  <a class="heading-anchor" href="#1-%e6%95%b0%e6%8d%ae%e6%a8%a1%e5%9e%8b%e6%a6%82%e8%bf%b0" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+<p>电力线路图由两个文件组成：</p>
+<ul>
+<li><strong>XML文件</strong>（CIM/RDF格式）：存储拓扑数据和设备属性</li>
+<li><strong>SVG文件</strong>：存储图形渲染信息（图标定义、坐标、连线、文字）</li>
+</ul>
+
+<h3 id="11-xml-数据模型iec-cim">1.1 XML 数据模型（IEC CIM）
+  <a class="heading-anchor" href="#11-xml-%e6%95%b0%e6%8d%ae%e6%a8%a1%e5%9e%8biec-cim" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p>XML 遵循 IEC CIM（公共信息模型）标准，核心元素：</p>
+<pre tabindex="0"><code>Circuit（线路）
+  └── CircuitSection（线段/干线/支线）
+        └── Equipment（设备）
+              ├── Disconnector（隔离开关）
+              ├── Breaker（断路器）
+              ├── LoadSwitch（负荷开关）
+              ├── Fuse（熔断器）
+              ├── Arrester（避雷器）
+              ├── PoleSite（杆塔位置）
+              ├── PowerTransformer（变压器）
+              ├── FaultIndicator（故障指示器）
+              ├── Junction（电缆终端头）
+              └── ...</code></pre><p><strong>关联关系通过 Terminal 建立：</strong></p>
+<pre tabindex="0"><code class="language-xml">&lt;!-- 设备：刀闸 --&gt;
+&lt;cim:Disconnector rdf:ID=&#34;SWITCH_378010585067001&#34;&gt;
+    &lt;cim:Naming.name&gt;松岗线#1塔1T01刀闸&lt;/cim:Naming.name&gt;
+    &lt;cim:PowerSystemResource.status&gt;1&lt;/cim:PowerSystemResource.status&gt;
+    &lt;cim:Switch.normalOpen&gt;false&lt;/cim:Switch.normalOpen&gt;
+    &lt;cim:PowerSystemResource.location&gt;POINT(112.8696172 22.7891477)&lt;/cim:PowerSystemResource.location&gt;
+    &lt;cim:PowerSystemResource.symbolRotation&gt;231.08&lt;/cim:PowerSystemResource.symbolRotation&gt;
+    &lt;cim:Equipment.MemberOf_EquipmentContainer rdf:resource=&#34;#CIRCUIT_378010547255901&#34;/&gt;
+    &lt;cim:Equipment.MemberOf_CircuitSection rdf:resource=&#34;#CIRSEC_378010547255911&#34;/&gt;
+&lt;/cim:Disconnector&gt;
+
+&lt;!-- 端子1：连接设备到节点A --&gt;
+&lt;cim:Terminal rdf:ID=&#34;TERMINAL_378010585067001_1&#34;&gt;
+    &lt;cim:Terminal.sequenceNumber&gt;1&lt;/cim:Terminal.sequenceNumber&gt;
+    &lt;cim:Terminal.ConductingEquipment rdf:resource=&#34;#SWITCH_378010585067001&#34;/&gt;
+    &lt;cim:Terminal.ConnectivityNode rdf:resource=&#34;#NODE_382220463449900&#34;/&gt;
+&lt;/cim:Terminal&gt;
+
+&lt;!-- 端子2：连接设备到节点B --&gt;
+&lt;cim:Terminal rdf:ID=&#34;TERMINAL_378010585067001_2&#34;&gt;
+    &lt;cim:Terminal.sequenceNumber&gt;2&lt;/cim:Terminal.sequenceNumber&gt;
+    &lt;cim:Terminal.ConductingEquipment rdf:resource=&#34;#SWITCH_378010585067001&#34;/&gt;
+    &lt;cim:Terminal.ConnectivityNode rdf:resource=&#34;#NODE_382220463450000&#34;/&gt;
+&lt;/cim:Terminal&gt;</code></pre><p><strong>拓扑关系链：</strong></p>
+<pre tabindex="0"><code>Equipment ←Terminal→ ConnectivityNode ←Terminal→ Equipment</code></pre>
+<h3 id="12-svg-图形模型">1.2 SVG 图形模型
+  <a class="heading-anchor" href="#12-svg-%e5%9b%be%e5%bd%a2%e6%a8%a1%e5%9e%8b" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p>SVG 文件结构分为三层：</p>
+<pre tabindex="0"><code>&lt;svg&gt;
+  &lt;defs&gt;                    ← 第一层：通用图标定义（symbol）
+  &lt;g id=&#34;HeadClass&#34;&gt;        ← 线路标题信息
+  &lt;g id=&#34;SubstationClass&#34;&gt;  ← 变电站/配电房
+  &lt;g id=&#34;DisconnectorClass&#34;&gt;← 按设备类型分层
+  &lt;g id=&#34;BreakerClass&#34;&gt;
+  &lt;g id=&#34;ConnectiveLineClass&#34;&gt; ← 连接线（拓扑连线）
+  &lt;g id=&#34;ACLineSegmentClass&#34;&gt;  ← 线路段（导线）
+  &lt;g id=&#34;TextClass&#34;&gt;           ← 文字标注
+  ...
+&lt;/svg&gt;</code></pre><p><strong>完整的 Class 分层：</strong></p>
+<table>
+  <thead>
+      <tr>
+          <th>Class ID</th>
+          <th>内容</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>HeadClass</td>
+          <td>线路名称、ID</td>
+          <td>背景矩形 + 属性</td>
+      </tr>
+      <tr>
+          <td>SubstationClass</td>
+          <td>变电站/配电房</td>
+          <td>多边形框 + metadata</td>
+      </tr>
+      <tr>
+          <td>OtherClass</td>
+          <td>FTU/DTU等附属设备</td>
+          <td>use引用 + metadata</td>
+      </tr>
+      <tr>
+          <td>ConnectivePointClass</td>
+          <td>电缆终端头等连接点</td>
+          <td>use引用</td>
+      </tr>
+      <tr>
+          <td>DisconnectorClass</td>
+          <td>隔离开关/刀闸</td>
+          <td>use引用</td>
+      </tr>
+      <tr>
+          <td>ArresterClass</td>
+          <td>避雷器</td>
+          <td>use引用</td>
+      </tr>
+      <tr>
+          <td>PolePSRClass</td>
+          <td>杆塔（铁塔/水泥杆）</td>
+          <td>use引用</td>
+      </tr>
+      <tr>
+          <td>FaultIndicatorClass</td>
+          <td>故障指示器</td>
+          <td>use引用</td>
+      </tr>
+      <tr>
+          <td>FuseClass</td>
+          <td>熔断器</td>
+          <td>use引用</td>
+      </tr>
+      <tr>
+          <td>PowerTransformerClass</td>
+          <td>变压器</td>
+          <td>use引用</td>
+      </tr>
+      <tr>
+          <td>BreakerClass</td>
+          <td>断路器</td>
+          <td>use引用</td>
+      </tr>
+      <tr>
+          <td>LoadSwitchClass</td>
+          <td>负荷开关</td>
+          <td>use引用</td>
+      </tr>
+      <tr>
+          <td>ConnectiveLineClass</td>
+          <td>拓扑连接线</td>
+          <td>path + CN_Ref</td>
+      </tr>
+      <tr>
+          <td>TextClass</td>
+          <td>文字标注</td>
+          <td>text元素</td>
+      </tr>
+      <tr>
+          <td>ACLineSegmentClass</td>
+          <td>导线段</td>
+          <td>polyline</td>
+      </tr>
+      <tr>
+          <td>JointUseClass</td>
+          <td>共管段</td>
+          <td>polyline</td>
+      </tr>
+      <tr>
+          <td>BusbarSectionClass</td>
+          <td>母线</td>
+          <td>polyline</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+
+<h2 id="2-拓扑分析从-xml-构建节点图">2. 拓扑分析：从 XML 构建节点图
+  <a class="heading-anchor" href="#2-%e6%8b%93%e6%89%91%e5%88%86%e6%9e%90%e4%bb%8e-xml-%e6%9e%84%e5%bb%ba%e8%8a%82%e7%82%b9%e5%9b%be" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+
+<h3 id="21-核心思路">2.1 核心思路
+  <a class="heading-anchor" href="#21-%e6%a0%b8%e5%bf%83%e6%80%9d%e8%b7%af" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p>从 XML 中提取三类数据：</p>
+<ol>
+<li><strong>设备节点</strong>（Equipment）：携带属性的图节点</li>
+<li><strong>连接节点</strong>（ConnectivityNode）：纯拓扑连接点</li>
+<li><strong>边关系</strong>（Terminal）：设备 ↔ 连接节点的映射</li>
+</ol>
+
+<h3 id="22-解析代码java">2.2 解析代码（Java）
+  <a class="heading-anchor" href="#22-%e8%a7%a3%e6%9e%90%e4%bb%a3%e7%a0%81java" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<pre tabindex="0"><code class="language-java">/**
+ * XML 拓扑解析器
+ * 从 CIM/RDF XML 中解析出设备节点和拓扑关系
+ */
+public class CimTopologyParser {
+
+    // 命名空间映射
+    private static final Map&lt;String, String&gt; NS = Map.of(
+        &#34;cim&#34;, &#34;http://iec.ch/TC57/2003/CIM-schema-cim10#&#34;,
+        &#34;rdf&#34;, &#34;http://www.w3.org/1999/02/22-rdf-syntax-ns#&#34;
+    );
+
+    /**
+     * 设备节点 —— 携带属性的图节点
+     */
+    @Data
+    public static class EquipmentNode {
+        private String id;           // rdf:ID，如 SWITCH_378010585067001
+        private String type;         // 设备类型，如 Disconnector
+        private String name;         // 设备名称
+        private String mRID;         // 唯一标识
+        private int status;          // 状态（1=运行）
+        private String location;     // GPS坐标 POINT(lng lat)
+        private double rotation;     // 图标旋转角度
+        private boolean normalOpen;  // 常开（开关类设备）
+        private String circuitId;    // 所属线路
+        private String sectionId;    // 所属线段
+        private List&lt;String&gt; terminalIds = new ArrayList&lt;&gt;(); // 关联端子
+    }
+
+    /**
+     * 连接节点 —— 拓扑连接点，记录所有关联的端子
+     * 一个 ConnectivityNode 可以连接多个 Terminal，
+     * 形成 &#34;设备A ←terminal→ 连接节点 ←terminal→ 设备B&#34; 的拓扑关系
+     */
+    @Data
+    public static class ConnectivityNode {
+        private String id;    // NODE_xxx
+        private String mRID;
+        // 关联的所有端子（通过 Terminal.ConnectivityNode 反向索引）
+        private List&lt;String&gt; terminalIds = new ArrayList&lt;&gt;();
+    }
+
+    /**
+     * 获取该连接节点左侧的设备（端子序号=2 的设备，即出口方向）
+     */
+    public List&lt;EquipmentNode&gt; getLeftEquipments(TopologyGraph graph) {
+        List&lt;EquipmentNode&gt; result = new ArrayList&lt;&gt;();
+        for (String tid : terminalIds) {
+            TerminalEdge t = graph.getTerminals().get(tid);
+            if (t != null &amp;&amp; t.getSequenceNumber() == 2) {
+                EquipmentNode eq = graph.getEquipments().get(t.getEquipmentRef());
+                if (eq != null) result.add(eq);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 获取该连接节点右侧的设备（端子序号=1 的设备，即入口方向）
+     */
+    public List&lt;EquipmentNode&gt; getRightEquipments(TopologyGraph graph) {
+        List&lt;EquipmentNode&gt; result = new ArrayList&lt;&gt;();
+        for (String tid : terminalIds) {
+            TerminalEdge t = graph.getTerminals().get(tid);
+            if (t != null &amp;&amp; t.getSequenceNumber() == 1) {
+                EquipmentNode eq = graph.getEquipments().get(t.getEquipmentRef());
+                if (eq != null) result.add(eq);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 获取所有相邻设备（不区分左右）
+     */
+    public List&lt;EquipmentNode&gt; getAdjacentEquipments(TopologyGraph graph) {
+        List&lt;EquipmentNode&gt; result = new ArrayList&lt;&gt;();
+        for (String tid : terminalIds) {
+            TerminalEdge t = graph.getTerminals().get(tid);
+            if (t != null) {
+                EquipmentNode eq = graph.getEquipments().get(t.getEquipmentRef());
+                if (eq != null) result.add(eq);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 端子 —— 设备与连接节点的桥梁
+     */
+    @Data
+    public static class TerminalEdge {
+        private String id;
+        private int sequenceNumber;       // 端子序号（1=入口，2=出口）
+        private String equipmentRef;      // 关联设备 ID
+        private String connectivityNodeRef; // 关联连接节点 ID
+    }
+
+    /**
+     * 线路段 —— 干线/支线的树形结构
+     */
+    @Data
+    public static class CircuitSection {
+        private String id;
+        private String name;         // 如&#34;木厂支线&#34;
+        private String connectionKind; // 主干线 / 分支线
+        private String parentId;     // 父线段ID（分支线才有）
+        private String circuitId;    // 所属线路
+    }
+
+    /**
+     * 解析结果
+     */
+    @Data
+    public static class TopologyGraph {
+        private Map&lt;String, EquipmentNode&gt; equipments = new LinkedHashMap&lt;&gt;();
+        private Map&lt;String, ConnectivityNode&gt; nodes = new LinkedHashMap&lt;&gt;();
+        private Map&lt;String, TerminalEdge&gt; terminals = new LinkedHashMap&lt;&gt;();
+        private Map&lt;String, CircuitSection&gt; sections = new LinkedHashMap&lt;&gt;();
+    }
+
+    /**
+     * 解析 XML 文件
+     */
+    public TopologyGraph parse(InputStream xmlInput) throws Exception {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        Document doc = factory.newDocumentBuilder().parse(xmlInput);
+
+        TopologyGraph graph = new TopologyGraph();
+
+        // 1. 解析所有设备类型
+        parseEquipments(doc, graph, &#34;Disconnector&#34;);
+        parseEquipments(doc, graph, &#34;Breaker&#34;);
+        parseEquipments(doc, graph, &#34;LoadSwitch&#34;);
+        parseEquipments(doc, graph, &#34;Fuse&#34;);
+        parseEquipments(doc, graph, &#34;Arrester&#34;);
+        parseEquipments(doc, graph, &#34;PoleSite&#34;);
+        parseEquipments(doc, graph, &#34;PowerTransformer&#34;);
+        parseEquipments(doc, graph, &#34;FaultIndicator&#34;);
+        parseEquipments(doc, graph, &#34;Junction&#34;);
+
+        // 2. 先解析连接节点（Terminal 反向索引依赖它）
+        parseConnectivityNodes(doc, graph);
+
+        // 3. 解析端子（同时建立 设备→端子 和 连接节点→端子 的反向关联）
+        parseTerminals(doc, graph);
+
+        // 4. 解析线路段树
+        parseCircuitSections(doc, graph);
+
+        return graph;
+    }
+
+    /**
+     * 解析指定类型的设备
+     */
+    private void parseEquipments(Document doc, TopologyGraph graph, String cimType) {
+        NodeList list = doc.getElementsByTagNameNS(NS.get(&#34;cim&#34;), cimType);
+        for (int i = 0; i &lt; list.getLength(); i&#43;&#43;) {
+            Element elem = (Element) list.item(i);
+            EquipmentNode node = new EquipmentNode();
+            node.setId(elem.getAttributeNS(NS.get(&#34;rdf&#34;), &#34;ID&#34;));
+            node.setType(cimType);
+            node.setName(getTagText(elem, NS.get(&#34;cim&#34;), &#34;Naming.name&#34;));
+            node.setMRID(getTagText(elem, NS.get(&#34;cim&#34;), &#34;Naming.mRID&#34;));
+            node.setStatus(parseInt(getTagText(elem, NS.get(&#34;cim&#34;), &#34;PowerSystemResource.status&#34;)));
+            node.setLocation(getTagText(elem, NS.get(&#34;cim&#34;), &#34;PowerSystemResource.location&#34;));
+            node.setRotation(parseDouble(getTagText(elem, NS.get(&#34;cim&#34;), &#34;PowerSystemResource.symbolRotation&#34;)));
+
+            // 开关类设备读取常开状态
+            String normalOpen = getTagText(elem, NS.get(&#34;cim&#34;), &#34;Switch.normalOpen&#34;);
+            if (&#34;true&#34;.equals(normalOpen)) {
+                node.setNormalOpen(true);
+            }
+
+            // 所属线路
+            String circuitRef = getRefAttribute(elem, NS.get(&#34;cim&#34;),
+                &#34;Equipment.MemberOf_EquipmentContainer&#34;);
+            node.setCircuitId(stripRefPrefix(circuitRef));
+
+            // 所属线段
+            String sectionRef = getRefAttribute(elem, NS.get(&#34;cim&#34;),
+                &#34;Equipment.MemberOf_CircuitSection&#34;);
+            node.setSectionId(stripRefPrefix(sectionRef));
+
+            graph.getEquipments().put(node.getId(), node);
+        }
+    }
+
+    /**
+     * 解析端子 —— 建立设备与连接节点的关联
+     */
+    private void parseTerminals(Document doc, TopologyGraph graph) {
+        NodeList list = doc.getElementsByTagNameNS(NS.get(&#34;cim&#34;), &#34;Terminal&#34;);
+        for (int i = 0; i &lt; list.getLength(); i&#43;&#43;) {
+            Element elem = (Element) list.item(i);
+            TerminalEdge edge = new TerminalEdge();
+            edge.setId(elem.getAttributeNS(NS.get(&#34;rdf&#34;), &#34;ID&#34;));
+            edge.setSequenceNumber(parseInt(
+                getTagText(elem, NS.get(&#34;cim&#34;), &#34;Terminal.sequenceNumber&#34;)));
+            edge.setEquipmentRef(stripRefPrefix(
+                getRefAttribute(elem, NS.get(&#34;cim&#34;), &#34;Terminal.ConductingEquipment&#34;)));
+            edge.setConnectivityNodeRef(stripRefPrefix(
+                getRefAttribute(elem, NS.get(&#34;cim&#34;), &#34;Terminal.ConnectivityNode&#34;)));
+
+            graph.getTerminals().put(edge.getId(), edge);
+
+            // 反向关联1：设备 → 端子列表
+            EquipmentNode eq = graph.getEquipments().get(edge.getEquipmentRef());
+            if (eq != null) {
+                eq.getTerminalIds().add(edge.getId());
+            }
+
+            // 反向关联2：连接节点 → 端子列表（建立左右连接关系）
+            ConnectivityNode cn = graph.getNodes().get(edge.getConnectivityNodeRef());
+            if (cn != null) {
+                cn.getTerminalIds().add(edge.getId());
+            }
+        }
+    }
+
+    /**
+     * 解析连接节点
+     */
+    private void parseConnectivityNodes(Document doc, TopologyGraph graph) {
+        NodeList list = doc.getElementsByTagNameNS(NS.get(&#34;cim&#34;), &#34;ConnectivityNode&#34;);
+        for (int i = 0; i &lt; list.getLength(); i&#43;&#43;) {
+            Element elem = (Element) list.item(i);
+            ConnectivityNode cn = new ConnectivityNode();
+            cn.setId(elem.getAttributeNS(NS.get(&#34;rdf&#34;), &#34;ID&#34;));
+            cn.setMRID(getTagText(elem, NS.get(&#34;cim&#34;), &#34;Naming.mRID&#34;));
+            graph.getNodes().put(cn.getId(), cn);
+        }
+    }
+
+    /**
+     * 解析线路段树
+     */
+    private void parseCircuitSections(Document doc, TopologyGraph graph) {
+        NodeList list = doc.getElementsByTagNameNS(NS.get(&#34;cim&#34;), &#34;CircuitSection&#34;);
+        for (int i = 0; i &lt; list.getLength(); i&#43;&#43;) {
+            Element elem = (Element) list.item(i);
+            CircuitSection sec = new CircuitSection();
+            sec.setId(elem.getAttributeNS(NS.get(&#34;rdf&#34;), &#34;ID&#34;));
+            sec.setName(getTagText(elem, NS.get(&#34;cim&#34;), &#34;Naming.name&#34;));
+            sec.setConnectionKind(getTagText(elem, NS.get(&#34;cim&#34;),
+                &#34;CircuitSection.connectionKind&#34;));
+            sec.setParentId(stripRefPrefix(
+                getRefAttribute(elem, NS.get(&#34;cim&#34;), &#34;CircuitSection.Parent&#34;)));
+            sec.setCircuitId(stripRefPrefix(
+                getRefAttribute(elem, NS.get(&#34;cim&#34;), &#34;CircuitSection.MemberOf_Circuit&#34;)));
+            graph.getSections().put(sec.getId(), sec);
+        }
+    }
+
+    // ---- 工具方法 ----
+
+    private String getTagText(Element parent, String ns, String localName) {
+        NodeList list = parent.getElementsByTagNameNS(ns, localName);
+        return list.getLength() &gt; 0 ? list.item(0).getTextContent().trim() : &#34;&#34;;
+    }
+
+    private String getRefAttribute(Element parent, String ns, String localName) {
+        NodeList list = parent.getElementsByTagNameNS(ns, localName);
+        if (list.getLength() == 0) return &#34;&#34;;
+        return ((Element) list.item(0)).getAttributeNS(
+            &#34;http://www.w3.org/1999/02/22-rdf-syntax-ns#&#34;, &#34;resource&#34;);
+    }
+
+    private String stripRefPrefix(String ref) {
+        // &#34;#CIRCUIT_xxx&#34; → &#34;CIRCUIT_xxx&#34;
+        return ref.startsWith(&#34;#&#34;) ? ref.substring(1) : ref;
+    }
+
+    private int parseInt(String s) {
+        try { return s.isEmpty() ? 0 : Integer.parseInt(s); }
+        catch (NumberFormatException e) { return 0; }
+    }
+
+    private double parseDouble(String s) {
+        try { return s.isEmpty() ? 0 : Double.parseDouble(s); }
+        catch (NumberFormatException e) { return 0; }
+    }
+}</code></pre>
+<h3 id="23-拓扑遍历从出线开关沿线路走">2.3 拓扑遍历：从出线开关沿线路走
+  <a class="heading-anchor" href="#23-%e6%8b%93%e6%89%91%e9%81%8d%e5%8e%86%e4%bb%8e%e5%87%ba%e7%ba%bf%e5%bc%80%e5%85%b3%e6%b2%bf%e7%ba%bf%e8%b7%af%e8%b5%b0" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<pre tabindex="0"><code class="language-java">/**
+ * 拓扑遍历器 —— 从出线开关开始，沿 ConnectivityNode 深度遍历整条线路
+ */
+public class TopologyTraverser {
+
+    private final TopologyGraph graph;
+
+    public TopologyTraverser(TopologyGraph graph) {
+        this.graph = graph;
+    }
+
+    /**
+     * 从指定设备开始，遍历所有连通设备
+     * @param startEquipmentId 起始设备ID（通常是出线开关）
+     * @param visitor 访问回调
+     */
+    public void traverse(String startEquipmentId, Consumer&lt;EquipmentNode&gt; visitor) {
+        Set&lt;String&gt; visitedNodes = new HashSet&lt;&gt;();
+        Set&lt;String&gt; visitedEquipments = new HashSet&lt;&gt;();
+        EquipmentNode start = graph.getEquipments().get(startEquipmentId);
+        if (start == null) return;
+        doTraverse(start, visitedNodes, visitedEquipments, visitor);
+    }
+
+    private void doTraverse(EquipmentNode equipment,
+                            Set&lt;String&gt; visitedNodes,
+                            Set&lt;String&gt; visitedEquipments,
+                            Consumer&lt;EquipmentNode&gt; visitor) {
+        if (visitedEquipments.contains(equipment.getId())) return;
+        visitedEquipments.add(equipment.getId());
+        visitor.accept(equipment);
+
+        // 从该设备的所有端子出发
+        for (String terminalId : equipment.getTerminalIds()) {
+            TerminalEdge terminal = graph.getTerminals().get(terminalId);
+            if (terminal == null) continue;
+
+            String nodeId = terminal.getConnectivityNodeRef();
+            if (visitedNodes.contains(nodeId)) continue;
+            visitedNodes.add(nodeId);
+
+            // 从连接节点直接获取关联端子（已在解析阶段建立）
+            ConnectivityNode cn = graph.getNodes().get(nodeId);
+            if (cn == null) continue;
+
+            for (String otherTid : cn.getTerminalIds()) {
+                if (otherTid.equals(terminalId)) continue;
+                TerminalEdge other = graph.getTerminals().get(otherTid);
+                if (other == null) continue;
+                EquipmentNode nextEquip = graph.getEquipments().get(other.getEquipmentRef());
+                if (nextEquip != null) {
+                    doTraverse(nextEquip, visitedNodes, visitedEquipments, visitor);
+                }
+            }
+        }
+    }
+
+    /**
+     * 获取指定线路下的所有设备，按线段分组
+     */
+    public Map&lt;String, List&lt;EquipmentNode&gt;&gt; groupBySection(String circuitId) {
+        Map&lt;String, List&lt;EquipmentNode&gt;&gt; result = new LinkedHashMap&lt;&gt;();
+        // 找到该线路的出线开关
+        graph.getEquipments().values().stream()
+            .filter(eq -&gt; circuitId.equals(eq.getCircuitId()))
+            .forEach(eq -&gt; {
+                result.computeIfAbsent(eq.getSectionId(), k -&gt; new ArrayList&lt;&gt;())
+                    .add(eq);
+            });
+        return result;
+    }
+}</code></pre><hr>
+
+<h2 id="3-svg-渲染图标文字连线">3. SVG 渲染：图标、文字、连线
+  <a class="heading-anchor" href="#3-svg-%e6%b8%b2%e6%9f%93%e5%9b%be%e6%a0%87%e6%96%87%e5%ad%97%e8%bf%9e%e7%ba%bf" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+
+<h3 id="31-defs-中定义通用图标">3.1 defs 中定义通用图标
+  <a class="heading-anchor" href="#31-defs-%e4%b8%ad%e5%ae%9a%e4%b9%89%e9%80%9a%e7%94%a8%e5%9b%be%e6%a0%87" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p>SVG 的 <code>&lt;defs&gt;</code> 区域定义所有可复用的设备图标（symbol），通过 <code>id</code> 标识设备类型和状态：</p>
+<p><strong>命名规则：</strong> <code>{CIM类型}:{设备名称}@{状态码}</code></p>
+<table>
+  <thead>
+      <tr>
+          <th>状态码</th>
+          <th>含义</th>
+          <th>颜色</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>@0</td>
+          <td>合闸/正常</td>
+          <td>rgb(0,255,0) 绿色</td>
+      </tr>
+      <tr>
+          <td>@1</td>
+          <td>分闸</td>
+          <td>rgb(255,0,0) 红色</td>
+      </tr>
+      <tr>
+          <td>@4</td>
+          <td>接地/特殊</td>
+          <td>rgb(255,0,255) 紫色</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>图标定义示例：</strong></p>
+<pre tabindex="0"><code class="language-xml">&lt;defs&gt;
+    &lt;!-- 通用端子（隐藏的连接点） --&gt;
+    &lt;symbol id=&#34;terminal:端子&#34; preserveAspectRatio=&#34;xMidYMid&#34;&gt;
+        &lt;circle cy=&#34;0.0&#34; r=&#34;1.0&#34; stroke-width=&#34;1&#34; cx=&#34;0.0&#34; visibility=&#34;hidden&#34;/&gt;
+    &lt;/symbol&gt;
+
+    &lt;!-- 柱上隔离开关 - 合闸状态(绿色) --&gt;
+    &lt;symbol viewBox=&#34;0 0 20.4 42.0&#34;
+            id=&#34;Disconnector:柱上隔离开关@0&#34;
+            preserveAspectRatio=&#34;xMidYMid&#34;&gt;
+        &lt;!-- 上下两个端子连接点 --&gt;
+        &lt;use x=&#34;10.2&#34; y=&#34;1.0&#34; terminal-index=&#34;0&#34; xlink:href=&#34;#terminal:端子&#34;/&gt;
+        &lt;use x=&#34;10.2&#34; y=&#34;41.0&#34; terminal-index=&#34;1&#34; xlink:href=&#34;#terminal:端子&#34;/&gt;
+        &lt;!-- 导线（绿色=合闸） --&gt;
+        &lt;line x1=&#34;10.2&#34; x2=&#34;10.2&#34; stroke=&#34;rgb(0,255,0)&#34;
+              y1=&#34;27.5&#34; y2=&#34;41.0&#34; stroke-width=&#34;1&#34;/&gt;
+        &lt;line x1=&#34;10.2&#34; x2=&#34;10.2&#34; stroke=&#34;rgb(0,255,0)&#34;
+              y1=&#34;10.3&#34; y2=&#34;1.0&#34; stroke-width=&#34;1&#34;/&gt;
+        &lt;!-- 刀闸横杠 --&gt;
+        &lt;line x1=&#34;7.2&#34; x2=&#34;13.2&#34; stroke=&#34;rgb(0,255,0)&#34;
+              y1=&#34;10.3&#34; y2=&#34;10.3&#34; stroke-width=&#34;1&#34;/&gt;
+        &lt;!-- 刀闸刀片（合闸=竖直） --&gt;
+        &lt;line x1=&#34;10.0&#34; x2=&#34;1.0&#34; stroke=&#34;rgb(0,255,0)&#34;
+              y1=&#34;26.4&#34; y2=&#34;9.4&#34; stroke-width=&#34;1&#34;/&gt;
+    &lt;/symbol&gt;
+
+    &lt;!-- 柱上隔离开关 - 分闸状态(红色) --&gt;
+    &lt;symbol viewBox=&#34;0 0 20.4 42.0&#34;
+            id=&#34;Disconnector:柱上隔离开关@1&#34;
+            preserveAspectRatio=&#34;xMidYMid&#34;&gt;
+        &lt;use x=&#34;10.2&#34; y=&#34;1.0&#34; terminal-index=&#34;0&#34; xlink:href=&#34;#terminal:端子&#34;/&gt;
+        &lt;use x=&#34;10.2&#34; y=&#34;41.0&#34; terminal-index=&#34;1&#34; xlink:href=&#34;#terminal:端子&#34;/&gt;
+        &lt;line x1=&#34;10.2&#34; x2=&#34;10.2&#34; stroke=&#34;rgb(255,0,0)&#34;
+              y1=&#34;27.5&#34; y2=&#34;41.0&#34; stroke-width=&#34;1&#34;/&gt;
+        &lt;line x1=&#34;10.2&#34; x2=&#34;10.2&#34; stroke=&#34;rgb(255,0,0)&#34;
+              y1=&#34;10.3&#34; y2=&#34;1.0&#34; stroke-width=&#34;1&#34;/&gt;
+        &lt;line x1=&#34;7.2&#34; x2=&#34;13.2&#34; stroke=&#34;rgb(255,0,0)&#34;
+              y1=&#34;10.3&#34; y2=&#34;10.3&#34; stroke-width=&#34;1&#34;/&gt;
+        &lt;!-- 刀闸刀片（分闸=倾斜断开） --&gt;
+        &lt;line x1=&#34;10.1&#34; x2=&#34;5.9&#34; stroke=&#34;rgb(255,0,0)&#34;
+              y1=&#34;26.2&#34; y2=&#34;8.8&#34; stroke-width=&#34;1&#34;/&gt;
+    &lt;/symbol&gt;
+&lt;/defs&gt;</code></pre>
+<h3 id="32-在图层中引用图标">3.2 在图层中引用图标
+  <a class="heading-anchor" href="#32-%e5%9c%a8%e5%9b%be%e5%b1%82%e4%b8%ad%e5%bc%95%e7%94%a8%e5%9b%be%e6%a0%87" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<p>每个设备在对应的 Class 图层中用 <code>&lt;use&gt;</code> 引用 defs 中的 symbol：</p>
+<pre tabindex="0"><code class="language-xml">&lt;!-- DisconnectorClass 图层 --&gt;
+&lt;g id=&#34;DisconnectorClass&#34;&gt;
+    &lt;g id=&#34;380220621226700&#34;&gt;
+        &lt;!-- 引用分闸状态的柱上隔离开关 --&gt;
+        &lt;use x=&#34;832.5&#34; y=&#34;1167.6&#34;
+             width=&#34;20.4&#34; height=&#34;42.0&#34;
+             xlink:href=&#34;#Disconnector:柱上隔离开关@1&#34;
+             transform=&#34;rotate(90.0,842.7,1188.6)&#34;/&gt;
+        &lt;!-- 元数据：关联 XML 中的设备ID --&gt;
+        &lt;metadata&gt;
+            &lt;cge:PSR_Ref ObjectName=&#34;1T01&#34;
+                         ObjectID=&#34;SWITCH_378010585067001&#34;/&gt;
+        &lt;/metadata&gt;
+    &lt;/g&gt;
+&lt;/g&gt;</code></pre><p><strong>关键属性说明：</strong></p>
+<table>
+  <thead>
+      <tr>
+          <th>属性</th>
+          <th>作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>x</code>, <code>y</code></td>
+          <td>图标左上角在画布上的坐标</td>
+      </tr>
+      <tr>
+          <td><code>width</code>, <code>height</code></td>
+          <td>图标尺寸（对应 viewBox 的缩放）</td>
+      </tr>
+      <tr>
+          <td><code>xlink:href</code></td>
+          <td>引用 defs 中的 symbol ID</td>
+      </tr>
+      <tr>
+          <td><code>transform=&quot;rotate(angle,cx,cy)&quot;</code></td>
+          <td>绕中心点旋转</td>
+      </tr>
+      <tr>
+          <td><code>transform=&quot;scale(sx,sy)&quot;</code></td>
+          <td>缩放</td>
+      </tr>
+      <tr>
+          <td><code>metadata/cge:PSR_Ref/@ObjectID</code></td>
+          <td>关联 XML 设备 ID</td>
+      </tr>
+  </tbody>
+</table>
+
+<h3 id="33-动态渲染代码前端-javascript">3.3 动态渲染代码（前端 JavaScript）
+  <a class="heading-anchor" href="#33-%e5%8a%a8%e6%80%81%e6%b8%b2%e6%9f%93%e4%bb%a3%e7%a0%81%e5%89%8d%e7%ab%af-javascript" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<pre tabindex="0"><code class="language-javascript">/**
+ * SVG 电力线路图渲染器
+ */
+class PowerLineRenderer {
+
+    constructor(svgElement) {
+        this.svg = svgElement;
+        this.ns = &#39;http://www.w3.org/2000/svg&#39;;
+        this.xlinkNs = &#39;http://www.w3.org/1999/xlink&#39;;
+    }
+
+    /**
+     * 在 defs 中注册一个设备图标
+     * @param {string} id - symbol ID，如 &#34;Disconnector:柱上隔离开关@0&#34;
+     * @param {string} viewBox - 如 &#34;0 0 20.4 42.0&#34;
+     * @param {Function} drawFn - 绘制函数，接收 SVGElement 参数
+     */
+    registerSymbol(id, viewBox, drawFn) {
+        let defs = this.svg.querySelector(&#39;defs&#39;);
+        if (!defs) {
+            defs = document.createElementNS(this.ns, &#39;defs&#39;);
+            this.svg.prepend(defs);
+        }
+
+        const symbol = document.createElementNS(this.ns, &#39;symbol&#39;);
+        symbol.setAttribute(&#39;id&#39;, id);
+        symbol.setAttribute(&#39;viewBox&#39;, viewBox);
+        symbol.setAttribute(&#39;preserveAspectRatio&#39;, &#39;xMidYMid&#39;);
+        drawFn(symbol);
+        defs.appendChild(symbol);
+    }
+
+    /**
+     * 注册柱上隔离开关图标
+     */
+    registerDisconnectorSymbol() {
+        // 合闸（绿色）
+        this.registerSymbol(
+            &#39;Disconnector:柱上隔离开关@0&#39;, &#39;0 0 20.4 42.0&#39;,
+            (symbol) =&gt; {
+                this._addTerminal(symbol, 10.2, 1.0, 0);
+                this._addTerminal(symbol, 10.2, 41.0, 1);
+                this._addLine(symbol, 10.2, 27.5, 10.2, 41.0, &#39;rgb(0,255,0)&#39;);
+                this._addLine(symbol, 10.2, 10.3, 10.2, 1.0, &#39;rgb(0,255,0)&#39;);
+                this._addLine(symbol, 7.2, 10.3, 13.2, 10.3, &#39;rgb(0,255,0)&#39;);
+                this._addLine(symbol, 10.0, 26.4, 1.0, 9.4, &#39;rgb(0,255,0)&#39;);
+            }
+        );
+        // 分闸（红色）
+        this.registerSymbol(
+            &#39;Disconnector:柱上隔离开关@1&#39;, &#39;0 0 20.4 42.0&#39;,
+            (symbol) =&gt; {
+                this._addTerminal(symbol, 10.2, 1.0, 0);
+                this._addTerminal(symbol, 10.2, 41.0, 1);
+                this._addLine(symbol, 10.2, 27.5, 10.2, 41.0, &#39;rgb(255,0,0)&#39;);
+                this._addLine(symbol, 10.2, 10.3, 10.2, 1.0, &#39;rgb(255,0,0)&#39;);
+                this._addLine(symbol, 7.2, 10.3, 13.2, 10.3, &#39;rgb(255,0,0)&#39;);
+                this._addLine(symbol, 10.1, 26.2, 5.9, 8.8, &#39;rgb(255,0,0)&#39;);
+            }
+        );
+    }
+
+    /**
+     * 渲染一个设备到指定图层
+     */
+    renderEquipment(layerId, equipmentId, symbolId, x, y, width, height,
+                    rotation, objectName, objectId) {
+        let layer = this.svg.querySelector(`#${layerId}`);
+        if (!layer) {
+            layer = document.createElementNS(this.ns, &#39;g&#39;);
+            layer.setAttribute(&#39;id&#39;, layerId);
+            this.svg.appendChild(layer);
+        }
+
+        const g = document.createElementNS(this.ns, &#39;g&#39;);
+        g.setAttribute(&#39;id&#39;, equipmentId);
+
+        // use 引用 symbol
+        const use = document.createElementNS(this.ns, &#39;use&#39;);
+        use.setAttribute(&#39;x&#39;, x);
+        use.setAttribute(&#39;y&#39;, y);
+        use.setAttribute(&#39;width&#39;, width);
+        use.setAttribute(&#39;height&#39;, height);
+        use.setAttributeNS(this.xlinkNs, &#39;xlink:href&#39;, `#${symbolId}`);
+        if (rotation) {
+            const cx = x &#43; width / 2;
+            const cy = y &#43; height / 2;
+            use.setAttribute(&#39;transform&#39;, `rotate(${rotation},${cx},${cy})`);
+        }
+        g.appendChild(use);
+
+        // metadata 关联
+        const metadata = document.createElementNS(this.ns, &#39;metadata&#39;);
+        const psrRef = document.createElementNS(
+            &#39;http://iec.ch/TC57/2005/SVG-schema#&#39;, &#39;cge:PSR_Ref&#39;);
+        psrRef.setAttribute(&#39;ObjectName&#39;, objectName || &#39;&#39;);
+        psrRef.setAttribute(&#39;ObjectID&#39;, objectId || &#39;&#39;);
+        metadata.appendChild(psrRef);
+        g.appendChild(metadata);
+
+        layer.appendChild(g);
+    }
+
+    /**
+     * 渲染文字标注
+     */
+    renderText(layerId, id, x, y, text, options = {}) {
+        let layer = this.svg.querySelector(`#${layerId}`);
+        if (!layer) {
+            layer = document.createElementNS(this.ns, &#39;g&#39;);
+            layer.setAttribute(&#39;id&#39;, layer);
+            this.svg.appendChild(layer);
+        }
+
+        const g = document.createElementNS(this.ns, &#39;g&#39;);
+        g.setAttribute(&#39;id&#39;, id);
+
+        const textEl = document.createElementNS(this.ns, &#39;text&#39;);
+        textEl.setAttribute(&#39;x&#39;, x);
+        textEl.setAttribute(&#39;y&#39;, y);
+        textEl.setAttribute(&#39;text-anchor&#39;, options.anchor || &#39;middle&#39;);
+        textEl.setAttribute(&#39;font-size&#39;, options.fontSize || &#39;14&#39;);
+        textEl.setAttribute(&#39;fill&#39;, options.fill || &#39;rgb(0,0,0)&#39;);
+        textEl.setAttribute(&#39;font-family&#39;, options.fontFamily || &#39;KaiTi&#39;);
+        if (options.linkLayer) {
+            textEl.setAttribute(&#39;link-layer&#39;, options.linkLayer);
+        }
+        textEl.textContent = text;
+        g.appendChild(textEl);
+        layer.appendChild(g);
+    }
+
+    /**
+     * 渲染导线段
+     */
+    renderLineSegment(layerId, id, points, options = {}) {
+        let layer = this.svg.querySelector(`#${layerId}`);
+        if (!layer) {
+            layer = document.createElementNS(this.ns, &#39;g&#39;);
+            layer.setAttribute(&#39;id&#39;, layer);
+            this.svg.appendChild(layer);
+        }
+
+        const g = document.createElementNS(this.ns, &#39;g&#39;);
+        g.setAttribute(&#39;id&#39;, id);
+
+        const polyline = document.createElementNS(this.ns, &#39;polyline&#39;);
+        polyline.setAttribute(&#39;fill&#39;, &#39;none&#39;);
+        polyline.setAttribute(&#39;stroke&#39;, options.stroke || &#39;rgb(0,0,0)&#39;);
+        polyline.setAttribute(&#39;stroke-width&#39;, options.strokeWidth || &#39;1&#39;);
+        polyline.setAttribute(&#39;points&#39;, points); // &#34;x1,y1 x2,y2 x3,y3&#34;
+        if (options.dashArray) {
+            polyline.setAttribute(&#39;stroke-dasharray&#39;, options.dashArray);
+        }
+        g.appendChild(polyline);
+        layer.appendChild(g);
+    }
+
+    // ---- 内部工具方法 ----
+
+    _addTerminal(symbol, x, y, index) {
+        const use = document.createElementNS(this.ns, &#39;use&#39;);
+        use.setAttribute(&#39;x&#39;, x);
+        use.setAttribute(&#39;y&#39;, y);
+        use.setAttribute(&#39;terminal-index&#39;, index);
+        use.setAttributeNS(this.xlinkNs, &#39;xlink:href&#39;, &#39;#terminal:端子&#39;);
+        symbol.appendChild(use);
+    }
+
+    _addLine(symbol, x1, y1, x2, y2, color) {
+        const line = document.createElementNS(this.ns, &#39;line&#39;);
+        line.setAttribute(&#39;x1&#39;, x1);
+        line.setAttribute(&#39;y1&#39;, y1);
+        line.setAttribute(&#39;x2&#39;, x2);
+        line.setAttribute(&#39;y2&#39;, y2);
+        line.setAttribute(&#39;stroke&#39;, color);
+        line.setAttribute(&#39;stroke-width&#39;, &#39;1&#39;);
+        symbol.appendChild(line);
+    }
+}</code></pre><hr>
+
+<h2 id="4-线路颜色渲染">4. 线路颜色渲染
+  <a class="heading-anchor" href="#4-%e7%ba%bf%e8%b7%af%e9%a2%9c%e8%89%b2%e6%b8%b2%e6%9f%93" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+
+<h3 id="41-颜色配置方案">4.1 颜色配置方案
+  <a class="heading-anchor" href="#41-%e9%a2%9c%e8%89%b2%e9%85%8d%e7%bd%ae%e6%96%b9%e6%a1%88" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<pre tabindex="0"><code class="language-javascript">/**
+ * 线路颜色配置
+ */
+const LINE_COLOR_CONFIG = {
+    // 按电压等级
+    voltage: {
+        &#39;110kV&#39;:  { stroke: &#39;rgb(255,0,0)&#39;,   label: &#39;110千伏&#39; },
+        &#39;10kV&#39;:   { stroke: &#39;rgb(0,128,0)&#39;,    label: &#39;10千伏&#39; },
+        &#39;380V&#39;:   { stroke: &#39;rgb(0,0,255)&#39;,    label: &#39;380伏&#39; },
+    },
+
+    // 按线路状态
+    status: {
+        running:    { stroke: &#39;rgb(0,255,0)&#39;,   label: &#39;运行&#39; },
+        stopped:    { stroke: &#39;rgb(255,0,0)&#39;,    label: &#39;停运&#39; },
+        fault:      { stroke: &#39;rgb(255,0,255)&#39;,  label: &#39;故障&#39; },
+        maintenance:{ stroke: &#39;rgb(255,165,0)&#39;,  label: &#39;检修&#39; },
+    },
+
+    // 按线段类型
+    section: {
+        trunk:    { stroke: &#39;rgb(0,0,0)&#39;,     strokeWidth: &#39;2&#39;, label: &#39;主干线&#39; },
+        branch:   { stroke: &#39;rgb(0,0,0)&#39;,     strokeWidth: &#39;1&#39;, label: &#39;分支线&#39; },
+        connective:{ stroke: &#39;rgb(0,0,0)&#39;,    strokeWidth: &#39;1&#39;, label: &#39;联络线&#39; },
+    },
+
+    // 按相别（A/B/C相）
+    phase: {
+        A: { stroke: &#39;rgb(255,0,0)&#39;,     label: &#39;A相&#39; },
+        B: { stroke: &#39;rgb(0,255,0)&#39;,     label: &#39;B相&#39; },
+        C: { stroke: &#39;rgb(0,0,255)&#39;,     label: &#39;C相&#39; },
+    },
+
+    // 按馈线（不同馈线不同颜色）
+    feeder: [
+        &#39;rgb(0,128,0)&#39;,     // 馈线1 绿色
+        &#39;rgb(0,0,255)&#39;,     // 馈线2 蓝色
+        &#39;rgb(255,128,0)&#39;,   // 馈线3 橙色
+        &#39;rgb(128,0,255)&#39;,   // 馈线4 紫色
+        &#39;rgb(0,128,128)&#39;,   // 馈线5 青色
+        &#39;rgb(255,0,128)&#39;,   // 馈线6 品红
+    ],
+};</code></pre>
+<h3 id="42-按馈线着色">4.2 按馈线着色
+  <a class="heading-anchor" href="#42-%e6%8c%89%e9%a6%88%e7%ba%bf%e7%9d%80%e8%89%b2" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<pre tabindex="0"><code class="language-javascript">/**
+ * 按馈线对线路进行颜色渲染
+ */
+class LineColorRenderer {
+
+    constructor(svgElement, colorConfig) {
+        this.svg = svgElement;
+        this.config = colorConfig || LINE_COLOR_CONFIG;
+    }
+
+    /**
+     * 给指定馈线的所有导线段着色
+     * @param {string} circuitId - 线路ID
+     * @param {string} color - 颜色，如 &#34;rgb(255,0,0)&#34;
+     */
+    colorCircuit(circuitId, color) {
+        // 找到 ACLineSegmentClass 下所有属于该线路的线段
+        const layer = this.svg.querySelector(&#39;#ACLineSegmentClass&#39;);
+        if (!layer) return;
+
+        const segments = layer.querySelectorAll(&#39;g&#39;);
+        segments.forEach(g =&gt; {
+            const metadata = g.querySelector(&#39;cge\\:PSR_Ref, PSR_Ref&#39;);
+            if (!metadata) return;
+            const objectId = metadata.getAttribute(&#39;ObjectID&#39;) || &#39;&#39;;
+            // SEG_xxx 属于该线路则着色
+            if (this._segmentBelongsToCircuit(objectId, circuitId)) {
+                const polyline = g.querySelector(&#39;polyline&#39;);
+                if (polyline) {
+                    polyline.setAttribute(&#39;stroke&#39;, color);
+                }
+            }
+        });
+    }
+
+    /**
+     * 给指定状态的设备着色
+     */
+    colorEquipmentByStatus(equipmentId, status) {
+        const colorMap = this.config.status;
+        const color = colorMap[status]?.stroke || &#39;rgb(0,0,0)&#39;;
+
+        // 查找设备所在图层
+        const allLayers = this.svg.querySelectorAll(&#39;[id$=&#34;Class&#34;]&#39;);
+        for (const layer of allLayers) {
+            const g = layer.querySelector(`#${equipmentId}`);
+            if (!g) continue;
+
+            const use = g.querySelector(&#39;use&#39;);
+            if (!use) continue;
+
+            // 切换 symbol 引用（@0=合闸, @1=分闸）
+            const href = use.getAttributeNS(
+                &#39;http://www.w3.org/1999/xlink&#39;, &#39;xlink:href&#39;);
+            if (href) {
+                const baseId = href.replace(/@\d&#43;$/, &#39;&#39;);
+                const statusCode = status === &#39;running&#39; ? &#39;0&#39; : &#39;1&#39;;
+                use.setAttributeNS(&#39;http://www.w3.org/1999/xlink&#39;,
+                    &#39;xlink:href&#39;, `${baseId}@${statusCode}`);
+            }
+        }
+    }
+
+    /**
+     * 高亮指定线段（主干线/分支线）
+     */
+    highlightSection(sectionId, color, strokeWidth) {
+        const layer = this.svg.querySelector(&#39;#ACLineSegmentClass&#39;);
+        if (!layer) return;
+
+        // 通过 metadata 中的 ObjectID 匹配
+        layer.querySelectorAll(&#39;g&#39;).forEach(g =&gt; {
+            const ref = g.querySelector(&#39;cge\\:PSR_Ref, PSR_Ref&#39;);
+            if (ref &amp;&amp; ref.getAttribute(&#39;ObjectID&#39;)?.includes(sectionId)) {
+                const polyline = g.querySelector(&#39;polyline&#39;);
+                if (polyline) {
+                    polyline.setAttribute(&#39;stroke&#39;, color);
+                    polyline.setAttribute(&#39;stroke-width&#39;, strokeWidth || &#39;3&#39;);
+                }
+            }
+        });
+    }
+
+    /**
+     * 清除所有自定义着色，恢复原始颜色
+     */
+    resetColors() {
+        this.svg.querySelectorAll(&#39;polyline&#39;).forEach(p =&gt; {
+            p.removeAttribute(&#39;stroke&#39;);
+            p.removeAttribute(&#39;stroke-width&#39;);
+        });
+    }
+
+    _segmentBelongsToCircuit(segmentId, circuitId) {
+        // 通过拓扑分析结果判断线段归属
+        // 实际项目中从后端接口获取映射关系
+        return segmentId.includes(circuitId.replace(&#39;CIRCUIT_&#39;, &#39;&#39;));
+    }
+}</code></pre>
+<h3 id="43-使用示例">4.3 使用示例
+  <a class="heading-anchor" href="#43-%e4%bd%bf%e7%94%a8%e7%a4%ba%e4%be%8b" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h3>
+<pre tabindex="0"><code class="language-javascript">// 初始化渲染器
+const svgEl = document.getElementById(&#39;power-line-svg&#39;);
+const renderer = new PowerLineRenderer(svgEl);
+const colorRenderer = new LineColorRenderer(svgEl);
+
+// 注册图标
+renderer.registerDisconnectorSymbol();
+
+// 渲染设备
+renderer.renderEquipment(
+    &#39;DisconnectorClass&#39;,       // 图层
+    &#39;380220621226700&#39;,         // 设备图形ID
+    &#39;Disconnector:柱上隔离开关@1&#39;, // symbol引用（分闸状态）
+    832.5, 1167.6,             // 坐标
+    20.4, 42.0,                // 尺寸
+    90.0,                      // 旋转角度
+    &#39;1T01&#39;,                    // 显示名称
+    &#39;SWITCH_378010585067001&#39;   // XML中的设备ID
+);
+
+// 渲染文字
+renderer.renderText(
+    &#39;TextClass&#39;,
+    &#39;380220621227200&#39;,
+    848.8, 1210.0,
+    &#39;1T01&#39;,
+    { anchor: &#39;middle&#39;, fontSize: &#39;14&#39;, linkLayer: &#39;DisconnectorClass&#39; }
+);
+
+// 渲染导线段
+renderer.renderLineSegment(
+    &#39;ACLineSegmentClass&#39;,
+    &#39;380220621229600&#39;,
+    &#39;882.7,1188.6 934.7,1188.6&#39;,
+    { stroke: &#39;rgb(0,0,0)&#39;, strokeWidth: &#39;1&#39; }
+);
+
+// 按馈线着色
+colorRenderer.colorCircuit(&#39;CIRCUIT_378010547255901&#39;, &#39;rgb(0,128,0)&#39;);
+
+// 按状态着色
+colorRenderer.colorEquipmentByStatus(&#39;SWITCH_378010585067001&#39;, &#39;running&#39;);</code></pre><hr>
+
+<h2 id="5-xml-与-svg-的关联映射">5. XML 与 SVG 的关联映射
+  <a class="heading-anchor" href="#5-xml-%e4%b8%8e-svg-%e7%9a%84%e5%85%b3%e8%81%94%e6%98%a0%e5%b0%84" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+<p>两个文件通过 ID 关联：</p>
+<pre tabindex="0"><code>XML                              SVG
+─────────────────────────────────────────────────────
+cim:Disconnector@rdf:ID  ←→  cge:PSR_Ref@ObjectID
+  &#34;SWITCH_378010585067001&#34;      &#34;SWITCH_378010585067001&#34;
+
+cim:Terminal.ConnectivityNode ←→ cge:CN_Ref@LinkObjectID
+  &#34;NODE_382220463450000&#34;         &#34;380220621226700@1&#34;
+
+cim:CircuitSection@rdf:ID  ←→  TextClass text@link-layer
+  &#34;CIRSEC_378010547255911&#34;       &#34;ACLineSegmentClass&#34;</code></pre><p><strong>映射代码：</strong></p>
+<pre tabindex="0"><code class="language-java">/**
+ * XML-SVG 关联映射器
+ */
+public class CimSvgMapper {
+
+    /**
+     * 从 SVG metadata 中提取 ObjectID，与 XML 设备关联
+     */
+    public Map&lt;String, EquipmentNode&gt; mapSvgToXml(
+            TopologyGraph graph, Document svgDoc) {
+
+        Map&lt;String, EquipmentNode&gt; mapping = new LinkedHashMap&lt;&gt;();
+
+        // 遍历 SVG 中所有 cge:PSR_Ref 元素
+        NodeList psrRefs = svgDoc.getElementsByTagNameNS(
+            &#34;http://iec.ch/TC57/2005/SVG-schema#&#34;, &#34;PSR_Ref&#34;);
+
+        for (int i = 0; i &lt; psrRefs.getLength(); i&#43;&#43;) {
+            Element ref = (Element) psrRefs.item(i);
+            String objectId = ref.getAttribute(&#34;ObjectID&#34;);
+            if (objectId == null || objectId.isEmpty()) continue;
+
+            EquipmentNode eq = graph.getEquipments().get(objectId);
+            if (eq != null) {
+                mapping.put(objectId, eq);
+            }
+        }
+        return mapping;
+    }
+}</code></pre><hr>
+
+<h2 id="6-完整处理流程">6. 完整处理流程
+  <a class="heading-anchor" href="#6-%e5%ae%8c%e6%95%b4%e5%a4%84%e7%90%86%e6%b5%81%e7%a8%8b" aria-label="Copy link to this section">
+    <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M633.417143 429.007238a174.567619 174.567619 0 0 1 0 246.857143l-155.306667 155.306667a186.709333 186.709333 0 1 1-264.045714-264.045715l76.483048-76.507428 51.73638 51.736381-76.507428 76.507428a113.566476 113.566476 0 1 0 160.597333 160.597334l155.306667-155.306667a101.424762 101.424762 0 0 0 0-143.408762z m208.603428-225.816381a186.709333 186.709333 0 0 1 0 264.045714L765.561905 543.744l-51.736381-51.712 76.507428-76.507429a113.566476 113.566476 0 1 0-160.597333-160.597333l-155.306667 155.306667a101.424762 101.424762 0 0 0 0 143.408762l-51.736381 51.736381a174.567619 174.567619 0 0 1 0-246.857143l155.306667-155.306667a186.709333 186.709333 0 0 1 264.045714 0z"/>
+    </svg>
+  </a>
+</h2>
+<pre tabindex="0"><code>1. 加载 XML → CimTopologyParser.parse()
+   ├── 解析 Equipment 节点（带属性）
+   ├── 解析 Terminal 边（建立关联）
+   ├── 解析 ConnectivityNode（连接点）
+   └── 解析 CircuitSection（线段树）
+
+2. 拓扑遍历 → TopologyTraverser.traverse()
+   ├── 从出线开关开始 BFS/DFS
+   ├── 按 ConnectivityNode 跳转
+   └── 输出有序设备列表
+
+3. 加载 SVG → 解析 defs 中的 symbol 定义
+   ├── 提取所有 symbol id（设备类型&#43;状态）
+   ├── 提取 viewBox 和图形元素
+   └── 缓存到内存
+
+4. 渲染 → PowerLineRenderer
+   ├── 按设备类型分层渲染（use引用symbol）
+   ├── 渲染文字标注（TextClass）
+   └── 渲染导线段（ACLineSegmentClass）
+
+5. 着色 → LineColorRenderer
+   ├── 按馈线着色
+   ├── 按状态着色
+   └── 按线段类型着色</code></pre>
+    </div>
+
+    
+    
+    
+    
+    <div class="px-8 pb-2 text-sm text-gray-500 flex items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+      </svg>
+      最后更新于 2026-10-21
+    </div>
+    
+
+    <footer class="px-8 py-6 bg-gray-50 border-t border-gray-100">
+      
+  <div class="tags-container">
+    <div class="text-gray-700 dark:text-gray-300 font-medium mb-2">Tags:</div>
+    <div class="flex flex-wrap gap-2">
+        <a href="/tags/svg/" class="tag-chip inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-labelledby="tagIconTitle" role="img">
+            <title id="tagIconTitle"></title>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+          </svg>
+          SVG
+        </a>
+        <a href="/tags/%E7%94%B5%E5%8A%9B%E6%8B%93%E6%89%91/" class="tag-chip inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-labelledby="tagIconTitle" role="img">
+            <title id="tagIconTitle"></title>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+          </svg>
+          电力拓扑
+        </a>
+        <a href="/tags/%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/" class="tag-chip inline-flex items-center px-3 py-1 rounded-full text-sm bg-blue-50 dark:bg-slate-800 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-slate-700 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-labelledby="tagIconTitle" role="img">
+            <title id="tagIconTitle"></title>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+          </svg>
+          开发指南
+        </a>
+    </div>
+  </div>
+
+      
+      
+      
+      
+      
+      <nav class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        
+        <a href="/post/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/docker%E5%AE%89%E8%A3%85mysql/" class="group block p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50/30 transition-colors">
+          <div class="text-xs text-gray-500 mb-1 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            Previous
+          </div>
+          <div class="text-sm font-medium text-gray-900 group-hover:text-blue-700 line-clamp-2">docker安装mysql</div>
+        </a>
+        
+
+        
+        <a href="/post/%E5%8D%97%E7%91%9E%E9%A1%B9%E7%9B%AE/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84/" class="group block p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50/30 transition-colors sm:text-right sm:col-start-2">
+          <div class="text-xs text-gray-500 mb-1 flex items-center sm:justify-end">
+            <span class="sm:order-1 mr-0 sm:ml-1">Next</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1.5 text-gray-400 sm:order-2 sm:ml-1 sm:mr-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+          <div class="text-sm font-medium text-gray-900 group-hover:text-blue-700 line-clamp-2">数据仓库分层架构</div>
+        </a>
+        
+      </nav>
+      
+      
+      
+      <div class="mt-6 flex justify-center">
+        <a href="/" class="inline-flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          返回首页
+        </a>
+      </div>
+    </footer>
+  </article>
+
+  
+  <div class="max-w-4xl mx-auto mt-8 bg-white rounded-lg shadow-md overflow-hidden theme-card" style="--tw-prose-body: #374151; --tw-prose-headings: #111827; --tw-prose-links: #2563eb; --tw-prose-links-hover: #1d4ed8; --tw-prose-code-bg: #f3f4f6; color: #374151;">
+    
+ 
+  </div>
+
+    </main>
+  </div>
+  
+  <footer class="w-full max-w-4xl mx-auto px-6 overflow-x-auto sm:overflow-visible">
+    <div class="py-8 border-t border-gray-200 bg-gray-50 shadow-inner mt-10">
+  <div class="container mx-auto px-4 max-w-4xl">
+    
+     
+     
+       
+         
+       
+     
+       
+         
+       
+    
+
+    
+    <div class="flex justify-center space-x-8">
+      
+      
+      <div class="transform transition duration-200 hover:scale-110">
+        <a
+          href="https://github.com/blueberryclub"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-gray-600 hover:text-gray-900"
+          aria-label="GitHub"
+        >
+          <svg
+            class="h-7 w-7"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </a>
+      </div>
+      
+
+      
+      
+
+      
+      
+      <div class="transform transition duration-200 hover:scale-110">
+        <a
+          href="mailto:1568413588@163.com"
+          rel="noopener noreferrer"
+          class="text-gray-600 hover:text-gray-900"
+          aria-label="邮箱"
+        >
+          <svg
+            class="h-7 w-7"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z"
+            />
+            <path
+              d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z"
+            />
+          </svg>
+        </a>
+      </div>
+      
+    </div>
+
+    <div class="text-center mt-6 text-sm text-gray-500">
+      &copy; 2026 blueberryclub | Powered by <a href="https://github.com/Daucloud/hugo-theme-void" class="text-gray-600 hover:text-gray-900 hover:underline">hugo-theme-void</a> | <span id="busuanzi_container_site_pv" style="display: none;">Total visits: <span id="busuanzi_value_site_pv" class="text-gray-600"></span></span>
+    </div>
+    
+  </div>
+</div>
+
+  </footer>
+</body>
+</html>

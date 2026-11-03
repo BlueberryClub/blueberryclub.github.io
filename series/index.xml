@@ -2,45 +2,52 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Series on blueberryclub</title>
-    <link>http://localhost:1313/series/</link>
+    <link>https://blueberryclub.github.io/series/</link>
     <description>Recent content in Series on blueberryclub</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 21 Oct 2026 10:00:00 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/series/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 02 Nov 2026 10:00:00 +0800</lastBuildDate>
+    <atom:link href="https://blueberryclub.github.io/series/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>安装教程</title>
-      <link>http://localhost:1313/series/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</link>
-      <pubDate>Wed, 21 Oct 2026 10:00:00 +0800</pubDate>
-      <guid>http://localhost:1313/series/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</guid>
+      <title>南瑞项目</title>
+      <link>https://blueberryclub.github.io/series/%E5%8D%97%E7%91%9E%E9%A1%B9%E7%9B%AE/</link>
+      <pubDate>Mon, 02 Nov 2026 10:00:00 +0800</pubDate>
+      <guid>https://blueberryclub.github.io/series/%E5%8D%97%E7%91%9E%E9%A1%B9%E7%9B%AE/</guid>
       <description></description>
     </item>
     <item>
       <title>使用教程</title>
-      <link>http://localhost:1313/series/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</link>
+      <link>https://blueberryclub.github.io/series/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</link>
+      <pubDate>Wed, 21 Oct 2026 14:00:00 +0800</pubDate>
+      <guid>https://blueberryclub.github.io/series/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>安装教程</title>
+      <link>https://blueberryclub.github.io/series/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</link>
       <pubDate>Wed, 21 Oct 2026 10:00:00 +0800</pubDate>
-      <guid>http://localhost:1313/series/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</guid>
+      <guid>https://blueberryclub.github.io/series/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/</guid>
       <description></description>
     </item>
     <item>
       <title>问题排查</title>
-      <link>http://localhost:1313/series/%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/</link>
+      <link>https://blueberryclub.github.io/series/%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/</link>
       <pubDate>Wed, 21 Oct 2026 10:00:00 +0800</pubDate>
-      <guid>http://localhost:1313/series/%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/</guid>
+      <guid>https://blueberryclub.github.io/series/%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/</guid>
       <description></description>
     </item>
     <item>
       <title>学习笔记</title>
-      <link>http://localhost:1313/series/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <link>https://blueberryclub.github.io/series/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Wed, 21 Oct 2026 10:00:00 +0800</pubDate>
-      <guid>http://localhost:1313/series/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <guid>https://blueberryclub.github.io/series/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
       <description></description>
     </item>
     <item>
       <title>源码分析</title>
-      <link>http://localhost:1313/series/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</link>
+      <link>https://blueberryclub.github.io/series/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</link>
       <pubDate>Wed, 21 Oct 2026 10:00:00 +0800</pubDate>
-      <guid>http://localhost:1313/series/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</guid>
+      <guid>https://blueberryclub.github.io/series/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</guid>
       <description></description>
     </item>
   </channel>
