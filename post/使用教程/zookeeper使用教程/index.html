@@ -561,7 +561,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          11 分钟阅读
+          21 分钟阅读
         </span>
 
         
@@ -662,7 +662,7 @@
     </svg>
   </a>
 </h1>
-<p>本文尚硅谷平台，仅学习使用。</p>
+<p>本文内容整理自尚硅谷平台课程，仅供学习使用。</p>
 
 <h2 id="1-zookeeper入门">1 Zookeeper入门
   <a class="heading-anchor" href="#1-zookeeper%e5%85%a5%e9%97%a8" aria-label="Copy link to this section">
@@ -679,10 +679,14 @@
     </svg>
   </a>
 </h3>
-<p>Zookeeper是一个开源的分布式的，为分布式框架提供协调服务的 Apache 项目。</p>
-<p><strong>Zookeeper工作机制</strong></p>
-<p>Zookeeper从设计模式角度来理解：是一个基于观察者模式设计的分布式服务管理框架，它负责存储和管理大家都关心的数据，然后接受观察者的注册，一旦这些数据的状态发生变化，Zookeeper就将负责通知已经在Zookeeper上注册的那些观察者做出相应的反应。</p>
-<p>Zookeeper=文件系统+通知机制</p>
+<p>Zookeeper 是一个开源的分布式框架，为分布式应用提供协调服务，属于 Apache 旗下项目。</p>
+<p><strong>Zookeeper 工作机制</strong></p>
+<p>从设计模式角度理解，Zookeeper 是一个基于<strong>观察者模式</strong>设计的分布式服务管理框架：它负责存储和管理大家都关心的数据，接受观察者的注册；一旦这些数据的状态发生变化，Zookeeper 就负责通知已经在它上面注册的那些观察者做出相应反应。</p>
+<p>可以用一句话概括其定位：</p>
+<blockquote>
+<p>Zookeeper = 文件系统 + 通知机制</p>
+</blockquote>
+<p>前者体现在它的数据模型（ZNode 树），后者体现在它的 Watcher 机制。</p>
 
 <h3 id="12-zookeeper特点">1.2 Zookeeper特点
   <a class="heading-anchor" href="#12-zookeeper%e7%89%b9%e7%82%b9" aria-label="Copy link to this section">
@@ -692,12 +696,12 @@
   </a>
 </h3>
 <ol>
-<li>Zookeeper：一个领导者（Leader），多个跟随者（Follower）组成的集群。</li>
-<li>集群中只要有半数以上节点存活，Zookeeper集群就能正常服务。所以Zookeeper适合安装奇数台服务器。</li>
-<li>全局数据一致：每个Server保存一份相同的数据副本，Client无论连接到那个Server，数据都是一致的。</li>
-<li>更新请求顺序执行，来自同一个Client的更新请求按其发送顺序依次执行。</li>
-<li>数据更新原子性，一次数据更新要么成功，要么失败。</li>
-<li>实时性，在一定时间范围内，Client能读到最新数据。</li>
+<li>Zookeeper 由一个领导者（Leader）、多个跟随者（Follower）组成集群。</li>
+<li>集群中只要有<strong>半数以上</strong>节点存活，Zookeeper 集群就能正常服务，因此 Zookeeper 适合部署在奇数台服务器上。</li>
+<li><strong>全局数据一致</strong>：每个 Server 保存一份相同的数据副本，Client 无论连接到哪个 Server，读到的数据都是一致的。</li>
+<li><strong>更新请求顺序执行</strong>：来自同一个 Client 的更新请求按其发送顺序依次执行。</li>
+<li><strong>数据更新原子性</strong>：一次数据更新要么成功，要么失败。</li>
+<li><strong>实时性</strong>：在一定时间范围内，Client 能读到最新数据。</li>
 </ol>
 
 <h3 id="13-数据结构">1.3 数据结构
@@ -707,7 +711,27 @@
     </svg>
   </a>
 </h3>
-<p>Zookeeper数据模型的结构与Unix文件系统很类似，整体上可以看做是一棵树，每个节点称作一个ZNode。每一个ZNode默认能够存储1MB的数据，每个ZNode都可以通过其路径唯一标识。</p>
+<p>Zookeeper 数据模型的结构与 Unix 文件系统很类似，整体上可以看做是一棵树，每个节点称作一个 <strong>ZNode</strong>。每一个 ZNode 默认能够存储 1MB 的数据，每个 ZNode 都可以通过其路径唯一标识。</p>
+<p>ZNode 的两种类型：</p>
+<table>
+  <thead>
+      <tr>
+          <th>类型</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>持久化（Persistent）</strong></td>
+          <td>客户端断开连接后节点仍然保留，是默认类型</td>
+      </tr>
+      <tr>
+          <td><strong>临时（Ephemeral）</strong></td>
+          <td>客户端会话失效后节点自动删除，常用于服务注册与心跳检测</td>
+      </tr>
+  </tbody>
+</table>
+<p>两者都可以附加**顺序（Sequential）**属性，创建时路径末尾会自动追加一个单调递增的序号，常用于实现公平锁与全局唯一 ID。</p>
 
 <h3 id="14-应用场景">1.4 应用场景
   <a class="heading-anchor" href="#14-%e5%ba%94%e7%94%a8%e5%9c%ba%e6%99%af" aria-label="Copy link to this section">
@@ -719,10 +743,10 @@
 <p>提供的服务包括：统一命名服务、统一配置管理、统一集群管理、服务器节点动态上下线、软负载均衡等。</p>
 <ul>
 <li><strong>统一命名服务</strong>：在分布式环境下，经常需要对应用/服务进行统一命名，便于识别。</li>
-<li><strong>统一配置管理</strong>：分布式环境下，配置文件同步非常常见。可将配置信息写入Zookeeper上的一个ZNode，各个客户端服务器监听这个ZNode。</li>
-<li><strong>统一集群管理</strong>：实时掌握每个节点的状态是必要的。可以将节点信息写入Zookeeper上的一个ZNode，监听这个ZNode可获取它的实时状态变化。</li>
+<li><strong>统一配置管理</strong>：分布式环境下，配置文件同步非常常见。可将配置信息写入 Zookeeper 上的一个 ZNode，各个客户端服务器监听这个 ZNode，配置变更时自动收到通知。</li>
+<li><strong>统一集群管理</strong>：实时掌握每个节点的状态是必要的。可以将节点信息写入 Zookeeper 上的一个 ZNode，监听这个 ZNode 可获取它的实时状态变化。</li>
 <li><strong>服务器动态上下线</strong>：客户端能实时洞察到服务器上下线的变化。</li>
-<li><strong>负载均衡</strong>：在Zookeeper中记录每台服务器的访问数，让访问数最少得服务器去处理最新的客户端请求。</li>
+<li><strong>负载均衡</strong>：在 Zookeeper 中记录每台服务器的访问数，让访问数最少的服务器去处理最新的客户端请求。</li>
 </ul>
 
 <h3 id="15-下载地址">1.5 下载地址
@@ -732,7 +756,7 @@
     </svg>
   </a>
 </h3>
-<p>官网首页：Apache ZooKeeper</p>
+<p>官网首页：<a href="https://zookeeper.apache.org/">Apache ZooKeeper</a></p>
 
 <h2 id="2-zookeeper本地安装">2 Zookeeper本地安装
   <a class="heading-anchor" href="#2-zookeeper%e6%9c%ac%e5%9c%b0%e5%ae%89%e8%a3%85" aria-label="Copy link to this section">
@@ -750,27 +774,44 @@
   </a>
 </h3>
 <ol>
-<li>安装前准备：安装JDK</li>
-<li>拷贝apache-zookeeper-3.5.7-bin.tar.gz安装包到Linux系统下</li>
-<li>解压到指定目录</li>
-<li>修改名称</li>
+<li>安装前准备：安装 JDK。</li>
+<li>拷贝 <code>apache-zookeeper-3.5.7-bin.tar.gz</code> 安装包到 Linux 系统下。</li>
+<li>解压到指定目录。</li>
+<li>修改名称，便于后续脚本引用。</li>
 </ol>
-<p><strong>配置修改</strong></p>
+<pre tabindex="0"><code class="language-bash"># 解压
+tar -zxvf apache-zookeeper-3.5.7-bin.tar.gz -C /opt/module/
+# 改名
+mv /opt/module/apache-zookeeper-3.5.7-bin /opt/module/zookeeper-3.5.7</code></pre><p><strong>配置修改</strong></p>
 <ol>
-<li>将/opt/module/zookeeper-3.5.7/conf这个路径下的 zoo_sample.cfg 修改为 zoo.cfg</li>
-<li>打开 zoo.cfg 文件，修改dataDir 路径</li>
-<li>在/opt/module/zookeeper-3.5.7/这个目录上创建 zkData文件夹</li>
+<li>将 <code>/opt/module/zookeeper-3.5.7/conf</code> 这个路径下的 <code>zoo_sample.cfg</code> 修改为 <code>zoo.cfg</code>。</li>
+<li>打开 <code>zoo.cfg</code> 文件，修改 <code>dataDir</code> 路径。</li>
+<li>在 <code>/opt/module/zookeeper-3.5.7/</code> 这个目录上创建 <code>zkData</code> 文件夹。</li>
 </ol>
-<p><strong>操作Zookeeper</strong></p>
-<ol>
-<li>启动Zookeeper</li>
-<li>查看进程是否启动</li>
-<li>查看状态</li>
-<li>启动客户端</li>
-<li>退出客户端</li>
-<li>停止Zookeeper</li>
-</ol>
+<pre tabindex="0"><code class="language-bash">cd /opt/module/zookeeper-3.5.7/conf
+mv zoo_sample.cfg zoo.cfg
 
+vi zoo.cfg
+# 修改：dataDir=/opt/module/zookeeper-3.5.7/zkData
+
+mkdir /opt/module/zookeeper-3.5.7/zkData</code></pre><p><strong>操作 Zookeeper</strong></p>
+<pre tabindex="0"><code class="language-bash"># 1. 启动 Zookeeper
+bin/zkServer.sh start
+
+# 2. 查看进程是否启动
+jps    # 出现 QuorumPeerMain 即表示已启动
+
+# 3. 查看状态
+bin/zkServer.sh status   # 单机模式下输出 Mode: standalone
+
+# 4. 启动客户端
+bin/zkCli.sh
+
+# 5. 退出客户端
+quit
+
+# 6. 停止 Zookeeper
+bin/zkServer.sh stop</code></pre>
 <h3 id="22-配置参数解读">2.2 配置参数解读
   <a class="heading-anchor" href="#22-%e9%85%8d%e7%bd%ae%e5%8f%82%e6%95%b0%e8%a7%a3%e8%af%bb" aria-label="Copy link to this section">
     <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
@@ -778,14 +819,37 @@
     </svg>
   </a>
 </h3>
-<p>Zookeeper中的配置文件 zoo.cfg 中参数含义解读如下：</p>
-<ul>
-<li><code>tickTime=2000</code>: 通信心跳时间，Zookeeper服务器与客户端心跳时间，单位毫秒</li>
-<li><code>initLimit=10</code>：LF初始通信时限，Leader和Follower初始链接时能容忍的最多心跳数（tickTime的数量）</li>
-<li><code>syncLimit=5</code>：LF同步通信时限，Leader和Follower之间通信时间如果超过syncLimit * tickTime，Leader认为Follower死掉，从服务器列表中删除Follower。</li>
-<li><code>dataDir</code>：保存Zookeeper中的数据，注意：默认的tmp目录，容易被linux系统定期删除，所以一般不用默认的tmp目录。</li>
-<li><code>clientPort=2181</code>：客户端连接端口，通常不做修改。</li>
-</ul>
+<p>Zookeeper 中的配置文件 <code>zoo.cfg</code> 中参数含义解读如下：</p>
+<table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>tickTime=2000</code></td>
+          <td>通信心跳时间，Zookeeper 服务器与客户端心跳时间，单位毫秒</td>
+      </tr>
+      <tr>
+          <td><code>initLimit=10</code></td>
+          <td>LF 初始通信时限，Leader 和 Follower 初始连接时能容忍的最多心跳数（<code>tickTime</code> 的数量）</td>
+      </tr>
+      <tr>
+          <td><code>syncLimit=5</code></td>
+          <td>LF 同步通信时限，Leader 和 Follower 之间通信时间如果超过 <code>syncLimit × tickTime</code>，Leader 认为 Follower 已死掉，从服务器列表中删除该 Follower</td>
+      </tr>
+      <tr>
+          <td><code>dataDir</code></td>
+          <td>保存 Zookeeper 中的数据。注意：默认的 tmp 目录容易被 Linux 系统定期删除，所以一般不用默认的 tmp 目录</td>
+      </tr>
+      <tr>
+          <td><code>clientPort=2181</code></td>
+          <td>客户端连接端口，通常不做修改</td>
+      </tr>
+  </tbody>
+</table>
 
 <h2 id="3-zookeeper基础操作">3 Zookeeper基础操作
   <a class="heading-anchor" href="#3-zookeeper%e5%9f%ba%e7%a1%80%e6%93%8d%e4%bd%9c" aria-label="Copy link to this section">
@@ -811,13 +875,24 @@
   </a>
 </h4>
 <ol>
-<li>集群规划：在hadoop102、hadoop103和hadoop104三个节点上都部署Zookeeper</li>
-<li>解压安装</li>
-<li>配置服务器编号：在zkData目录下创建myid文件，添加与server对应的编号</li>
-<li>配置zoo.cfg文件</li>
-<li>集群操作：分别启动Zookeeper，查看状态</li>
+<li><strong>集群规划</strong>：在 hadoop102、hadoop103 和 hadoop104 三个节点上都部署 Zookeeper。</li>
+<li><strong>解压安装</strong>：把 Zookeeper 安装包拷贝到每台机器并解压。</li>
+<li><strong>配置服务器编号</strong>：在 <code>zkData</code> 目录下创建 <code>myid</code> 文件，添加与该 Server 对应的编号。</li>
+<li><strong>配置 <code>zoo.cfg</code> 文件</strong>。</li>
+<li><strong>集群操作</strong>：分别启动 Zookeeper，查看状态。</li>
 </ol>
+<pre tabindex="0"><code class="language-bash"># 在每台机器的 zkData 目录下写入各自的编号（内容必须与集群规划一致）
+echo 2 &gt; /opt/module/zookeeper-3.5.7/zkData/myid    # hadoop102
+echo 3 &gt; /opt/module/zookeeper-3.5.7/zkData/myid    # hadoop103
+echo 4 &gt; /opt/module/zookeeper-3.5.7/zkData/myid    # hadoop104
 
+# zoo.cfg 中追加集群配置
+server.2=hadoop102:2888:3888
+server.3=hadoop103:2888:3888
+server.4=hadoop104:2888:3888</code></pre><p>端口说明：<code>2888</code> 是 Follower 与 Leader 之间<strong>信息交换</strong>的端口；<code>3888</code> 是集群内机器<strong>选举 Leader</strong> 使用的端口。</p>
+<pre tabindex="0"><code class="language-bash"># 分别在三台机器上启动并查看状态
+bin/zkServer.sh start
+bin/zkServer.sh status   # 其中一台为 leader，其余为 follower</code></pre>
 <h4 id="312-选举机制面试重点">3.1.2 选举机制（面试重点）
   <a class="heading-anchor" href="#312-%e9%80%89%e4%b8%be%e6%9c%ba%e5%88%b6%e9%9d%a2%e8%af%95%e9%87%8d%e7%82%b9" aria-label="Copy link to this section">
     <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
@@ -825,21 +900,21 @@
     </svg>
   </a>
 </h4>
-<p><strong>SID</strong>：服务器ID，用来唯一标识一台Zookeeper集群中的机器，每台机器不能重复，和myid一致。</p>
-<p><strong>ZXID</strong>：事务ID。用来标识一次服务器状态的变更。</p>
-<p><strong>Epoch</strong>：每个Leader任期的代号。</p>
+<p><strong>SID</strong>：服务器 ID，用来唯一标识一台 Zookeeper 集群中的机器，每台机器不能重复，和 <code>myid</code> 一致。</p>
+<p><strong>ZXID</strong>：事务 ID，用来标识一次服务器状态的变更。</p>
+<p><strong>Epoch</strong>：每个 Leader 任期的代号。</p>
 <p><strong>第一次启动选举流程：</strong></p>
 <ol>
-<li>服务器1启动，发起一次选举，投给自己一票</li>
-<li>服务器2启动，服务器1发现服务器2的myid比自己大，更改选票为推举服务器2</li>
-<li>服务器3启动，服务器1和2都会更改选票为服务器3，服务器3当选Leader</li>
-<li>服务器4、5启动，服从多数，更改选票信息为服务器3</li>
+<li>服务器 1 启动，发起一次选举，投给自己一票。</li>
+<li>服务器 2 启动，服务器 1 发现服务器 2 的 <code>myid</code> 比自己大，更改选票为推举服务器 2。</li>
+<li>服务器 3 启动，服务器 1 和 2 都会更改选票为服务器 3，此时服务器 3 获得半数以上选票，当选 Leader。</li>
+<li>服务器 4、5 启动，由于多数票已经产生，它们只能服从多数，更改选票信息为服务器 3。</li>
 </ol>
-<p><strong>非第一次启动选举规则：</strong></p>
+<p><strong>非第一次启动选举规则</strong>（按优先级依次比较）：</p>
 <ol>
-<li>EPOCH大的直接胜出</li>
-<li>EPOCH相同，事务id大的胜出</li>
-<li>事务id相同，服务器id大的胜出</li>
+<li>EPOCH 大的直接胜出；</li>
+<li>EPOCH 相同，事务 ID（ZXID）大的胜出；</li>
+<li>事务 ID 相同，服务器 ID（SID）大的胜出。</li>
 </ol>
 
 <h3 id="32-客户端命令行操作">3.2 客户端命令行操作
@@ -858,35 +933,35 @@
   </thead>
   <tbody>
       <tr>
-          <td>help</td>
+          <td><code>help</code></td>
           <td>显示所有操作命令</td>
       </tr>
       <tr>
-          <td>ls path</td>
-          <td>查看当前znode的子节点（可监听）</td>
+          <td><code>ls path</code></td>
+          <td>查看当前 znode 的子节点（可监听）</td>
       </tr>
       <tr>
-          <td>create</td>
-          <td>普通创建（-s 含有序列，-e 临时）</td>
+          <td><code>create</code></td>
+          <td>普通创建（<code>-s</code> 含有序列，<code>-e</code> 临时）</td>
       </tr>
       <tr>
-          <td>get path</td>
+          <td><code>get path</code></td>
           <td>获得节点的值（可监听）</td>
       </tr>
       <tr>
-          <td>set</td>
+          <td><code>set</code></td>
           <td>设置节点的具体值</td>
       </tr>
       <tr>
-          <td>stat</td>
+          <td><code>stat</code></td>
           <td>查看节点状态</td>
       </tr>
       <tr>
-          <td>delete</td>
+          <td><code>delete</code></td>
           <td>删除节点</td>
       </tr>
       <tr>
-          <td>deleteall</td>
+          <td><code>deleteall</code></td>
           <td>递归删除节点</td>
       </tr>
   </tbody>
@@ -899,8 +974,29 @@
     </svg>
   </a>
 </h3>
-<p>包括IDEA环境搭建、创建Zookeeper客户端、创建子节点、获取子节点并监听节点变化、判断ZNode是否存在等。</p>
+<p>包括 IDEA 环境搭建、创建 Zookeeper 客户端、创建子节点、获取子节点并监听节点变化、判断 ZNode 是否存在等。</p>
+<p>核心依赖与用法：</p>
+<pre tabindex="0"><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.zookeeper&lt;/groupId&gt;
+    &lt;artifactId&gt;zookeeper&lt;/artifactId&gt;
+    &lt;version&gt;3.5.7&lt;/version&gt;
+&lt;/dependency&gt;</code></pre><pre tabindex="0"><code class="language-java">// 获取客户端连接
+ZooKeeper zooKeeper = new ZooKeeper(&#34;hadoop102:2181&#34;, 5000, new Watcher() {
+    @Override
+    public void process(WatchedEvent watchedEvent) {
+        System.out.println(watchedEvent.getPath() &#43; &#34; 发生变化：&#34; &#43; watchedEvent.getType());
+    }
+});
 
+// 创建节点
+zooKeeper.create(&#34;/zk-test&#34;, &#34;0&#34;.getBytes(),
+        ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+
+// 获取子节点并监听变化（第二个参数 true 表示注册 Watcher）
+List&lt;String&gt; children = zooKeeper.getChildren(&#34;/&#34;, true);
+
+// 判断 ZNode 是否存在
+Stat stat = zooKeeper.exists(&#34;/zk-test&#34;, false);</code></pre>
 <h3 id="34-客户端向服务端写数据流程">3.4 客户端向服务端写数据流程
   <a class="heading-anchor" href="#34-%e5%ae%a2%e6%88%b7%e7%ab%af%e5%90%91%e6%9c%8d%e5%8a%a1%e7%ab%af%e5%86%99%e6%95%b0%e6%8d%ae%e6%b5%81%e7%a8%8b" aria-label="Copy link to this section">
     <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
@@ -908,6 +1004,21 @@
     </svg>
   </a>
 </h3>
+<p>Zookeeper 的写操作必须由 Leader 统一发起，整体流程如下：</p>
+<ol>
+<li>Client 将写请求发送给<strong>任意一台</strong> Server。</li>
+<li>如果接收请求的 Server 不是 Leader，它把请求<strong>转发给 Leader</strong>。</li>
+<li>Leader 收到请求后，把该事务（Proposal）分发给集群中所有的 Follower，同时自己也写入事务日志。</li>
+<li>每个 Server 把事务日志<strong>持久化到磁盘</strong>，写成功后向 Leader 返回 ACK。</li>
+<li>Leader 收到<strong>集群中半数以上</strong>节点的 ACK 后，向所有 Follower 发送 Commit 消息，正式提交该事务。</li>
+<li>Follower 将事务应用到内存数据库，更新完成后，由与 Client 相连的那台 Server 向 Client 反馈写操作成功。</li>
+</ol>
+<p>要点：</p>
+<ul>
+<li>写请求是<strong>串行</strong>的，Leader 通过 ZXID 单调递增来保证全局顺序，这就是 ZAB 协议的核心。</li>
+<li>只要半数以上节点 ACK，写入即算成功，因此 3 节点集群可容忍 1 个节点故障，5 节点可容忍 2 个。</li>
+<li>读请求则不同：任意一台 Server 都可以直接从自己的内存副本返回，不经过 Leader，所以读性能随节点数增加而提升。</li>
+</ul>
 
 <h2 id="4-服务器动态上下线监听案例">4 服务器动态上下线监听案例
   <a class="heading-anchor" href="#4-%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%8a%a8%e6%80%81%e4%b8%8a%e4%b8%8b%e7%ba%bf%e7%9b%91%e5%90%ac%e6%a1%88%e4%be%8b" aria-label="Copy link to this section">
@@ -916,6 +1027,20 @@
     </svg>
   </a>
 </h2>
+<p><strong>需求</strong>：某分布式系统中，Server 可能动态上线或下线，Client 需要实时感知到 Server 列表的变化。</p>
+<p><strong>设计思路</strong>：</p>
+<ol>
+<li>Zookeeper 中创建一个永久节点 <code>/servers</code> 作为服务器列表的父节点。</li>
+<li>每台 Server 启动时，在 <code>/servers</code> 下创建一个<strong>临时节点</strong>（如 <code>/servers/192.168.10.100:8080</code>）；Server 宕机或会话失效时，该临时节点被自动删除。</li>
+<li>Client 启动时调用 <code>getChildren(&quot;/servers&quot;, true)</code> 获取当前可用服务器列表，并注册 Watcher。</li>
+<li>任一 Server 上下线都会导致 <code>/servers</code> 的子节点变化，Zookeeper 向 Client 推送 <code>NodeChildrenChanged</code> 事件；Client 在 Watcher 回调中<strong>重新获取子节点列表</strong>并更新本地缓存。</li>
+</ol>
+<p><strong>关键点</strong>：</p>
+<ul>
+<li>必须使用<strong>临时节点</strong>，这是&quot;下线即感知&quot;的基础——不需要 Server 主动上报死亡。</li>
+<li>Zookeeper 的 Watcher 是<strong>一次性的</strong>，触发后需要重新注册，否则只能收到第一次变更通知。</li>
+<li>Client 本地缓存一份服务器列表，避免每次业务调用都访问 Zookeeper。</li>
+</ul>
 
 <h2 id="5-zookeeper分布式锁案例">5 Zookeeper分布式锁案例
   <a class="heading-anchor" href="#5-zookeeper%e5%88%86%e5%b8%83%e5%bc%8f%e9%94%81%e6%a1%88%e4%be%8b" aria-label="Copy link to this section">
@@ -932,6 +1057,23 @@
     </svg>
   </a>
 </h3>
+<p><strong>基本实现</strong>：多个客户端争抢创建同一个节点，<code>create</code> 在 Zookeeper 中是原子的，创建成功即获得锁；业务完成后 <code>delete</code> 该节点即释放锁。</p>
+<pre tabindex="0"><code class="language-java">try {
+    zooKeeper.create(&#34;/lock&#34;, &#34;1&#34;.getBytes(),
+            ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
+    // 创建成功，获得锁，执行业务
+} catch (NodeExistsException e) {
+    // 节点已存在，抢锁失败，此处可注册 Watcher 等待锁释放后重试
+} finally {
+    // 释放锁
+    zooKeeper.delete(&#34;/lock&#34;, -1);
+}</code></pre><p><strong>存在的问题</strong>：</p>
+<ul>
+<li><strong>羊群效应</strong>：抢锁失败的客户端都在监听同一个节点，锁释放时全部被唤醒，但只有一个能抢到，其余再次失败，造成大量无效通知与上下文切换。</li>
+<li><strong>不可重入</strong>：同一线程再次获取锁时会被自己阻塞。</li>
+<li><strong>公平性无法保证</strong>：唤醒顺序不代表申请顺序，后到的客户端可能先抢到锁。</li>
+</ul>
+<p><strong>改良方案</strong>：改用<strong>临时顺序节点</strong>。每个客户端在 <code>/lock</code> 下创建 <code>EPHEMERAL_SEQUENTIAL</code> 序号节点，序号最小者获得锁；其余客户端只监听<strong>自己前一个</strong>节点。这样既消除了羊群效应，又天然保证了 FIFO 公平性。</p>
 
 <h3 id="52-curator框架实现分布式锁案例">5.2 Curator框架实现分布式锁案例
   <a class="heading-anchor" href="#52-curator%e6%a1%86%e6%9e%b6%e5%ae%9e%e7%8e%b0%e5%88%86%e5%b8%83%e5%bc%8f%e9%94%81%e6%a1%88%e4%be%8b" aria-label="Copy link to this section">
@@ -940,7 +1082,56 @@
     </svg>
   </a>
 </h3>
+<p>Curator 是 Apache 官方的 Zookeeper 客户端框架，封装了重试策略与分布式锁等常见配方（recipes），生产环境一般直接使用它而不是裸写 Zookeeper API。</p>
+<pre tabindex="0"><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.curator&lt;/groupId&gt;
+    &lt;artifactId&gt;curator-recipes&lt;/artifactId&gt;
+    &lt;version&gt;5.1.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre><p>Curator 提供的锁类型：</p>
+<table>
+  <thead>
+      <tr>
+          <th>类</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>InterProcessMutex</code></td>
+          <td>分布式<strong>可重入</strong>互斥锁</td>
+      </tr>
+      <tr>
+          <td><code>InterProcessSemaphoreMutex</code></td>
+          <td>分布式<strong>不可重入</strong>互斥锁</td>
+      </tr>
+      <tr>
+          <td><code>InterProcessReadWriteLock</code></td>
+          <td>分布式读写锁，读读不互斥、读写互斥、写写互斥</td>
+      </tr>
+      <tr>
+          <td><code>InterProcessSemaphoreV2</code></td>
+          <td>信号量，用于控制并发数量</td>
+      </tr>
+  </tbody>
+</table>
+<pre tabindex="0"><code class="language-java">// 创建 Curator 客户端
+CuratorFramework client = CuratorFrameworkFactory.builder()
+        .connectString(&#34;hadoop102:2181,hadoop103:2181,hadoop104:2181&#34;)
+        .sessionTimeoutMs(30000)
+        .retryPolicy(new ExponentialBackoffRetry(1000, 3))
+        .build();
+client.start();
 
+// 可重入分布式锁
+InterProcessMutex lock = new InterProcessMutex(client, &#34;/locks/order&#34;);
+try {
+    // 尝试加锁，最多等待 10 秒
+    if (lock.acquire(10, TimeUnit.SECONDS)) {
+        // 执行业务
+    }
+} finally {
+    lock.release();   // 释放锁
+}</code></pre>
 <h2 id="6-企业面试真题面试重点">6 企业面试真题（面试重点）
   <a class="heading-anchor" href="#6-%e4%bc%81%e4%b8%9a%e9%9d%a2%e8%af%95%e7%9c%9f%e9%a2%98%e9%9d%a2%e8%af%95%e9%87%8d%e7%82%b9" aria-label="Copy link to this section">
     <svg viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor" aria-hidden="true">
@@ -956,6 +1147,7 @@
     </svg>
   </a>
 </h3>
+<p>参见 <a href="/post/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/zookeeper%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/#312-%e9%80%89%e4%b8%be%e6%9c%ba%e5%88%b6%e9%9d%a2%e8%af%95%e9%87%8d%e7%82%b9">3.1.2 选举机制</a>。回答时抓住三点：第一次启动靠 <strong>SID</strong> 比较、非第一次启动按 <strong>EPOCH &gt; ZXID &gt; SID</strong> 的优先级依次比较、以及<strong>半数以上</strong>通过才能当选。</p>
 
 <h3 id="62-生产集群安装多少zk合适">6.2 生产集群安装多少zk合适？
   <a class="heading-anchor" href="#62-%e7%94%9f%e4%ba%a7%e9%9b%86%e7%be%a4%e5%ae%89%e8%a3%85%e5%a4%9a%e5%b0%91zk%e5%90%88%e9%80%82" aria-label="Copy link to this section">
@@ -964,6 +1156,14 @@
     </svg>
   </a>
 </h3>
+<p><strong>结论</strong>：至少 3 台，且部署<strong>奇数台</strong>，常见规模为 3、5、7 台。</p>
+<p><strong>理由</strong>：</p>
+<ol>
+<li>Zookeeper 需要半数以上节点存活才能对外服务，可用性要求下 1 台没有容错能力，2 台挂 1 台即不可用，因此最小可用集群是 3 台。</li>
+<li>集群能容忍的故障节点数为 <code>(n − 1) / 2</code>（向下取整）。4 台集群只能容忍 1 台故障，与 3 台相同，多出来的 1 台纯属浪费；而 5 台能容忍 2 台。既然偶数不带来额外容错能力，就应选奇数。</li>
+<li>奇数节点在<strong>网络分区</strong>场景下更容易避免出现&quot;两个分区都凑够半数&quot;的脑裂情况。</li>
+<li>节点越多，写请求需要等待的 ACK 越多，写延迟随之上升，因此不建议盲目扩容到很大规模；读吞吐不足时更适合加 Observer 而非 Follower。</li>
+</ol>
 
 <h3 id="63-常用命令">6.3 常用命令
   <a class="heading-anchor" href="#63-%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4" aria-label="Copy link to this section">
